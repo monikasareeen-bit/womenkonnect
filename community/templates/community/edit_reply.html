@@ -1,0 +1,121 @@
+{% extends 'community/base.html' %}
+
+{% block title %}Edit Reply - WomenConnect{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Back Button -->
+            <a href="{% url 'post_detail' reply.post.pk %}" class="btn btn-outline-pink mb-4">
+                <i class="fas fa-arrow-left"></i> Back to Post
+            </a>
+
+            <div class="card edit-reply-card shadow-lg">
+                <div class="card-body p-5">
+                    <h2 class="card-title text-center mb-4">
+                        <i class="fas fa-edit text-pink"></i> Edit Your Reply
+                    </h2>
+
+                    <!-- Time Remaining Warning -->
+                    {% if reply.can_edit %}
+                        <div class="alert alert-warning text-center">
+                            <i class="far fa-clock"></i> 
+                            You can edit this reply for {{ reply.created_at|timeuntil }} more.
+                        </div>
+                    {% endif %}
+
+                    <!-- Original Post Context -->
+                    <div class="post-context mb-4">
+                        <small class="text-muted">Replying to:</small>
+                        <h5 class="text-pink mb-0">{{ reply.post.title }}</h5>
+                    </div>
+
+                    <form method="post" class="mt-4">
+                        {% csrf_token %}
+                        
+                        <div class="mb-4">
+                            <label for="content" class="form-label">
+                                <i class="fas fa-comment"></i> Your Reply
+                            </label>
+                            <textarea 
+                                name="content" 
+                                id="content" 
+                                rows="6" 
+                                class="form-control" 
+                                placeholder="Share your thoughts..."
+                                required>{{ reply.content }}</textarea>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+                            <a href="{% url 'post_detail' reply.post.pk %}" class="btn btn-outline-secondary btn-lg">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                            <button type="submit" class="btn btn-pink btn-lg">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.edit-reply-card {
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #fff 0%, #fff5f9 100%);
+}
+
+.post-context {
+    padding: 15px;
+    background: #fff;
+    border-left: 4px solid #ff69b4;
+    border-radius: 10px;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #ff1493;
+    font-size: 1.1rem;
+}
+
+.form-control:focus {
+    border-color: #ff69b4;
+    box-shadow: 0 0 0 0.2rem rgba(255, 105, 180, 0.25);
+}
+
+.form-control {
+    border: 2px solid #ffe4f0;
+    border-radius: 10px;
+}
+
+.btn-pink {
+    background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 12px 30px;
+    border-radius: 25px;
+    transition: all 0.3s;
+}
+
+.btn-pink:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+    color: white;
+}
+
+.btn-outline-pink {
+    color: #ff69b4;
+    border-color: #ff69b4;
+}
+
+.btn-outline-pink:hover {
+    background-color: #ff69b4;
+    color: white;
+}
+</style>
+{% endblock %}

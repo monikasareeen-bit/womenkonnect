@@ -1,0 +1,59 @@
+{% extends 'community/base.html' %}
+
+{% load static %}
+{% block title %}Delete Post - WomenConnect{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'community/posts/posts.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card delete-card shadow-lg">
+                <div class="card-body p-5 text-center">
+                    <!-- Warning Icon -->
+                    <div class="warning-icon mb-4">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+
+                    <h2 class="card-title mb-4">Delete Post?</h2>
+                    
+                    <div class="alert alert-danger">
+                        <strong>Warning!</strong> This action cannot be undone.
+                    </div>
+
+                    <!-- Post Preview -->
+                    <div class="post-preview p-3 mb-4">
+                        <h5 class="text-pink">{{ post.title }}</h5>
+                        <p class="text-muted mb-0">
+                            {{ post.content|truncatewords:30 }}
+                        </p>
+                        <small class="text-muted d-block mt-2">
+                            <i class="far fa-comment"></i> {{ post.replies.count }} replies
+                            <i class="fas fa-heart ms-2"></i> {{ post.total_likes }} likes
+                        </small>
+                    </div>
+
+                    <p class="text-muted mb-4">
+                        Are you sure you want to delete this post? All replies and likes will be permanently removed.
+                    </p>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-grid gap-3">
+                            <button type="submit" class="btn btn-danger btn-lg">
+                                <i class="fas fa-trash"></i> Yes, Delete Post
+                            </button>
+                            <a href="{% url 'post_detail' post.pk %}" class="btn btn-outline-secondary btn-lg">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'community/base.html' %}
+
+{% block title %}Edit Profile - WomenConnect{% endblock %}
+
+{% block content %}
+<div class="container my-5" style="max-width:600px;">
+    <div class="post-card">
+        <h3 style="color:var(--rose);margin-bottom:20px;">
+            <i class="fas fa-edit"></i> Edit Profile
+        </h3>
+
+        <!-- Read-only account info -->
+        <div style="background:#fdf2f8;border-radius:8px;padding:14px 16px;margin-bottom:20px;font-size:14px;">
+            <div style="margin-bottom:6px;">
+                <i class="fas fa-user" style="color:var(--rose);width:18px;"></i>
+                <strong>Username:</strong> {{ request.user.username }}
+            </div>
+            <div>
+                <i class="fas fa-envelope" style="color:var(--rose);width:18px;"></i>
+                <strong>Email:</strong> {{ request.user.email }}
+            </div>
+            <div style="margin-top:8px;font-size:12px;color:#999;">
+                To change your username or email, please contact us.
+            </div>
+        </div>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label"><strong>Profile Picture</strong></label>
+                {% if form.instance.profile_picture %}
+                <div style="margin-bottom:8px;">
+                    <img src="{{ form.instance.profile_picture.url }}" alt="Current picture"
+                         style="width:60px;height:60px;border-radius:50%;object-fit:cover;border:2px solid var(--rose);">
+                    <span style="font-size:12px;color:#999;margin-left:8px;">Current picture</span>
+                </div>
+                {% endif %}
+                {{ form.profile_picture }}
+                {% if form.profile_picture.errors %}
+                <div style="color:#e53e3e;font-size:13px;">{{ form.profile_picture.errors }}</div>
+                {% endif %}
+                <div style="font-size:12px;color:#999;margin-top:4px;">JPEG, PNG, GIF or WebP. Max 2MB.</div>
+            </div>
+
+            <div class="mb-3" style="margin-top:16px;">
+                <label class="form-label"><strong>Bio</strong></label>
+                {{ form.bio }}
+                {% if form.bio.errors %}
+                <div style="color:#e53e3e;font-size:13px;">{{ form.bio.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="mb-3" style="margin-top:16px;">
+                <label class="form-label"><strong>Location</strong></label>
+                {{ form.location }}
+            </div>
+
+            <div class="mb-3" style="margin-top:16px;">
+                <label class="form-label"><strong>Website</strong></label>
+                {{ form.website }}
+            </div>
+
+            <div style="margin-top:24px;display:flex;gap:12px;">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+                <a href="{% url 'profile' %}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

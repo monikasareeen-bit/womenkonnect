@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Error - WomenConnect</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    {% block extra_css %}
+    <link rel="stylesheet" href="/static/community/css/complete.css">
+
+    {% endblock %}
+</head>
+
+<body>
+    <div class="error-container">
+        <div class="error-icon">⚠️</div>
+        <h1>500</h1>
+        <p>Something went wrong on our end.<br>We're working to fix it! Please try again later.</p>
+        <a href="/" class="btn">
+            <i class="fas fa-home"></i> Go Home
+        </a>
+    </div>
+</body>
+
+</html>

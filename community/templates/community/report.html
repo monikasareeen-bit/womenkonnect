@@ -1,0 +1,40 @@
+{% extends 'community/base.html' %}
+
+{% block title %}Report Content - WomenConnect{% endblock %}
+
+{% block content %}
+<div class="container my-5" style="max-width:600px;">
+    <div class="post-card">
+        <h3 style="color:var(--rose);margin-bottom:8px;">
+            <i class="fas fa-flag"></i> Report {{ object_type|capfirst }}
+        </h3>
+        <p style="color:#666;font-size:14px;margin-bottom:20px;">
+            Help keep WomenConnect safe. Our team will review your report within 24 hours.
+        </p>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label"><strong>Reason</strong></label>
+                {{ form.reason }}
+                {% if form.reason.errors %}
+                <div style="color:#e53e3e;font-size:13px;">{{ form.reason.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="mb-3" style="margin-top:16px;">
+                <label class="form-label"><strong>Details</strong></label>
+                {{ form.description }}
+                {% if form.description.errors %}
+                <div style="color:#e53e3e;font-size:13px;">{{ form.description.errors }}</div>
+                {% endif %}
+            </div>
+            <div style="display:flex;gap:12px;margin-top:20px;">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-flag"></i> Submit Report
+                </button>
+                <a href="javascript:history.back()" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

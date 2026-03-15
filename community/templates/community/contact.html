@@ -1,0 +1,43 @@
+{% extends 'community/base.html' %}
+
+{% block title %}Contact Us - WomenConnect{% endblock %}
+
+{% block content %}
+<div class="container my-5" style="max-width:650px;">
+    <div class="post-card">
+        <h2 style="color:var(--rose);margin-bottom:8px;">
+            <i class="fas fa-envelope"></i> Contact Us
+        </h2>
+        <p style="color:#666;margin-bottom:24px;">
+            Have a question, suggestion, or need help? We'd love to hear from you.
+        </p>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label"><strong>Your Name</strong></label>
+                {{ form.name }}
+                {% if form.name.errors %}<div style="color:#e53e3e;font-size:13px;">{{ form.name.errors }}</div>{% endif %}
+            </div>
+            <div class="mb-3" style="margin-top:14px;">
+                <label class="form-label"><strong>Your Email</strong></label>
+                {{ form.email }}
+                {% if form.email.errors %}<div style="color:#e53e3e;font-size:13px;">{{ form.email.errors }}</div>{% endif %}
+            </div>
+            <div class="mb-3" style="margin-top:14px;">
+                <label class="form-label"><strong>Subject</strong></label>
+                {{ form.subject }}
+                {% if form.subject.errors %}<div style="color:#e53e3e;font-size:13px;">{{ form.subject.errors }}</div>{% endif %}
+            </div>
+            <div class="mb-3" style="margin-top:14px;">
+                <label class="form-label"><strong>Message</strong></label>
+                {{ form.message }}
+                {% if form.message.errors %}<div style="color:#e53e3e;font-size:13px;">{{ form.message.errors }}</div>{% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top:16px;">
+                <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120" width="420" height="120">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C2185B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E91E8C;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E91E8C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF6EC7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#B5005B" />
+      <stop offset="100%" style="stop-color:#E91E8C" />
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#E91E8C" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Icon mark: two overlapping circles (connection / women symbol) -->
+  <!-- Left circle -->
+  <circle cx="42" cy="52" r="22" fill="url(#grad1)" opacity="0.92" filter="url(#softShadow)"/>
+  <!-- Right circle (overlapping) -->
+  <circle cx="66" cy="52" r="22" fill="url(#grad2)" opacity="0.85" filter="url(#softShadow)"/>
+
+  <!-- Venus symbol stems on both circles -->
+  <!-- Left circle venus cross -->
+  <line x1="42" y1="74" x2="42" y2="86" stroke="#C2185B" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="36" y1="81" x2="48" y2="81" stroke="#C2185B" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Right circle venus cross -->
+  <line x1="66" y1="74" x2="66" y2="86" stroke="#E91E8C" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="60" y1="81" x2="72" y2="81" stroke="#E91E8C" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Konnect dot in the overlap center -->
+  <circle cx="54" cy="52" r="6" fill="white" opacity="0.95"/>
+  <circle cx="54" cy="52" r="3.5" fill="url(#grad1)"/>
+
+  <!-- Wordmark -->
+  <!-- "Women" in bold deep rose -->
+  <text
+    x="100" y="58"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="34"
+    font-weight="700"
+    fill="url(#textGrad)"
+    letter-spacing="-0.5"
+  >Women</text>
+
+  <!-- "Konnect" in lighter pink, slightly smaller for contrast -->
+  <text
+    x="100" y="84"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="19"
+    font-weight="400"
+    fill="#E91E8C"
+    letter-spacing="3"
+  >KONNECT</text>
+
+  <!-- Thin accent line under tagline -->
+  <line x1="100" y1="92" x2="390" y2="92" stroke="url(#grad2)" stroke-width="1" opacity="0.4"/>
+
+  <!-- Tagline -->
+  <text
+    x="100" y="107"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="10"
+    font-style="italic"
+    fill="#C2185B"
+    opacity="0.75"
+    letter-spacing="1.5"
+  >Connect · Grow · Inspire</text>
+</svg>

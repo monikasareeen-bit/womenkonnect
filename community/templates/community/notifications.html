@@ -1,0 +1,53 @@
+{% extends 'community/base.html' %}
+
+{% block title %}Notifications - WomenConnect{% endblock %}
+
+{% block content %}
+<div class="container my-5" style="max-width:700px;">
+
+    <h2 style="color:var(--rose);margin-bottom:20px;">
+        <i class="fas fa-bell"></i> Notifications
+    </h2>
+
+    {% if notifications %}
+    <div class="replies-section">
+        {% for notification in notifications %}
+        <div class="reply-card" style="{% if not notification.is_read %}border-left:3px solid var(--rose);{% endif %}">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
+                <div>
+                    <div style="font-size:14px;">
+                        {% if notification.notification_type == 'like' %}
+                        <i class="fas fa-heart" style="color:var(--rose);"></i>
+                        {% elif notification.notification_type == 'reply' %}
+                        <i class="fas fa-reply" style="color:#6c8ebf;"></i>
+                        {% else %}
+                        <i class="fas fa-bell" style="color:#f0a500;"></i>
+                        {% endif %}
+
+                        {% if notification.from_user %}
+                        <strong>{{ notification.from_user.username }}</strong>
+                        {% endif %}
+                        {{ notification.message }}
+
+                        {% if notification.post %}
+                        — <a href="{% url 'post_detail' notification.post.pk %}" style="color:var(--rose);">View Post</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div style="font-size:12px;color:#999;white-space:nowrap;">
+                    {{ notification.created_at|timesince }} ago
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="post-card" style="text-align:center;padding:48px 24px;">
+        <i class="fas fa-bell-slash" style="font-size:48px;color:#ddd;margin-bottom:16px;display:block;"></i>
+        <p style="color:#999;">No notifications yet. Start engaging with the community!</p>
+        <a href="{% url 'home' %}" class="btn btn-primary" style="margin-top:12px;">Browse Discussions</a>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

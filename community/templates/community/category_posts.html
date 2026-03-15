@@ -1,0 +1,174 @@
+{% extends 'community/base.html' %}
+{% load static %}
+
+{% block title %}{{ category.name }} - WomenConnect{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+
+    <!-- Back Button -->
+    <a href="{% url 'home' %}" class="btn btn-outline mb-4">
+        <i class="fas fa-arrow-left"></i> Back to Home
+    </a>
+
+    <!-- Category Banner -->
+    <div class="category-banner">
+        <div class="category-icon">{{ category.icon }}</div>
+        <div class="category-info">
+            <h1>{{ category.name }}</h1>
+            <p class="category-description">{{ category.description }}</p>
+        </div>
+    </div>
+
+    <!-- Header with Post Count and Create Button -->
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
+        <div class="post-stats">
+            <div class="stat-item">
+                <i class="fas fa-comments"></i>
+                <span>
+                    {{ posts.count }}
+                    {% if posts.count == 1 %}Post{% else %}Posts{% endif %}
+                </span>
+            </div>
+        </div>
+
+        {% if user.is_authenticated %}
+        <a href="{% url 'create_post_in_category' category.slug %}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> New Post
+        </a>
+        {% else %}
+        <a href="{% url 'login' %}?next={% url 'create_post_in_category' category.slug %}" class="btn btn-primary">
+            <i class="fas fa-sign-in-alt"></i> Login to Post
+        </a>
+        {% endif %}
+    </div>
+
+    <!-- Posts List -->
+    {% if posts %}
+    {% for post in posts %}
+    <div class="post-card {% if post.is_pinned %}pinned-post{% endif %}">
+
+        <!-- Pinned Badge -->
+        {% if post.is_pinned %}
+        <div class="pinned-badge">
+            <i class="fas fa-thumbtack"></i> Pinned
+        </div>
+        {% endif %}
+
+        <!-- Author Info -->
+        <div class="post-author">
+            <div class="author-avatar">
+                {% if post.author.userprofile.profile_picture %}
+                <img src="{{ post.author.userprofile.profile_picture.url }}" alt="{{ post.author.username }}">
+                {% else %}
+                {{ post.author.username|slice:":1"|upper }}
+                {% endif %}
+            </div>
+            <div>
+                <div class="author-name">{{ post.author.username }}</div>
+                <div class="author-time">{{ post.created_at|timesince }} ago</div>
+            </div>
+        </div>
+
+        <!-- Post Title -->
+        <h3 class="post-title">
+            <a href="{% url 'post_detail' post.pk %}">
+                {{ post.title }}
+            </a>
+        </h3>
+
+        <!-- Post Excerpt -->
+        <div class="post-content">
+            {{ post.content|truncatewords:30|linebreaks }}
+        </div>
+
+        <!-- Stats & Actions -->
+        <div class="post-actions">
+
+            <!-- Like Button -->
+            {% if user.is_authenticated %}
+            <button type="button" class="like-btn {% if user in post.likes.all %}liked{% endif %}"
+                data-post-id="{{ post.pk }}" onclick="toggleLike(this)">
+                <i class="{% if user in post.likes.all %}fas{% else %}far{% endif %} fa-heart"></i>
+                <span class="like-count">{{ post.total_likes }}</span>
+            </button>
+            {% else %}
+            <div class="stat-item">
+                <i class="far fa-heart"></i>
+                <span>{{ post.total_likes }}</span>
+            </div>
+            {% endif %}
+
+            <!-- Reply Count -->
+            <a href="{% url 'post_detail' post.pk %}#replies" class="reply-link">
+                <i class="far fa-comment"></i>
+                <span>
+                    {{ post.reply_count }}
+                    {% if post.reply_count == 1 %}reply{% else %}replies{% endif %}
+                </span>
+            </a>
+
+            <!-- Read More -->
+            <a href="{% url 'post_detail' post.pk %}" class="btn btn-secondary btn-sm">
+                Read full post <i class="fas fa-arrow-right"></i>
+            </a>
+
+        </div>
+    </div>
+    {% endfor %}
+
+    {% else %}
+    <!-- Empty State -->
+    <div class="empty-state">
+        <div class="empty-state-icon">
+            <i class="fas fa-comments"></i>
+        </div>
+        <h3>No posts yet in this category</h3>
+        <p>Be the first to start a conversation!</p>
+
+        {% if user.is_authenticated %}
+        <a href="{% url 'create_post_in_category' category.slug %}" class="btn btn-create btn-lg">
+            <i class="fas fa-plus"></i> Create First Post
+        </a>
+        {% else %}
+        <a href="{% url 'login' %}" class="btn btn-primary btn-lg">
+            <i class="fas fa-sign-in-alt"></i> Login to Create Post
+        </a>
+        {% endif %}
+    </div>
+    {% endif %}
+
+</div>
+
+{% block extra_js %}
+<script>
+function toggleLike(button) {
+    const postId = button.getAttribute('data-post-id');
+    const csrfToken = '{{ csrf_token }}';
+
+    fetch(`/post/${postId}/like/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrfToken,
+            'X-Requested-With': 'XMLHttpRequest',
+        },
+        credentials: 'same-origin'
+    })
+    .then(response => response.json())
+    .then(data => {
+        const likeCount = button.querySelector('.like-count');
+        likeCount.textContent = data.total_likes;
+        const icon = button.querySelector('i');
+        if (data.liked) {
+            button.classList.add('liked');
+            icon.classList.replace('far', 'fas');
+        } else {
+            button.classList.remove('liked');
+            icon.classList.replace('fas', 'far');
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+</script>
+{% endblock %}
+{% endblock %}

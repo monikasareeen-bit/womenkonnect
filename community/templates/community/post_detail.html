@@ -1,0 +1,384 @@
+{% extends 'community/base.html' %}
+{% load static %}
+{% load time_filters %}
+
+{% block title %}{{ post.title }} - WomenConnect{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+
+    <!-- POST HEADER -->
+    <div class="post-title-header">
+        {% if post.is_pinned %}
+        <div class="pinned-badge" style="margin-bottom:8px;">
+            <i class="fas fa-thumbtack"></i> Pinned Post
+        </div>
+        {% endif %}
+        <h2>{{ post.title }}</h2>
+        <div class="post-meta">
+            By <strong>{{ post.author.username }}</strong> &bull;
+            {{ post.created_at|timesince }} ago &bull;
+            <span id="post-likes-count">{{ post.total_likes }}</span> likes &bull;
+            {{ post.replies.count }} replies &bull;
+            {{ post.view_count }} views
+        </div>
+    </div>
+
+    <!-- MAIN POST (page 1 only) -->
+    {% if replies.number == 1 %}
+    <div class="post-card">
+        <div class="post-content mb-3">{{ post.content|linebreaks }}</div>
+
+        <div class="post-actions">
+
+            <!-- Like Button — disabled for own post -->
+            {% if user.is_authenticated %}
+                {% if user == post.author %}
+                <span class="like-btn disabled" title="You cannot like your own post" style="opacity:0.4;cursor:not-allowed;">
+                    <i class="fas fa-heart"></i>
+                    <span class="like-count">{{ post.total_likes }}</span>
+                </span>
+                {% else %}
+                <button type="button"
+                        class="like-btn {% if user in post.likes.all %}liked{% endif %}"
+                        onclick="togglePostLike({{ post.pk }}, this)">
+                    <i class="{% if user in post.likes.all %}fas{% else %}far{% endif %} fa-heart"></i>
+                    <span class="like-count">{{ post.total_likes }}</span>
+                </button>
+                {% endif %}
+            {% else %}
+            <span class="stat-item"><i class="far fa-heart"></i> {{ post.total_likes }}</span>
+            {% endif %}
+
+            <!-- Scroll to Reply -->
+            {% if user.is_authenticated and not post.is_locked %}
+            <button class="reply-link" onclick="scrollToReplyBox()">
+                <i class="far fa-comment"></i> Reply
+            </button>
+            {% endif %}
+
+            <!-- Edit (own post, within 24h only) -->
+            {% if user == post.author and post.can_edit %}
+            <a href="{% url 'edit_post' post.pk %}" class="btn btn-secondary btn-sm">
+                <i class="fas fa-edit"></i> Edit
+            </a>
+            {% endif %}
+
+            <!-- Delete (own post within 24h OR staff) -->
+            {% if user == post.author and post.can_edit %}
+            <a href="{% url 'delete_post' post.pk %}" class="btn btn-secondary btn-sm" style="color:#dc3545;">
+                <i class="fas fa-trash"></i> Delete
+            </a>
+            {% elif user.is_staff %}
+            <a href="{% url 'delete_post' post.pk %}" class="btn btn-secondary btn-sm" style="color:#dc3545;">
+                <i class="fas fa-trash"></i> Delete (Staff)
+            </a>
+            {% endif %}
+
+            <!-- Report (logged in, not own post) -->
+            {% if user.is_authenticated and user != post.author %}
+            <a href="{% url 'report_post' post.pk %}" class="btn btn-secondary btn-sm" style="color:#e53e3e;" title="Report this post">
+                <i class="fas fa-flag"></i> Report
+            </a>
+            {% endif %}
+
+            <!-- Pin / Unpin (staff only) -->
+            {% if user.is_staff %}
+            <form method="post" action="{% url 'pin_post' post.pk %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-secondary btn-sm">
+                    <i class="fas fa-thumbtack"></i>
+                    {% if post.is_pinned %}Unpin{% else %}Pin{% endif %}
+                </button>
+            </form>
+            {% endif %}
+
+            <!-- Back to Category -->
+            <a href="{% url 'category_posts' post.category.slug %}" class="btn btn-outline btn-sm">
+                <i class="fas fa-arrow-left"></i> {{ post.category.name }}
+            </a>
+
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- REPLIES -->
+    <div id="replies" class="replies-section">
+        <h4>Replies ({{ post.replies.count }})</h4>
+
+        {% if replies %}
+        {% for reply in replies %}
+        <div class="reply-card">
+
+            <div class="post-author">
+                <div class="author-avatar author-avatar-sm">
+                    {% if reply.author.userprofile.profile_picture %}
+                    <img src="{{ reply.author.userprofile.profile_picture.url }}" alt="{{ reply.author.username }}">
+                    {% else %}
+                    {{ reply.author.username|slice:":1"|upper }}
+                    {% endif %}
+                </div>
+                <div>
+                    <div class="author-name">{{ reply.author.username }}</div>
+                    <div class="author-time">
+                        {{ reply.created_at|timesince }} ago
+                        {% if reply.updated_at != reply.created_at %}&bull; <em>edited</em>{% endif %}
+                    </div>
+                </div>
+            </div>
+
+            {% if reply.quoted_user %}
+            <div class="replying-to">
+                <i class="fas fa-reply fa-flip-horizontal"></i>
+                Replying to <strong>@{{ reply.quoted_user.username }}</strong>
+            </div>
+            {% endif %}
+
+            <div class="reply-content">{{ reply.content|linebreaks }}</div>
+
+            <div class="post-actions">
+
+                <!-- Like Reply — disabled for own reply -->
+                {% if user.is_authenticated %}
+                    {% if user == reply.author %}
+                    <span class="like-btn disabled" title="You cannot like your own reply" style="opacity:0.4;cursor:not-allowed;">
+                        <i class="fas fa-heart"></i>
+                        <span class="like-count">{{ reply.total_likes }}</span>
+                    </span>
+                    {% else %}
+                    <button type="button"
+                            class="like-btn {% if user in reply.likes.all %}liked{% endif %}"
+                            onclick="toggleReplyLike({{ reply.pk }}, this)">
+                        <i class="{% if user in reply.likes.all %}fas{% else %}far{% endif %} fa-heart"></i>
+                        <span class="like-count">{{ reply.total_likes }}</span>
+                    </button>
+                    {% endif %}
+                {% else %}
+                <span class="stat-item"><i class="far fa-heart"></i> {{ reply.total_likes }}</span>
+                {% endif %}
+
+                <!-- Quote Reply -->
+                {% if user.is_authenticated and not post.is_locked %}
+                <button class="reply-link" onclick="quoteReply('{{ reply.author.username }}', {{ reply.author.id }})">
+                    <i class="fas fa-reply"></i> Quote
+                </button>
+                {% endif %}
+
+                <!-- Edit (own reply, within 24h only) -->
+                {% if user == reply.author and reply.can_edit %}
+                <a href="{% url 'edit_reply' reply.pk %}" class="btn btn-secondary btn-sm">
+                    <i class="fas fa-edit"></i> Edit
+                </a>
+                {% endif %}
+
+                <!-- Delete (own reply within 24h OR staff) -->
+                {% if user == reply.author and reply.can_edit %}
+                <a href="{% url 'delete_reply' reply.pk %}" class="btn btn-secondary btn-sm" style="color:#dc3545;">
+                    <i class="fas fa-trash"></i> Delete
+                </a>
+                {% elif user.is_staff %}
+                <a href="{% url 'delete_reply' reply.pk %}" class="btn btn-secondary btn-sm" style="color:#dc3545;">
+                    <i class="fas fa-trash"></i> Delete (Staff)
+                </a>
+                {% endif %}
+                <!-- Report reply (logged in, not own reply) -->
+                {% if user.is_authenticated and user != reply.author %}
+                <a href="{% url 'report_reply' reply.pk %}" class="btn btn-secondary btn-sm" style="color:#e53e3e;" title="Report this reply">
+                    <i class="fas fa-flag"></i>
+                </a>
+                {% endif %}
+
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Pagination -->
+        {% if replies.has_other_pages %}
+        <div class="pagination-container">
+            <nav aria-label="Replies pagination">
+                <ul class="pagination">
+                    {% if replies.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ replies.previous_page_number }}#replies">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link"><i class="fas fa-chevron-left"></i> Previous</span>
+                    </li>
+                    {% endif %}
+
+                    {% for num in replies.paginator.page_range %}
+                        {% if replies.number == num %}
+                        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                        {% elif num > replies.number|add:'-3' and num < replies.number|add:'3' %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}#replies">{{ num }}</a>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if replies.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ replies.next_page_number }}#replies">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">Next <i class="fas fa-chevron-right"></i></span>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <div class="page-info">Page {{ replies.number }} of {{ replies.paginator.num_pages }}</div>
+        </div>
+        {% endif %}
+
+        {% else %}
+        <p class="empty-text">No replies yet. Be the first to reply!</p>
+        {% endif %}
+    </div>
+
+    <!-- REPLY BOX -->
+    {% if user.is_authenticated %}
+        {% if post.is_locked %}
+        <div class="login-prompt">
+            <p><i class="fas fa-lock"></i> This post is locked and no longer accepts replies.</p>
+        </div>
+        {% else %}
+        <div class="add-reply-card" id="reply-box" style="display:none;">
+            <h4><i class="fas fa-reply"></i> Write a Reply</h4>
+            <form method="post" action="{% url 'add_reply' post.pk %}">
+                {% csrf_token %}
+                <input type="hidden" name="quoted_user_id" id="quoted_user_id">
+                <div id="quoting-indicator" style="display:none;margin-bottom:8px;font-size:13px;color:#c26ba3;">
+                    <i class="fas fa-reply"></i> Replying to <strong id="quoting-name"></strong>
+                    <button type="button" onclick="clearQuote()" style="background:none;border:none;cursor:pointer;color:#999;margin-left:6px;">✕ clear</button>
+                </div>
+                <textarea id="reply-textarea" name="content" class="form-control"
+                          rows="4" placeholder="Write a reply... (max 5000 characters)"
+                          required maxlength="5000"></textarea>
+                <div style="margin-top:12px;display:flex;gap:10px;align-items:center;">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Post Reply
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="closeReplyBox()">
+                        Cancel
+                    </button>
+                    <span id="char-count" style="font-size:12px;color:#999;margin-left:auto;">0 / 5000</span>
+                </div>
+            </form>
+        </div>
+        {% endif %}
+    {% else %}
+    <div class="login-prompt">
+        <p><i class="fas fa-lock"></i> <a href="{% url 'login' %}?next={{ request.path }}">Login</a> to join the discussion.</p>
+    </div>
+    {% endif %}
+
+</div>
+
+<script>
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        for (let cookie of document.cookie.split(';')) {
+            cookie = cookie.trim();
+            if (cookie.startsWith(name + '=')) {
+                cookieValue = decodeURIComponent(cookie.slice(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+
+function togglePostLike(postId, button) {
+    fetch(`/post/${postId}/like/`, {
+        method: 'POST',
+        headers: { 'X-CSRFToken': csrftoken, 'X-Requested-With': 'XMLHttpRequest' },
+        credentials: 'same-origin'
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.error) return;
+        button.querySelector('.like-count').textContent = data.total_likes;
+        document.getElementById('post-likes-count').textContent = data.total_likes;
+        const icon = button.querySelector('i');
+        if (data.liked) {
+            button.classList.add('liked');
+            icon.classList.replace('far', 'fas');
+        } else {
+            button.classList.remove('liked');
+            icon.classList.replace('fas', 'far');
+        }
+    })
+    .catch(e => console.error(e));
+}
+
+function toggleReplyLike(replyId, button) {
+    fetch(`/reply/${replyId}/like/`, {
+        method: 'POST',
+        headers: { 'X-CSRFToken': csrftoken, 'X-Requested-With': 'XMLHttpRequest' },
+        credentials: 'same-origin'
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.error) return;
+        button.querySelector('.like-count').textContent = data.total_likes;
+        const icon = button.querySelector('i');
+        if (data.liked) {
+            button.classList.add('liked');
+            icon.classList.replace('far', 'fas');
+        } else {
+            button.classList.remove('liked');
+            icon.classList.replace('fas', 'far');
+        }
+    })
+    .catch(e => console.error(e));
+}
+
+function quoteReply(username, userId) {
+    document.getElementById('quoted_user_id').value = userId;
+    document.getElementById('quoting-name').textContent = '@' + username;
+    document.getElementById('quoting-indicator').style.display = 'block';
+    scrollToReplyBox();
+}
+
+function clearQuote() {
+    document.getElementById('quoted_user_id').value = '';
+    document.getElementById('quoting-indicator').style.display = 'none';
+    document.getElementById('reply-textarea').value = '';
+    document.getElementById('char-count').textContent = '0 / 5000';
+}
+
+function scrollToReplyBox() {
+    const box = document.getElementById('reply-box');
+    if (box) {
+        box.style.display = 'block';
+        box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.getElementById('reply-textarea').focus();
+    }
+}
+
+function closeReplyBox() {
+    const box = document.getElementById('reply-box');
+    if (box) box.style.display = 'none';
+    clearQuote();
+}
+
+// Character counter
+const textarea = document.getElementById('reply-textarea');
+const charCount = document.getElementById('char-count');
+if (textarea && charCount) {
+    textarea.addEventListener('input', function() {
+        const len = this.value.length;
+        charCount.textContent = len + ' / 5000';
+        charCount.style.color = len > 4500 ? '#e53e3e' : '#999';
+    });
+}
+</script>
+{% endblock %}
