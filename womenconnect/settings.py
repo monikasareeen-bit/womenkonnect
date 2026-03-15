@@ -62,10 +62,9 @@ WSGI_APPLICATION = 'womenconnect.wsgi.application'
 # Database
 
 
+DATABASE_URL = config('DATABASE_URL', default=f'sqlite:///{BASE_DIR}/db.sqlite3')
 DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL', default=f'sqlite:///{BASE_DIR}/db.sqlite3')
-    )
+    'default': dj_database_url.parse(DATABASE_URL, conn_max_age=60)
 }
 
 # Password validation
