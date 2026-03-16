@@ -204,6 +204,6 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5MB
 
 
 # Brute force protection (django-axes)
-AXES_FAILURE_LIMIT = 5          # Lock after 5 failed attempts
+AXES_FAILURE_LIMIT = 50          # Lock after 5 failed attempts
 AXES_COOLOFF_TIME = 1           # 1 hour lockout
 AXES_RESET_ON_SUCCESS = True    # Reset count on successful login
