@@ -6,8 +6,6 @@ pip install -r requirements.txt
 python manage.py collectstatic --noinput
 python manage.py migrate
 
-echo "Creating admin user..."
-
 echo "from django.contrib.auth import get_user_model;
 User=get_user_model();
 username='admin';
