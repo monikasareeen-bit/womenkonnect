@@ -109,8 +109,8 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
 AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # ← move this first
     'community.backends.EmailBackend',
-    'django.contrib.auth.backends.ModelBackend',
 ]
 
 # Site URL
