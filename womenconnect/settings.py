@@ -109,10 +109,9 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',  # ← move this first
+    'django.contrib.auth.backends.ModelBackend',
     'community.backends.EmailBackend',
 ]
-
 # Site URL
 SITE_URL = config('SITE_URL', default='http://127.0.0.1:8000')
 
