@@ -9,13 +9,13 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'womenconnect.settings')
 django.setup()
 from django.contrib.auth import get_user_model
 User = get_user_model()
-if not User.objects.filter(username=os.environ['DJANGO_SUPERUSER_USERNAME']).exists():
-    User.objects.create_superuser(
-        os.environ['admin'],
-        os.environ['monikasareeen@gmail.com'],
-        os.environ['Satija2026!']
-    )
-    print('Superuser created.')
-else:
-    print('Superuser already exists, skipping.')
+username = os.environ['DJANGO_SUPERUSER_USERNAME']
+email = os.environ['DJANGO_SUPERUSER_EMAIL']
+password = os.environ['DJANGO_SUPERUSER_PASSWORD']
+user, created = User.objects.get_or_create(username=username, defaults={'email': email, 'is_staff': True, 'is_superuser': True})
+user.set_password(password)
+user.is_staff = True
+user.is_superuser = True
+user.save()
+print('Superuser ready.')
 "
