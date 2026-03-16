@@ -35,7 +35,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'axes.middleware.AxesMiddleware'
+
 ]
 
 ROOT_URLCONF = 'womenconnect.urls'
@@ -111,7 +111,11 @@ AUTHENTICATION_BACKENDS = [
 SITE_URL = config('SITE_URL', default='http://127.0.0.1:8000')
 
 # CSRF Settings
-CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='http://127.0.0.1:8000,http://localhost:8000,https://womenkonnect.co.in,https://www.womenkonnect.co.in').split(',')
+CSRF_TRUSTED_ORIGINS = [
+"https://womenkonnect.co.in",
+"https://www.womenkonnect.co.in",
+"https://womenkonnect.onrender.com"
+]
 
 # Security settings for production
 if not DEBUG:
