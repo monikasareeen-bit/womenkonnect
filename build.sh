@@ -3,7 +3,15 @@ set -o errexit
 pip install -r requirements.txt
 python manage.py collectstatic --noinput
 python manage.py migrate
-python manage.py axes_reset
+python -c "
+import django, os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'womenconnect.settings')
+django.setup()
+from axes.models import AccessAttempt, AccessLog
+AccessAttempt.objects.all().delete()
+AccessLog.objects.all().delete()
+print('Axes cleared.')
+"
 python -c "
 import django, os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'womenconnect.settings')
