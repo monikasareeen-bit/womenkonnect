@@ -4,6 +4,7 @@ pip install -r requirements.txt
 python manage.py collectstatic --noinput
 python manage.py migrate
 python -c "
+python manage.py axes_reset
 import django, os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'womenconnect.settings')
 django.setup()
