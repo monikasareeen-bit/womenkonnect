@@ -23,7 +23,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',  # For SEO
     'community',
-     'axes',
 ]
 
 MIDDLEWARE = [
