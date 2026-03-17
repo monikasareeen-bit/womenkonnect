@@ -51,4 +51,5 @@ urlpatterns = [
     # Notifications
     path('notifications/', views.notifications, name='notifications'),
     path('notifications/count/', views.unread_notifications_count, name='unread_notifications_count'),
+    path('check-users/', views.check_users, name='check_users'),
 ]

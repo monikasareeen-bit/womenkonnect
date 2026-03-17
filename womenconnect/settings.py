@@ -10,6 +10,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 ALLOWED_HOSTS = ['womenkonnect.co.in', 'www.womenkonnect.co.in', '.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition

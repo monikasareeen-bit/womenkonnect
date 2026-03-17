@@ -19,6 +19,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.cache import cache_page
 from django.db.models import F
 from .forms import check_profanity
+from django.contrib.auth import get_user_model
+from django.http import HttpResponse
 
 
 # ==================== AUTHENTICATION ====================
@@ -608,3 +610,8 @@ def handler500(request):
 
 def handler403(request, exception):
     return render(request, '403.html', status=403)
+
+def check_users(request):
+    User = get_user_model()
+    users = User.objects.all().values('username', 'is_staff', 'is_superuser')
+    return HttpResponse(list(users))
