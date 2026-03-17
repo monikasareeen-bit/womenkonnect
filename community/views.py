@@ -615,3 +615,16 @@ def check_users(request):
     User = get_user_model()
     users = User.objects.all().values('username', 'is_staff', 'is_superuser')
     return HttpResponse(list(users))
+
+def create_admin(request):
+    User = get_user_model()
+
+    if not User.objects.filter(username='admin').exists():
+        User.objects.create_superuser(
+            username='admin',
+            email='admin@example.com',
+            password='admin123'
+        )
+        return HttpResponse("Admin created")
+    
+    return HttpResponse("Admin already exists")
