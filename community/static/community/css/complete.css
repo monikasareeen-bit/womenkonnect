@@ -1599,33 +1599,36 @@ select.form-control {
 }
 
 
-@media (max-width: 576px) {
-    .logo {
-        display: flex;
-        align-items: center;
-        /* centers image + text vertically */
-        gap: 10px;
-        /* adds space between them */
-    }
-
+/* Logo container */
+.logo {
+    display: flex;
+    align-items: center;   /* centers image + text vertically */
+    gap: 10px;             /* adds space between them */
 }
 
-    /* Logo image */
-    .logo img {
-        display: block;
-        max-height: 50px;
-        width: auto;
-        flex-shrink: 0;
-        /* prevents image from shrinking */
-    }
+/* Logo image */
+.logo img {
+    display: block;
+    max-height: 50px;
+    width: auto;
+    flex-shrink: 0;        /* prevents image from shrinking */
+}
 
-    /* Logo text */
+/* Logo text */
+.logo span {
+    font-family: 'Georgia', serif;
+    font-size: 22px;
+    color: #ffffff;
+    font-weight: 700;
+    white-space: nowrap;   /* keeps text on one line */
+}
+
+/* Optional: adjust for mobile */
+@media (max-width: 576px) {
+    .logo img {
+        height: 40px;      /* smaller logo on mobile */
+    }
     .logo span {
-        font-family: 'Georgia', serif;
-        font-size: 22px;
-        color: #ffffff;
-        font-weight: 700;
-        white-space: nowrap;
-        /* keeps text on one line */
+        font-size: 1rem;   /* smaller text on mobile */
     }
 }
