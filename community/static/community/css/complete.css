@@ -1605,20 +1605,21 @@ select.form-control {
     align-items: center;   /* centers image + text vertically */
     gap: 10px;             /* adds space between them */
 }
-/* Logo container */
+/* Apply flexbox directly to the anchor that wraps image + text */
 .logo a {
-    display: flex;             /* flex applied directly to the <a> */
-    align-items: center;       /* vertical centering */
-    gap: 12px;                 /* spacing between image and text */
-    text-decoration: none;     /* optional: remove underline */
+    display: flex;
+    align-items: center;   /* vertical centering */
+    gap: 12px;             /* spacing between image and text */
+    text-decoration: none; /* optional: remove underline */
 }
+
 
 /* Logo image */
 .logo img {
-    display: block;
-    height: 50px;              /* consistent logo size */
+    height: 50px;          /* consistent logo size */
     width: auto;
-    flex-shrink: 0;            /* prevents image from shrinking */
+    flex-shrink: 0;        /* prevents shrinking */
+    display: block;
 }
 
 /* Logo text */
@@ -1627,8 +1628,9 @@ select.form-control {
     font-size: 22px;
     color: #ffffff;
     font-weight: 700;
-    white-space: nowrap;       /* keeps text on one line */
+    white-space: nowrap;   /* keeps text on one line */
 }
+
 /* Optional: adjust for mobile */
 @media (max-width: 576px) {
     .logo img {
