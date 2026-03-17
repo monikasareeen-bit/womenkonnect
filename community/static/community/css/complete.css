@@ -1562,9 +1562,11 @@ select.form-control {
 @media (max-width: 576px) {
     .logo img {
         max-height: 40px;
+        margin-right: 8px; 
     }
 
     .logo span {
         font-size: 18px;
+        font-weight: 600;
     }
 }
