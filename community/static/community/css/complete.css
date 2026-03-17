@@ -1538,3 +1538,33 @@ select.form-control {
         font-size: 14px;
     }
 }
+
+.logo img {
+    display: block;
+    max-height: 50px;
+    width: auto;
+}
+
+.logo span {
+    font-family: 'Georgia', serif;
+    font-size: 22px;
+    color: #ffffff;
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+.top-navbar .logo a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+@media (max-width: 576px) {
+    .logo img {
+        max-height: 40px;
+    }
+
+    .logo span {
+        font-size: 18px;
+    }
+}

@@ -24,32 +24,39 @@
 <body>
 
     <!-- Navbar -->
-    <header class="top-navbar">
-        <div class="logo">
-            <a href="{% url 'home' %}">
-                <img src="{% static 'community/images/womenkonnect-logo.svg' %}"
-                     alt="WomenKonnect"
-                     height="50"
-                     style="display:block;">
-            </a>
+    <header>
+        <div class="top-navbar">
+            <!-- Logo -->
+            <div class="logo">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'community/images/womenkonnect-logo.svg' %}" alt="WomenKonnect" height="50">
+                    <span>WomenKonnect</span>
+                </a>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="nav-links">
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'about' %}">About</a>
+                <a href="{% url 'contact' %}">Contact</a>
+
+                {% if user.is_authenticated %}
+                <div class="user-menu">
+                    <span class="username">{{ user.username }}</span>
+                    <div class="dropdown-menu">
+                        <a href="{% url 'profile' %}">Profile</a>
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="logout-btn">Logout</button>
+                        </form>
+                    </div>
+                </div>
+                {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                {% endif %}
+            </nav>
         </div>
-
-        <nav class="nav-links">
-            <a href="{% url 'home' %}">Home</a>
-            <a href="{% url 'about' %}">About</a>
-
-            {% if user.is_authenticated %}
-            <a href="{% url 'profile' %}">Profile</a>
-            <form method="post" action="{% url 'logout' %}" style="display: inline; margin: 0;">
-                {% csrf_token %}
-                <button type="submit" class="logout-link logout-btn">Logout</button>
-            </form>
-            {% else %}
-            <a href="{% url 'login' %}" class="login-link">Login</a>
-            {% endif %}
-        </nav>
     </header>
-
     <!-- Main Layout -->
     <div class="layout-container">
 
@@ -89,10 +96,8 @@
         <div class="footer-container">
             <!-- About Section -->
             <div class="footer-section about">
-                <img src="{% static 'community/images/womenkonnect-logo.svg' %}"
-                     alt="WomenKonnect"
-                     height="40"
-                     style="margin-bottom: 10px; filter: brightness(0) invert(1);">
+                <img src="{% static 'community/images/womenkonnect-logo.svg' %}" alt="WomenKonnect" height="40"
+                    style="margin-bottom: 10px; filter: brightness(0) invert(1);">
                 <p>A safe and supportive space for women to share, discuss, and grow together.</p>
                 <div class="social-icons">
                     <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
