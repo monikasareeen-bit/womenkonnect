@@ -21,6 +21,8 @@ from django.db.models import F
 from .forms import check_profanity
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
+from django.http import JsonResponse
+
 
 
 # ==================== AUTHENTICATION ====================
@@ -29,43 +31,24 @@ def register(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.is_active = False
-            user.save()
+    email = form.cleaned_data['email']
+    password = form.cleaned_data['password']
 
-            uid = urlsafe_base64_encode(force_bytes(user.pk))
-            token = account_activation_token.make_token(user)
-            activation_link = f"{settings.SITE_URL}/activate/{uid}/{token}/"
+    user = authenticate(request, username=email, password=password)
 
-            message = render_to_string("community/activation_email.txt", {
-                "user": user,
-                "activation_link": activation_link,
-            })
-
-            try:
-                send_mail(
-                    subject="Activate your WomenConnect account",
-                    message=message,
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=[user.email],
-                    fail_silently=False,
-                )
-                messages.success(
-                    request,
-                    "Account created! Please check your email to activate your account."
-                )
-            except Exception:
-                # Email failed but account was created — let user know
-                user.is_active = True
-                user.save()
-                messages.warning(
-                    request,
-                    "Account created but we could not send a confirmation email. You can log in directly."
-                )
-            return redirect("login")
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            next_url = request.GET.get('next', '')
+            if next_url and next_url.startswith('/') and not next_url.startswith('//'):
+                return redirect(next_url)
+            return redirect('home')
+        else:
+            messages.error(request, "Account not activated.")
     else:
-        form = CustomUserCreationForm()
+        messages.error(request, "Invalid email or password.")
 
+            
     return render(request, "community/register.html", {"form": form})
 
 
@@ -613,8 +596,8 @@ def handler403(request, exception):
 
 def check_users(request):
     User = get_user_model()
-    users = User.objects.all().values('username', 'is_staff', 'is_superuser')
-    return HttpResponse(list(users))
+    users = list(User.objects.all().values('username', 'is_staff', 'is_superuser'))
+    return JsonResponse(users, safe=False)
 
 def create_admin(request):
     User = get_user_model()
@@ -629,15 +612,3 @@ def create_admin(request):
     
     return HttpResponse("Admin already exists")
 
-def create_admin(request):
-    User = get_user_model()
-
-    if not User.objects.filter(username='admin').exists():
-        User.objects.create_superuser(
-            username='admin',
-            email='admin@example.com',
-            password='admin123'
-        )
-        return HttpResponse("Admin created")
-
-    return HttpResponse("Admin already exists")
