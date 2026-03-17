@@ -31,10 +31,10 @@ def register(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-    email = form.cleaned_data['email']
-    password = form.cleaned_data['password']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
 
-    user = authenticate(request, username=email, password=password)
+            user = authenticate(request, username=email, password=password)
 
     if user is not None:
         if user.is_active:
