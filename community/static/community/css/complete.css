@@ -1560,13 +1560,19 @@ select.form-control {
 }
 
 @media (max-width: 576px) {
-    .logo img {
-        max-height: 40px;
-        margin-right: 8px; 
-    }
+    .logo {
+    display: flex;
+    align-items: center;   /* centers image + text vertically */
+    gap: 10px;             /* adds space between them */
+}
 
-    .logo span {
-        font-size: 18px;
-        font-weight: 600;
-    }
+.logo img {
+    height: 40px;          /* consistent logo size */
+}
+
+.logo span {
+    font-size: 1.2rem;
+    font-weight: 600;
+    white-space: nowrap;   /* prevents wrapping into two lines */
+}
 }
