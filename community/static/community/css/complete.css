@@ -148,8 +148,8 @@ a:hover {
 
 .top-navbar {
     background: linear-gradient(90deg, #e8558b 0%, #9b7fa8 50%, #d97d6e 100%);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 15px 30px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);   
+    padding: 18px 40px;   /* more breathing space */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -198,7 +198,7 @@ a:hover {
 }
 
 .logo a:hover {
-    transform: scale(1.05);
+    opacity: 0.9;
 }
 
 .nav-links {
@@ -1616,9 +1616,8 @@ select.form-control {
 
 /* Logo image */
 .logo img {
-    height: 50px;          /* consistent logo size */
+    height: 60px;     /* slightly bigger = more premium */
     width: auto;
-    flex-shrink: 0;        /* prevents shrinking */
     display: block;
 }
 
