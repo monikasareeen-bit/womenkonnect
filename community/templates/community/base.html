@@ -31,7 +31,7 @@
                 <a href="{% url 'home' %}">
                     <img src="{% static 'community/images/womenkonnect-logo.svg' %}" alt="WomenKonnect" height="60">
                     <span class="logo-text">WomenKonnect</span>
-                    
+
                 </a>
             </div>
 
@@ -42,8 +42,8 @@
                 <a href="{% url 'contact' %}">Contact</a>
 
                 {% if user.is_authenticated %}
-                <div class="user-menu">
-                    <span class="username">{{ user.username }}</span>
+                <div class="dropdown">
+                    <button class="dropbtn">{{ user.username }} ▾</button>
                     <div class="dropdown-menu">
                         <a href="{% url 'profile' %}">Profile</a>
                         <form method="post" action="{% url 'logout' %}">
@@ -147,24 +147,22 @@
     </footer>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const userMenu = document.querySelector('.user-menu');
-        const dropdownMenu = document.querySelector('.dropdown-menu');
+        document.addEventListener('DOMContentLoaded', function () {
+            const dropbtn = document.querySelector('.dropbtn');
+            const dropdownMenu = document.querySelector('.dropdown-menu');
 
-        // Only run if user is logged in (elements exist)
-        if (userMenu && dropdownMenu) {
-            userMenu.addEventListener('click', function (e) {
-                e.stopPropagation();
-                dropdownMenu.classList.toggle('show');
-            });
+            if (dropbtn && dropdownMenu) {
+                dropbtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    dropdownMenu.classList.toggle('show');
+                });
 
-            document.addEventListener('click', function () {
-                dropdownMenu.classList.remove('show');
-            });
-        }
-    });
-</script>
-
+                document.addEventListener('click', function () {
+                    dropdownMenu.classList.remove('show');
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
