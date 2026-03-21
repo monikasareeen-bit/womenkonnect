@@ -1243,13 +1243,12 @@ select.form-control {
 /* =========================================
    AUTHENTICATION PAGES (LOGIN/REGISTER)
 ========================================= */
-
 .auth-container {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 100px 20px 20px 20px;  /* changed top padding to 100px */
     position: fixed;
     top: 0;
     left: 0;
@@ -1260,7 +1259,6 @@ select.form-control {
     width: 100%;
     overflow-y: auto;
 }
-
 /* Ambient background for auth container */
 .auth-container::before {
     content: '';
