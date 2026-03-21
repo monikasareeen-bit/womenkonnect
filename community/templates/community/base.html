@@ -147,21 +147,23 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const dropbtn = document.querySelector('.dropbtn');
-            const dropdownMenu = document.querySelector('.dropdown-menu');
+    document.addEventListener('DOMContentLoaded', function () {
+        const userMenu = document.querySelector('.user-menu');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
 
-            dropbtn.addEventListener('click', function (e) {
-                e.stopPropagation(); // prevent closing immediately
+        // Only run if user is logged in (elements exist)
+        if (userMenu && dropdownMenu) {
+            userMenu.addEventListener('click', function (e) {
+                e.stopPropagation();
                 dropdownMenu.classList.toggle('show');
             });
 
-            // Close dropdown when clicking outside
             document.addEventListener('click', function () {
                 dropdownMenu.classList.remove('show');
             });
-        });
-    </script>
+        }
+    });
+</script>
 
 </body>
 
