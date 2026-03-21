@@ -26,31 +26,35 @@ from django.http import JsonResponse
 
 
 # ==================== AUTHENTICATION ====================
-
 def register(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
+            user = form.save(commit=False)
+            user.is_active = False  # inactive until email verified
+            user.save()
 
-            user = authenticate(request, username=email, password=password)
+            # Send activation email
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            token = account_activation_token.make_token(user)
+            activation_link = f"{settings.SITE_URL}/activate/{uid}/{token}/"
 
-    if user is not None:
-        if user.is_active:
-            login(request, user)
-            next_url = request.GET.get('next', '')
-            if next_url and next_url.startswith('/') and not next_url.startswith('//'):
-                return redirect(next_url)
-            return redirect('home')
+            send_mail(
+                subject="Activate your WomenKonnect account",
+                message=f"Hi {user.username},\n\nClick the link below to activate your account:\n{activation_link}",
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[user.email],
+                fail_silently=False,
+            )
+
+            messages.success(request, "Account created! Please check your email to activate your account.")
+            return redirect('login')
         else:
-            messages.error(request, "Account not activated.")
+            messages.error(request, "Please correct the errors below.")
     else:
-        messages.error(request, "Invalid email or password.")
+        form = CustomUserCreationForm()
 
-            
     return render(request, "community/register.html", {"form": form})
-
 
 def login_view(request):
     if request.user.is_authenticated:
