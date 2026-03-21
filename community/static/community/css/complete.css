@@ -1337,7 +1337,7 @@ select.form-control {
 .auth-card form {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
 }
 
 .auth-card .form-group {
