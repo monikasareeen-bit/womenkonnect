@@ -2,62 +2,67 @@
 {% block title %}Join Us - WomenConnect{% endblock %}
 {% block extra_css %}
 <style>
+    .auth-container {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        min-height: auto !important;
+        max-width: 420px !important;
+        width: 90% !important;
+        margin: 20px auto !important;
+        padding: 0 !important;
+        background: transparent !important;
+        overflow-y: visible !important;
+        display: block !important;
+        z-index: auto !important;
+    }
+
     .auth-card {
         background: white;
         border-radius: 20px;
-        padding: 20px 20px;
-        /* reduced from 30px 25px */
+        padding: 20px;
         box-shadow: 0 10px 40px rgba(214, 51, 132, 0.15);
         border: 3px solid #ffe4f1;
     }
 
+    .auth-header {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
     .auth-header h2 {
         font-size: 1.3em;
-        /* reduced from 1.6em */
         margin-bottom: 4px;
-    }
-
-    .auth-header p {
-        font-size: 0.9em;
-        /* reduced from 1.1em */
-        margin-bottom: 0;
-    }
-
-    .form-group {
-        margin-bottom: 10px;
-        /* reduced from 15px */
-    }
-
-    .form-group label {
-        font-size: 0.9em;
-        /* reduced from 1.05em */
-        margin-bottom: 4px;
-    }
-
-    .form-group input {
-        padding: 8px 12px;
-        /* reduced from 10px 14px */
-        font-size: 0.9em;
-    }
-
-    .btn {
-        padding: 9px;
-        /* reduced from 11px */
-        font-size: 0.95em;
-        margin-top: 5px;
+        color: #d63384;
     }
 
     .auth-header p {
         color: #888;
-        font-size: 1.1em;
+        font-size: 0.85em;
+        margin: 0;
+    }
+
+    .form-group {
+        margin-bottom: 8px;
     }
 
     .form-group label {
         display: block;
-        margin-bottom: 8px;
+        margin-bottom: 3px;
         color: #d63384;
         font-weight: 600;
-        font-size: 1.05em;
+        font-size: 0.85em;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 7px 10px !important;
+        font-size: 0.85em !important;
+        border: 2px solid #ffe4f1;
+        border-radius: 8px;
+        box-sizing: border-box;
     }
 
     .password-wrapper {
@@ -67,12 +72,12 @@
     }
 
     .password-wrapper input {
-        padding-right: 50px;
+        padding-right: 40px !important;
     }
 
     .toggle-eye {
         position: absolute;
-        right: 14px;
+        right: 10px;
         background: none;
         border: none;
         cursor: pointer;
@@ -81,34 +86,36 @@
         align-items: center;
         color: #d63384;
         opacity: 0.6;
-        transition: opacity 0.2s ease;
-    }
-
-    .toggle-eye:hover {
-        opacity: 1;
     }
 
     .toggle-eye svg {
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
         pointer-events: none;
-    }
-
-    .form-help {
-        font-size: 0.85em;
-        color: #888;
-        margin-top: 5px;
     }
 
     .errorlist {
         list-style: none;
         color: #c9184a;
-        font-size: 0.9em;
-        margin-bottom: 15px;
+        font-size: 0.85em;
+        margin: 4px 0;
         padding-left: 0;
     }
 
-    .btn:hover {
+    .btn.submit-btn {
+        width: 100%;
+        padding: 9px !important;
+        font-size: 0.9em !important;
+        margin-top: 8px;
+        background: linear-gradient(135deg, #ff6b9d, #d63384);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .btn.submit-btn:hover {
         transform: translateY(-2px);
         box-shadow: 0 8px 20px rgba(214, 51, 132, 0.3);
     }

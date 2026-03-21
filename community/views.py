@@ -31,23 +31,28 @@ def register(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = False  # inactive until email verified
+            user.is_active = False
             user.save()
 
-            # Send activation email
             uid = urlsafe_base64_encode(force_bytes(user.pk))
             token = account_activation_token.make_token(user)
             activation_link = f"{settings.SITE_URL}/activate/{uid}/{token}/"
 
-            send_mail(
-                subject="Activate your WomenKonnect account",
-                message=f"Hi {user.username},\n\nClick the link below to activate your account:\n{activation_link}",
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[user.email],
-                fail_silently=False,
-            )
+            try:
+                send_mail(
+                    subject="Activate your WomenKonnect account",
+                    message=f"Hi {user.username},\n\nClick the link to activate:\n{activation_link}",
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[user.email],
+                    fail_silently=False,
+                )
+                messages.success(request, "✅ Account created! Check your email to activate.")
+            except Exception as e:
+                # Delete user if email fails so they can try again
+                user.delete()
+                messages.error(request, f"Registration failed - email could not be sent. Please try again.")
+                return render(request, "community/register.html", {"form": form})
 
-            messages.success(request, "Account created! Please check your email to activate your account.")
             return redirect('login')
         else:
             messages.error(request, "Please correct the errors below.")

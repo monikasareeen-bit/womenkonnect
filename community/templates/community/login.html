@@ -2,6 +2,27 @@
 {% load static %}
 {% block title %}Login - WomenConnect{% endblock %}
 {% block content %}
+{% block extra_css %}
+<style>
+    .auth-container {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        min-height: auto !important;
+        max-width: 420px !important;
+        width: 90% !important;
+        margin: 20px auto !important;
+        padding: 0 !important;
+        background: transparent !important;
+        overflow-y: visible !important;
+        display: block !important;
+        z-index: auto !important;
+    }
+</style>
+{% endblock %}
+
 <div class="auth-container">
     <div class="auth-card">
         <div class="auth-header">
