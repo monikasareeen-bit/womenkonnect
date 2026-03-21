@@ -3,33 +3,48 @@
 {% block extra_css %}
 <style>
     .auth-container {
-        max-width: 500px;
-        margin: 80px auto 50px auto;
+        max-width: 480px;
+        margin: 20px auto;
+        padding: 0 15px;
         animation: fadeIn 0.8s ease;
     }
+
     .auth-card {
         background: white;
-        border-radius: 25px;
-        padding: 50px 40px;
+        border-radius: 20px;
+        padding: 30px 25px;
         box-shadow: 0 10px 40px rgba(214, 51, 132, 0.15);
         border: 3px solid #ffe4f1;
     }
+
     .auth-header {
         text-align: center;
-        margin-bottom: 35px;
+        margin-bottom: 20px;
     }
+
     .auth-header h2 {
-        font-size: 2.5em;
-        margin-bottom: 10px;
-        color: #d63384;
+        font-size: 1.6em;
+        margin-bottom: 6px;
     }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group input {
+        padding: 10px 14px;
+    }
+
+    .btn {
+        padding: 11px;
+        font-size: 1em;
+    }
+
     .auth-header p {
         color: #888;
         font-size: 1.1em;
     }
-    .form-group {
-        margin-bottom: 25px;
-    }
+
     .form-group label {
         display: block;
         margin-bottom: 8px;
@@ -37,22 +52,17 @@
         font-weight: 600;
         font-size: 1.05em;
     }
-    .form-group input {
-        width: 100%;
-        padding: 14px 18px;
-        border: 2px solid #ffe4f1;
-        border-radius: 12px;
-        font-size: 1em;
-        box-sizing: border-box;
-    }
+
     .password-wrapper {
         position: relative;
         display: flex;
         align-items: center;
     }
+
     .password-wrapper input {
         padding-right: 50px;
     }
+
     .toggle-eye {
         position: absolute;
         right: 14px;
@@ -66,19 +76,23 @@
         opacity: 0.6;
         transition: opacity 0.2s ease;
     }
+
     .toggle-eye:hover {
         opacity: 1;
     }
+
     .toggle-eye svg {
         width: 20px;
         height: 20px;
         pointer-events: none;
     }
+
     .form-help {
         font-size: 0.85em;
         color: #888;
         margin-top: 5px;
     }
+
     .errorlist {
         list-style: none;
         color: #c9184a;
@@ -86,17 +100,7 @@
         margin-bottom: 15px;
         padding-left: 0;
     }
-    .btn {
-        background: linear-gradient(135deg, #ff6b9d, #d63384);
-        color: white;
-        border: none;
-        border-radius: 12px;
-        padding: 14px;
-        font-size: 1.1em;
-        font-weight: 600;
-        cursor: pointer;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
+
     .btn:hover {
         transform: translateY(-2px);
         box-shadow: 0 8px 20px rgba(214, 51, 132, 0.3);
@@ -138,11 +142,12 @@
                     {{ form.password1 }}
                     <button type="button" class="toggle-eye" onclick="togglePassword('id_password1', this)">
                         <!-- Eye open icon -->
-                        <svg id="icon_password1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg id="icon_password1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                         </svg>
                     </button>
                 </div>
@@ -153,11 +158,12 @@
                     {{ form.password2 }}
                     <button type="button" class="toggle-eye" onclick="togglePassword('id_password2', this)">
                         <!-- Eye open icon -->
-                        <svg id="icon_password2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg id="icon_password2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                         </svg>
                     </button>
                 </div>
