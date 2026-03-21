@@ -766,8 +766,32 @@ a.reply-link:hover,
    FORMS
 ========================================= */
 
+.form-group input {
+    width: 100%;
+    padding: 7px 10px !important;
+    font-size: 0.85em !important;
+    border: 2px solid #ffe4f1;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.form-group label {
+    font-size: 0.85em !important;
+    margin-bottom: 3px;
+}
+
 .form-group {
-    margin-bottom: 25px;
+    margin-bottom: 8px !important;
+}
+
+.password-wrapper input {
+    padding: 7px 40px 7px 10px !important;
+}
+
+.btn {
+    padding: 8px !important;
+    font-size: 0.9em !important;
+    width: 100%;
 }
 
 .form-label {
