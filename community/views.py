@@ -623,3 +623,58 @@ def create_admin(request):
     
     return HttpResponse("Admin already exists")
 
+def forgot_password(request):
+    if request.method == "POST":
+        email = request.POST.get('email', '').strip().lower()
+        try:
+            user = User.objects.get(email__iexact=email)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            token = account_activation_token.make_token(user)
+            reset_link = f"{settings.SITE_URL}/password-reset-confirm/{uid}/{token}/"
+
+            resend.api_key = settings.RESEND_API_KEY
+            resend.Emails.send({
+                "from": settings.DEFAULT_FROM_EMAIL,
+                "to": [user.email],
+                "subject": "Reset your WomenKonnect password",
+                "text": f"Hi {user.username},\n\nClick the link to reset your password:\n{reset_link}\n\nIf you didn't request this, ignore this email.",
+            })
+        except User.DoesNotExist:
+            pass  # Don't reveal if email exists
+
+        messages.success(request, "If that email exists, a reset link has been sent.")
+        return redirect('forgot_password')
+
+    return render(request, "community/password_reset.html")
+
+
+def reset_password_confirm(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is None or not account_activation_token.check_token(user, token):
+        messages.error(request, 'Reset link is invalid or has expired!')
+        return redirect('forgot_password')
+
+    if request.method == "POST":
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+
+        if password1 != password2:
+            messages.error(request, 'Passwords do not match.')
+            return render(request, 'community/password_reset_confirm.html', {'uidb64': uidb64, 'token': token})
+
+        if len(password1) < 8:
+            messages.error(request, 'Password must be at least 8 characters.')
+            return render(request, 'community/password_reset_confirm.html', {'uidb64': uidb64, 'token': token})
+
+        user.set_password(password1)
+        user.save()
+        messages.success(request, 'Password reset successfully! You can now login.')
+        return redirect('login')
+
+    return render(request, 'community/password_reset_confirm.html', {'uidb64': uidb64, 'token': token})
+
