@@ -22,6 +22,7 @@ from .forms import check_profanity
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from django.http import JsonResponse
+from django.contrib.auth.tokens import default_token_generator
 
 
 
@@ -629,7 +630,7 @@ def forgot_password(request):
         try:
             user = User.objects.get(email__iexact=email)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
-            token = account_activation_token.make_token(user)
+            token = default_token_generator.make_token(user)
             reset_link = f"{settings.SITE_URL}/password-reset-confirm/{uid}/{token}/"
 
             resend.api_key = settings.RESEND_API_KEY
@@ -640,7 +641,7 @@ def forgot_password(request):
                 "text": f"Hi {user.username},\n\nClick the link to reset your password:\n{reset_link}\n\nIf you didn't request this, ignore this email.",
             })
         except User.DoesNotExist:
-            pass  # Don't reveal if email exists
+            pass
 
         messages.success(request, "If that email exists, a reset link has been sent.")
         return redirect('forgot_password')
@@ -655,7 +656,7 @@ def reset_password_confirm(request, uidb64, token):
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
 
-    if user is None or not account_activation_token.check_token(user, token):
+    if user is None or not default_token_generator.check_token(user, token):
         messages.error(request, 'Reset link is invalid or has expired!')
         return redirect('forgot_password')
 
@@ -677,4 +678,3 @@ def reset_password_confirm(request, uidb64, token):
         return redirect('login')
 
     return render(request, 'community/password_reset_confirm.html', {'uidb64': uidb64, 'token': token})
-
