@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.db.models import Q, Count, Prefetch
+from urllib3 import request
 from .models import Category, Post, Reply, UserProfile, Notification
 from django.utils import timezone
 from .forms import CustomUserCreationForm, ProfileForm, EmailAuthenticationForm, PostForm, ContactForm, ReportForm
@@ -661,9 +662,8 @@ def reset_password_confirm(request, uidb64, token):
         return redirect('forgot_password')
 
     if request.method == "POST":
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
-
+        password1 = request.POST.get('new_password1')
+        password2 = request.POST.get('new_password2')
         if password1 != password2:
             messages.error(request, 'Passwords do not match.')
             return render(request, 'community/password_reset_confirm.html', {'uidb64': uidb64, 'token': token, 'validlink': True})
