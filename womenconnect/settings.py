@@ -196,9 +196,9 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 DEFAULT_FROM_EMAIL = config(
     'DEFAULT_FROM_EMAIL',
-    default='WomenConnect <noreply@womenconnect.com>'
-    RESEND_API_KEY = config('RESEND_API_KEY', default='')
+    default='WomenConnect <noreply@womenconnect.com>'   
 )
+RESEND_API_KEY = config('RESEND_API_KEY', default='')
 
 # ========================
 # LOGGING
