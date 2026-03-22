@@ -666,15 +666,15 @@ def reset_password_confirm(request, uidb64, token):
 
         if password1 != password2:
             messages.error(request, 'Passwords do not match.')
-            return render(request, 'community/password_reset_confirm.html', {'uidb64': uidb64, 'token': token})
+            return render(request, 'community/password_reset_confirm.html', {'uidb64': uidb64, 'token': token, 'validlink': True})
 
         if len(password1) < 8:
             messages.error(request, 'Password must be at least 8 characters.')
-            return render(request, 'community/password_reset_confirm.html', {'uidb64': uidb64, 'token': token})
+            return render(request, 'community/password_reset_confirm.html', {'uidb64': uidb64, 'token': token, 'validlink': True})
 
         user.set_password(password1)
         user.save()
         messages.success(request, 'Password reset successfully! You can now login.')
         return redirect('login')
 
-    return render(request, 'community/password_reset_confirm.html', {'uidb64': uidb64, 'token': token})
+    return render(request, 'community/password_reset_confirm.html', {'uidb64': uidb64, 'token': token, 'validlink': True})
