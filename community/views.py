@@ -26,6 +26,8 @@ from django.http import JsonResponse
 
 
 # ==================== AUTHENTICATION ====================
+import resend
+
 def register(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
@@ -39,18 +41,17 @@ def register(request):
             activation_link = f"{settings.SITE_URL}/activate/{uid}/{token}/"
 
             try:
-                send_mail(
-                    subject="Activate your WomenKonnect account",
-                    message=f"Hi {user.username},\n\nClick the link to activate:\n{activation_link}",
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=[user.email],
-                    fail_silently=False,
-                )
+                resend.api_key = settings.RESEND_API_KEY
+                resend.Emails.send({
+                    "from": settings.DEFAULT_FROM_EMAIL,
+                    "to": [user.email],
+                    "subject": "Activate your WomenKonnect account",
+                    "text": f"Hi {user.username},\n\nClick the link to activate:\n{activation_link}",
+                })
                 messages.success(request, "✅ Account created! Check your email to activate.")
             except Exception as e:
-                # Delete user if email fails so they can try again
                 user.delete()
-                messages.error(request, f"Registration failed - email could not be sent. Please try again.")
+                messages.error(request, "Registration failed - email could not be sent. Please try again.")
                 return render(request, "community/register.html", {"form": form})
 
             return redirect('login')
@@ -60,7 +61,6 @@ def register(request):
         form = CustomUserCreationForm()
 
     return render(request, "community/register.html", {"form": form})
-
 def login_view(request):
     if request.user.is_authenticated:
         return redirect('home')

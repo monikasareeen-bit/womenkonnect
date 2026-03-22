@@ -185,6 +185,9 @@ else:
 # ========================
 # EMAIL
 # ========================
+# ========================
+# EMAIL
+# ========================
 EMAIL_BACKEND = config(
     'EMAIL_BACKEND',
     default='django.core.mail.backends.smtp.EmailBackend'
@@ -196,10 +199,9 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 DEFAULT_FROM_EMAIL = config(
     'DEFAULT_FROM_EMAIL',
-    default='WomenConnect <noreply@womenconnect.com>'   
+    default='WomenKonnect <noreply@womenkonnect.co.in>'
 )
 RESEND_API_KEY = config('RESEND_API_KEY', default='')
-
 # ========================
 # LOGGING
 # ========================
