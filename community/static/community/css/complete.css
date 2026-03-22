@@ -1697,3 +1697,12 @@ select.form-control {
         font-size: 1rem;   /* smaller text on mobile */
     }
 }
+/* Fix transparent text in input fields */
+input, textarea, select {
+    -webkit-text-fill-color: var(--text-main) !important;
+    color: var(--text-main) !important;
+}
+
+input[type="password"] {
+    -webkit-text-fill-color: initial !important;
+}
