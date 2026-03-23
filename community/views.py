@@ -608,22 +608,10 @@ def handler403(request, exception):
     return render(request, '403.html', status=403)
 
 def check_users(request):
-    User = get_user_model()
-    users = list(User.objects.all().values('username', 'is_staff', 'is_superuser'))
-    return JsonResponse(users, safe=False)
+    return HttpResponse("This endpoint is disabled.", status=403)
 
 def create_admin(request):
-    User = get_user_model()
-
-    if not User.objects.filter(username='admin').exists():
-        User.objects.create_superuser(
-            username='admin',
-            email='admin@example.com',
-            password='admin123'
-        )
-        return HttpResponse("Admin created")
-    
-    return HttpResponse("Admin already exists")
+    return HttpResponse("This endpoint is disabled.", status=403)
 
 def forgot_password(request):
     if request.method == "POST":
