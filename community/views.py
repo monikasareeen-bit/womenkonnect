@@ -585,7 +585,7 @@ def contact(request):
                 resend.api_key = settings.RESEND_API_KEY
                 resend.Emails.send({
                     "from": settings.DEFAULT_FROM_EMAIL,
-                    "to": [settings.EMAIL_HOST_USER],
+                    "to": [settings.ADMIN_EMAIL],
                     "subject": f"Contact: {form.cleaned_data['subject']}",
                     "text": f"From: {form.cleaned_data['name']} <{form.cleaned_data['email']}>\n\n{form.cleaned_data['message']}",
                 })
