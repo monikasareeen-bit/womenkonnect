@@ -582,16 +582,17 @@ def contact(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             try:
-                send_mail(
-                    subject=f"Contact: {form.cleaned_data['subject']}",
-                    message=f"From: {form.cleaned_data['name']} <{form.cleaned_data['email']}>\n\n{form.cleaned_data['message']}",
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=[settings.EMAIL_HOST_USER],
-                    fail_silently=False,
-                )
+                resend.api_key = settings.RESEND_API_KEY
+                resend.Emails.send({
+                    "from": settings.DEFAULT_FROM_EMAIL,
+                    "to": [settings.EMAIL_HOST_USER],
+                    "subject": f"Contact: {form.cleaned_data['subject']}",
+                    "text": f"From: {form.cleaned_data['name']} <{form.cleaned_data['email']}>\n\n{form.cleaned_data['message']}",
+                })
                 messages.success(request, "Your message has been sent! We'll get back to you soon.")
-            except Exception:
-                messages.error(request, "Sorry, we couldn't send your message. Please try again later.")
+            except Exception as e:
+                print(f"Contact email error: {e}")
+                messages.error(request, "Sorry, couldn't send your message. Please try again.")
             return redirect('contact')
     else:
         form = ContactForm()
