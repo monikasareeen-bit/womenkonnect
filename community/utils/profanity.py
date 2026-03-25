@@ -1,16 +1,14 @@
-# community/utils/profanity.py
 import re
 import unicodedata
 from typing import Optional
 
 # ---------------------------------------------------------------------------
-# Core word list — stems/roots only; variants are handled by normalization.
-# Keeping this focused reduces false positives vs. an exhaustive list.
+# Core word list — stems/roots only
 # ---------------------------------------------------------------------------
 PROFANITY_LIST: list[str] = [
     # Sexual / explicit
     'fuck', 'fck', 'fuk', 'fuq',
-    'shit', 'sht',
+    'shit', 'sht', 'sex',
     'ass', 'arse',
     'bitch', 'btch',
     'bastard',
@@ -30,7 +28,7 @@ PROFANITY_LIST: list[str] = [
     'spic',
     'kike',
     # Harassment / self-harm
-    'kys',          # "kill yourself" abbreviation
+    'kys',
     'killyourself',
     'killurself',
     'dieasshole',
@@ -40,28 +38,23 @@ PROFANITY_LIST: list[str] = [
     'cutmyself',
 ]
 
-# Words that CONTAIN a bad stem but are perfectly innocent.
-# These are checked BEFORE flagging, using the full (space-preserved) normalized text.
+# Whitelisted STEMS — if a token's normalized form starts with or equals these,
+# it is innocent. Using stem prefixes is safer than full-word matching.
 WHITELIST: set[str] = {
     # "ass" stem
-    'assassin', 'assassinate', 'assassination',
-    'classic', 'classics', 'classical',
-    'class', 'classes', 'classify', 'classification',
+    'assassin', 'assassination', 'assassinate',
+    'classic', 'classical', 'classify', 'classification',
+    'class', 'classes',
     'mass', 'masses', 'massive',
     'pass', 'passes', 'passion', 'passionate', 'passive',
     'grass', 'grassy',
     'glass', 'glasses',
-    'brass',
-    'bass',
+    'brass', 'bass',
     'cassette', 'cassandra',
-    'harassment',    # contains "rass"
-    'embarrass', 'embarrassment',
+    'harassment', 'embarrass', 'embarrassment',
     'ambassador',
     'assistance', 'assistant', 'assess', 'asset', 'assets',
-    'compass',
-    'surpass',
-    'crass',
-    'harass',
+    'compass', 'surpass', 'crass', 'harass',
     # "cock" stem
     'cockerel', 'cockatoo', 'cockatiel', 'cocktail', 'cocoa',
     'peacock', 'weathercock', 'woodcock',
@@ -69,162 +62,262 @@ WHITELIST: set[str] = {
     'dictionary', 'dictate', 'dictator', 'dictation', 'diction',
     'benedict', 'benediction', 'predict', 'verdict', 'edict',
     'addicted', 'addiction',
-    # "fag" stem  (UK usage = cigarette / bundle of sticks)
-    'fagot',    # bundle of sticks — note: also a common misspelling of slur, keep short list
-    # "rape" stem — plant/agriculture
+    # "rape" stem
     'drape', 'drapes', 'grape', 'grapes', 'grapevine',
     'landscape', 'escape', 'scrape',
-    'rapeseed', 'oilseed',   # legitimate crop
-    # "slut" — Scandinavian surname / place suffix
-    'slutsk',
-    # "cum" — Latin prefix (common in English words)
+    'rapeseed', 'oilseed',
+    # "cum" Latin prefix
     'document', 'documents', 'documentary', 'documentation',
     'accumulate', 'accumulation', 'accumulated',
     'cucumber',
-    'scum',      # borderline — keep whitelisted; context matters
     # "shit" stem
-    'bullshit',  # NOTE: this is itself profanity — remove if you want to block it
     # "piss" stem
     'mississippi',
-    # "bitch" stem — female dog, female animal
+    # "bitch" stem
     'bitcoin',
+    # "sex" stem — common in legitimate words
+    'sexual', 'sexuality', 'sexology', 'sextet', 'sextuplet',
+    'bisexual', 'asexual', 'intersex', 'sexism', 'sexist',
 }
 
 # ---------------------------------------------------------------------------
-# Leet-speak / substitution normalization map
+# Extended homoglyph / Cyrillic / Unicode lookalike map
 # ---------------------------------------------------------------------------
-_NORMALIZE_MAP: dict[str, str] = {
-    '@': 'a',
-    '4': 'a',
-    '3': 'e',
-    '€': 'e',
-    '1': 'i',
-    '!': 'i',
-    '|': 'i',
+_HOMOGLYPH_MAP: dict[str, str] = {
+    # Cyrillic lookalikes
+    'а': 'a', 'е': 'e', 'і': 'i', 'о': 'o', 'р': 'p',
+    'с': 'c', 'у': 'y', 'х': 'x', 'ѕ': 'z', 'ї': 'i',
+    # Greek lookalikes
+    'α': 'a', 'β': 'b', 'ε': 'e', 'ι': 'i', 'ο': 'o',
+    'ρ': 'p', 'τ': 't', 'υ': 'u', 'χ': 'x',
+    # Misc Unicode
+    'ø': 'o', 'ö': 'o', 'ü': 'u', 'ä': 'a', 'ñ': 'n',
+    '\u200b': '',   # zero-width space
+    '\u200c': '',   # zero-width non-joiner
+    '\u200d': '',   # zero-width joiner
+    '\ufeff': '',   # BOM
+}
+
+# Leet-speak map
+_LEET_MAP: dict[str, str] = {
+    '@': 'a', '4': 'a',
+    '3': 'e', '€': 'e',
+    '1': 'i', '!': 'i', '|': 'i',
     '0': 'o',
-    '$': 's',
-    '5': 's',
-    '+': 't',
-    '7': 't',
-    '9': 'g',
-    '6': 'b',
-    '8': 'b',
-    'ph': 'f',   # "phuck" → "fuck"
+    '$': 's', '5': 's',
+    '+': 't', '7': 't',
+    '9': 'g', '6': 'b', '8': 'b',
+}
+
+# Multi-char substitutions (apply before single-char)
+_MULTI_CHAR_MAP: dict[str, str] = {
+    'ph': 'f',
     'ck': 'k',
     'qu': 'k',
-    'x': 'ks',
 }
 
-# Regex to collapse repeated characters: "fuuuuck" → "fuk" (keep 2 max, then de-dup in check)
-_REPEATED_CHARS_RE = re.compile(r'(.)\1{2,}')
-
-# Regex to strip punctuation / separators between letters: "f.u.c.k" → "fuck"
+_REPEATED_CHARS_RE = re.compile(r'(.)\1+')  # collapse ALL repeats to 1
 _SEPARATOR_RE = re.compile(r'[\s\.\-_\*\^\~\`\'\"]+')
 
 
 def _strip_accents(text: str) -> str:
-    """Decompose Unicode and remove combining marks: 'fück' → 'fuck'."""
     nfkd = unicodedata.normalize('NFKD', text)
     return ''.join(c for c in nfkd if not unicodedata.combining(c))
+
+
+def _apply_homoglyphs(text: str) -> str:
+    return ''.join(_HOMOGLYPH_MAP.get(c, c) for c in text)
 
 
 def normalize_text(text: str) -> str:
     """
     Full normalization pipeline:
-      1. Unicode decomposition (strips accents / homoglyphs)
-      2. Lowercase
-      3. Multi-char substitutions (ph → f)
-      4. Single-char leet substitutions
-      5. Remove separators between letters (f.u.c.k → fuck)
-      6. Collapse 3+ repeated chars (fuuuck → fuuck → fuk handled at match time)
+      1. Unicode decomposition (strips accents)
+      2. Homoglyph replacement (Cyrillic/Greek lookalikes)
+      3. Lowercase
+      4. Multi-char leet subs (ph → f)
+      5. Single-char leet subs
+      6. Remove separators
+      7. Collapse ALL repeated chars to 1 (fuuuck → fuk)
     """
     text = _strip_accents(text)
+    text = _apply_homoglyphs(text)
     text = text.lower()
 
-    # Multi-char subs first (order matters: 'ph' before single chars)
-    for src, dst in _NORMALIZE_MAP.items():
-        if len(src) > 1:
-            text = text.replace(src, dst)
+    for src, dst in _MULTI_CHAR_MAP.items():
+        text = text.replace(src, dst)
 
-    # Single-char subs
-    for src, dst in _NORMALIZE_MAP.items():
+    for src, dst in _LEET_MAP.items():
         if len(src) == 1:
             text = text.replace(src, dst)
 
-    # Remove separators
     text = _SEPARATOR_RE.sub('', text)
 
-    # Collapse 3+ repeated chars to 2 (fuuuck → fuuck)
-    text = _REPEATED_CHARS_RE.sub(r'\1\1', text)
+    # Collapse ALL repeats to single char: fuuuck → fuk
+    text = _REPEATED_CHARS_RE.sub(r'\1', text)
 
     return text
 
 
-def _is_whitelisted(word: str) -> bool:
-    """Return True if the full normalized token is an innocent whitelisted word."""
-    return word in WHITELIST
+# Pre-normalize the whitelist so comparisons work after repeat-collapse
+# Built lazily on first use since normalize_text must be defined first
+_NORMALIZED_WHITELIST: set[str] = set()
+
+
+def _get_normalized_whitelist() -> set[str]:
+    if not _NORMALIZED_WHITELIST:
+        for w in WHITELIST:
+            _NORMALIZED_WHITELIST.add(normalize_text(w))
+    return _NORMALIZED_WHITELIST
+
+
+def _is_whitelisted(token: str) -> bool:
+    """
+    Check if a normalized token is whitelisted.
+    Both token and whitelist entries are repeat-collapsed via normalize_text,
+    so 'clasic' matches normalized('classic') = 'clasic'.
+    Also matches if token starts with a whitelisted stem (handles -ed, -ing, -ly suffixes).
+    """
+    nwl = _get_normalized_whitelist()
+    if token in nwl:
+        return True
+    for w in nwl:
+        if token.startswith(w):
+            return True
+    return False
+
+
+def _contains_bad_word(normalized: str) -> Optional[str]:
+    """Return the matched bad word stem if found, else None."""
+    for bad in PROFANITY_LIST:
+        # Also normalize the bad word itself (handles repeat collapse)
+        norm_bad = _REPEATED_CHARS_RE.sub(r'\1', bad)
+        if norm_bad in normalized:
+            return bad
+    return None
 
 
 def check_profanity(text: str) -> bool:
     """
     Returns True if the text contains profanity.
 
-    Strategy:
-      - Tokenise the original text into words (preserves word boundaries).
-      - For each token, normalize it and check against the profanity list.
-      - A token is only flagged if it is NOT in the whitelist AND contains a bad stem.
-      - Also checks the fully-collapsed (no-space) version to catch spaced-out evasions
-        like "f u c k" or "s h i t" while keeping per-token whitelist protection.
+    Three passes:
+      1. Per-word check — respects whitelist, catches embedded bad words in tokens
+      2. Sliding window on normalized full text — catches split evasions like "f u c k"
+         while still checking each window slice against whitelist
+      3. Collapsed full text — catches spaced/separated evasions
     """
     if not text or not isinstance(text, str):
         return False
 
-    # --- Pass 1: per-word check (protects whitelist words) ---
-    tokens = re.findall(r"[a-zA-Z0-9@$!|€\.\-_\*\^\~\`\'\"]+", text)
+    # --- Pass 1: per-word check ---
+    tokens = re.findall(r"[^\s]+", text)
     for token in tokens:
-        normalized_token = normalize_text(token)
-        if _is_whitelisted(normalized_token):
+        normalized = normalize_text(token)
+        if _is_whitelisted(normalized):
             continue
-        for bad in PROFANITY_LIST:
-            # Use substring match but only on single tokens to avoid cross-word false positives
-            if bad in normalized_token:
+        if _contains_bad_word(normalized):
+            return True
+
+    # --- Pass 2: rejoin adjacent short tokens to catch split evasions ---
+    # e.g. "f u c k" → tokens ["f","u","c","k"] → joined "fuck"
+    # We slide a window of 2–6 adjacent tokens, join them, normalize, and check.
+    normalized_full = normalize_text(text)
+
+    raw_tokens = re.findall(r"[^\s]+", text)
+    for window_size in range(2, 7):
+        for i in range(len(raw_tokens) - window_size + 1):
+            joined = ''.join(raw_tokens[i:i + window_size])
+            normalized_joined = normalize_text(joined)
+            if _is_whitelisted(normalized_joined):
+                continue
+            if _contains_bad_word(normalized_joined):
                 return True
 
-    # --- Pass 2: full collapsed check (catches "f u c k" spaced evasions) ---
-    # Strip everything except alphanumeric + leet chars, then normalize
-    collapsed = normalize_text(re.sub(r'[^a-zA-Z0-9@$!|€]', '', text))
-    for bad in PROFANITY_LIST:
-        if bad in collapsed:
-            # Before flagging, verify it's not a whitelisted word hiding in collapsed form
-            if not _is_whitelisted(collapsed):
+    # --- Pass 3: strip ALL non-alpha chars and check ---
+    # Catches "f.u.c.k", "f-u-c-k", mixed separators
+    # We must re-tokenize from the original to build a whitelist-safe stripped version.
+    # Strategy: normalize each original token individually, strip non-alpha, then
+    # only flag if that stripped token is not whitelisted.
+    for token in tokens:
+        normalized = normalize_text(token)
+        stripped_token = re.sub(r'[^a-z]', '', normalized)
+        stripped_token = _REPEATED_CHARS_RE.sub(r'\1', stripped_token)
+        if _is_whitelisted(stripped_token):
+            continue
+        for bad in PROFANITY_LIST:
+            norm_bad = _REPEATED_CHARS_RE.sub(r'\1', bad)
+            if norm_bad in stripped_token:
                 return True
 
     return False
 
 
 def get_profanity_matches(text: str) -> list[str]:
-    """
-    Debug / logging helper — returns list of matched bad words.
-    Do NOT expose this output to end users.
-    """
+    """Debug helper — returns matched bad word stems. Do NOT expose to end users."""
     if not text or not isinstance(text, str):
         return []
 
     found: list[str] = []
-    tokens = re.findall(r"[a-zA-Z0-9@$!|€\.\-_\*\^\~\`\'\"]+", text)
+    tokens = re.findall(r"[^\s]+", text)
 
     for token in tokens:
-        normalized_token = normalize_text(token)
-        if _is_whitelisted(normalized_token):
+        normalized = normalize_text(token)
+        if _is_whitelisted(normalized):
             continue
-        for bad in PROFANITY_LIST:
-            if bad in normalized_token and bad not in found:
-                found.append(bad)
+        match = _contains_bad_word(normalized)
+        if match and match not in found:
+            found.append(match)
 
-    collapsed = normalize_text(re.sub(r'[^a-zA-Z0-9@$!|€]', '', text))
+    normalized_full = normalize_text(text)
+    stripped = re.sub(r'[^a-z]', '', normalized_full)
+    stripped = _REPEATED_CHARS_RE.sub(r'\1', stripped)
+
     for bad in PROFANITY_LIST:
-        if bad in collapsed and bad not in found:
-            if not _is_whitelisted(collapsed):
-                found.append(bad)
+        norm_bad = _REPEATED_CHARS_RE.sub(r'\1', bad)
+        if norm_bad in stripped and bad not in found:
+            found.append(bad)
 
     return found
+
+
+# ---------------------------------------------------------------------------
+# Quick self-test — remove in production
+# ---------------------------------------------------------------------------
+if __name__ == '__main__':
+    tests = [
+        # Should be TRUE (profanity)
+        ("fuck",            True),
+        ("f u c k",         True),
+        ("f.u.c.k",         True),
+        ("fuuuuck",         True),
+        ("fück",            True),   # accented
+        ("f_u_c_k",         True),
+        ("sh1t",            True),
+        ("b1tch",           True),
+        ("@ss",             True),
+        # Should be FALSE (clean)
+        ("classic music",   False),
+        ("passionate",      False),
+        ("assassination",   False),
+        ("cocktail",        False),
+        ("dictionary",      False),
+        ("grass",           False),
+        ("Mississippi",     False),
+        ("bitcoin",         False),
+        ("grape juice",     False),
+        ("escape room",     False),
+    ]
+
+    print(f"{'Text':<25} {'Expected':<10} {'Got':<10} {'Pass?'}")
+    print("-" * 55)
+    all_pass = True
+    for text, expected in tests:
+        result = check_profanity(text)
+        passed = result == expected
+        all_pass = all_pass and passed
+        status = "✓" if passed else "✗ FAIL"
+        print(f"{text:<25} {str(expected):<10} {str(result):<10} {status}")
+
+    print()
+    print("All tests passed!" if all_pass else "Some tests FAILED — review above.")
