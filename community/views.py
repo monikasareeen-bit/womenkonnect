@@ -586,6 +586,7 @@ def contact(request):
                 resend.Emails.send({
                     "from": settings.DEFAULT_FROM_EMAIL,
                     "to": [settings.ADMIN_EMAIL],
+                    "reply_to": form.cleaned_data['email'],   # ← add this
                     "subject": f"Contact: {form.cleaned_data['subject']}",
                     "text": f"From: {form.cleaned_data['name']} <{form.cleaned_data['email']}>\n\n{form.cleaned_data['message']}",
                 })
@@ -597,7 +598,6 @@ def contact(request):
     else:
         form = ContactForm()
     return render(request, "community/contact.html", {"form": form})
-
 # Error handlers
 def handler404(request, exception):
     return render(request, '404.html', status=404)
