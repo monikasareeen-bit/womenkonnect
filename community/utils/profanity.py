@@ -100,6 +100,11 @@ WHITELIST: set[str] = {
     'breast',         # breasts (anatomical)
     'toast',          # toasts
     'coast',          # coastal
+    'cook',           # cook, cooked, cooking, cooker
+    'cookbook',       # cookbooks
+    'cookie',         # cookies, cookie
+    'cooker',         # cookers, pressure cooker
+    'cookery',        # cookery
     'roast',
     'boast',
     'almost',
