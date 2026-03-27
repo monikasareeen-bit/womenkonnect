@@ -3,14 +3,10 @@
 
 {% block title %}Home - WomenKonnect{% endblock %}
 
-
-<!-- ================= SIDEBAR ================= -->
 {% block sidebar %}
 {% include 'community/partials/sidebar.html' %}
 {% endblock %}
 
-
-<!-- ================= RIGHT PANEL ================= -->
 {% block right_panel %}
 <div class="sidebar-card">
     <h4>📊 Community Stats</h4>
@@ -19,63 +15,64 @@
 </div>
 {% endblock %}
 
-
-<!-- ================= MAIN CONTENT ================= -->
 {% block content %}
 <div class="home-wrapper">
 
+    <!-- MOBILE ONLY: horizontal category chips -->
+    <div class="mobile-category-bar">
+        <a href="?category=career">Career & Finance</a>
+        <a href="?category=marriage">Marriage Pressure</a>
+        <a href="?category=courage">Courage Stories</a>
+        <a href="?category=health">Health & Self-Care</a>
+        <a href="?category=identity">Identity</a>
+        <a href="?category=inlaws">In-Laws</a>
+        <a href="?category=mental">Mental Health</a>
+    </div>
+
     <div class="home-grid">
 
-        <!-- LEFT COLUMN : Older Posts -->
+        <!-- LEFT COLUMN: Older Posts -->
         <div class="discussion-column">
             <h3 class="section-title">Older Discussions</h3>
 
             {% for post in older_posts %}
-                <div class="post-row">
-                    <h5 class="post-title">
-                        <a href="{% url 'post_detail' post.pk %}">
-                            {{ post.title }}
-                        </a>
-                    </h5>
-
-                    <div class="post-meta">
-                        {{ post.author.username }} ·
-                        {{ post.created_at|naturaltime }} ·
-                        {{ post.reply_count }} replies ·
-                        {{ post.total_likes }} likes
-                    </div>
+            <div class="post-row">
+                <h5 class="post-title">
+                    <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
+                </h5>
+                <div class="post-meta">
+                    {{ post.author.username }} ·
+                    {{ post.created_at|naturaltime }} ·
+                    {{ post.reply_count }} replies ·
+                    {{ post.total_likes }} likes
                 </div>
+            </div>
             {% empty %}
-                <p class="empty-text">No older posts available.</p>
+            <p class="empty-text">No older posts available.</p>
             {% endfor %}
         </div>
 
-
-        <!-- RIGHT COLUMN : Recent Posts -->
+        <!-- RIGHT COLUMN: Recent Posts -->
         <div class="discussion-column">
             <h3 class="section-title">Recent Discussions</h3>
 
             {% for post in recent_posts %}
-                <div class="post-row">
-                    <h5 class="post-title">
-                        <a href="{% url 'post_detail' post.pk %}">
-                            {{ post.title }}
-                        </a>
-                    </h5>
-
-                    <div class="post-meta">
-                        {{ post.author.username }} ·
-                        {{ post.created_at|naturaltime }} ·
-                        {{ post.reply_count }} replies ·
-                        {{ post.total_likes }} likes
-                    </div>
+            <div class="post-row">
+                <h5 class="post-title">
+                    <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
+                </h5>
+                <div class="post-meta">
+                    {{ post.author.username }} ·
+                    {{ post.created_at|naturaltime }} ·
+                    {{ post.reply_count }} replies ·
+                    {{ post.total_likes }} likes
                 </div>
+            </div>
             {% empty %}
-                <p class="empty-text">No recent posts yet.</p>
+            <p class="empty-text">No recent posts yet.</p>
             {% endfor %}
         </div>
 
     </div>
-
 </div>
 {% endblock %}
