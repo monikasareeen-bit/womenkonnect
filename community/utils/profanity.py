@@ -59,6 +59,81 @@ WHITELIST: set[str] = {
     # ── "ass" / "arse" family — common everyday words ───────────────────────
     # These everyday words contain 'as' or 'ars' as a substring and must
     # be whitelisted or they trigger false positives on normal sentences.
+    # Single common words that ARE the normalized form of 'ass' hits
+    'as',             # as — "as if", "as well", "such as" etc.
+    'ask',            # ask, asked, asking, asks
+    'aspect',         # aspects, aspective
+    'assist',         # assistance, assistant (already present but 'as' needs own entry)
+    'assume',         # assumes, assumed, assuming, assumption
+    'asset',          # assets (already present but covered by 'as' now)
+    'assign',         # assigns, assigned, assignment
+    'associate',      # associates, association
+    'assembly',       # assemblies, assemble
+    'assert',         # asserts, assertion
+    'assess',         # assessment (already present)
+    'assign',
+    'asylum',         # asylum
+    'astute',
+    'asterisk',
+    'asteroid',
+    'astronomy',
+    'astronaut',
+    'atmosphere',
+    'athletic',
+    'athletics',
+    'atlantic',
+    'atlas',          # already present
+    'vast',           # vast, vastly — contains 'as'
+    'last',           # last, lasting, lastly
+    'past',           # past, pastime, pastor
+    'fast',           # fast, faster, fastest
+    'cast',           # cast, casting, broadcast
+    'mast',           # mast, masthead
+    'blast',          # blasts, blasting
+    'contrast',       # contrasts
+    'forecast',       # forecasts
+    'east',           # eastern, northeast, southeast
+    'least',          # at least
+    'beast',          # beasts
+    'feast',          # feasts
+    'yeast',
+    'breast',         # breasts (anatomical)
+    'toast',          # toasts
+    'coast',          # coastal
+    'roast',
+    'boast',
+    'almost',
+    'ghost',          # ghost — no 'as' but safe
+    'amongst',        # amongst
+    'against',        # against — very common word, contains 'as'
+    'pleasant',       # pleasant, pleasantly, unpleasant
+    'peasant',        # peasants
+    'pheasant',
+    'past',     # past
+    'last',     # last
+    'fast',     # fast
+    'cast',     # cast
+    'vast',     # vast
+    'east',     # east
+    'least',    # least
+    'against',  # against
+    'almost',   # almost
+    'blast',    # blast
+    'coast',    # coast
+    'assistant',      # already via 'assist' but explicit
+    'constant',       # constantly, inconstant
+    'distant',        # distance, distantly
+    'instant',        # instantly, instance, instances
+    'bystander',
+    'outstanding',    # outstanding, outstandingly
+    'understanding',  # understanding, misunderstanding
+    'withstanding',   # notwithstanding
+    'standing',
+    'lasting',
+    'everlasting',
+    'broadcasting',
+    'contrasting',
+    'fascinating',    # fascinating, fascination
     'year',           # years, yearly — contains 'ears' → 'ars' hit
     'ears',          # ears, nearby — contains 'ars'
     'bears',          # bears, bearing, bearable
@@ -532,6 +607,10 @@ def _contains_bad_word(normalized: str) -> Optional[str]:
     """Return the matched bad-word stem if found, else None."""
     for bad in PROFANITY_LIST:
         norm_bad = _REPEATED_CHARS_RE.sub(r'\1', bad)
+        # Skip if the normalized bad word is <= 2 chars AND the token
+        # is a common short word — prevents 'as','is','us' false positives
+        if len(norm_bad) <= 2 and len(normalized) <= 3:
+            continue
         if norm_bad in normalized:
             return bad
     return None
