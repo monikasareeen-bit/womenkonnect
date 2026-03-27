@@ -1993,3 +1993,123 @@ input[type="password"] {
         order: 3;
     }
 }
+
+/* =========================================
+   COMPLETE MOBILE FIX
+   Makes site look full and complete on mobile
+   like IndusLadies
+========================================= */
+
+/* Prevent horizontal scroll / overflow */
+html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+}
+
+@media (max-width: 768px) {
+
+    /* ── Layout: full width, no overflow ── */
+    .layout-container {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 16px auto !important;
+        padding: 0 12px !important;
+        gap: 16px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Show discussions FIRST, sidebar SECOND, stats LAST */
+    .layout-container > main.main-content { order: 1; }
+    .layout-container > aside.sidebar     { order: 2; }
+    .layout-container > aside.right-panel { order: 3; }
+
+    /* All panels full width */
+    .layout-container > * {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* ── Home grid: stack columns vertically ── */
+    .home-wrapper,
+    .home-grid {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .home-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+    }
+
+    .discussion-column {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* ── Post rows: full width, no overflow ── */
+    .post-row {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 14px 16px !important;
+        margin-bottom: 10px !important;
+    }
+
+    /* Prevent post titles from overflowing */
+    .post-row h5,
+    .post-title {
+        font-size: 16px !important;
+        word-break: break-word !important;
+        white-space: normal !important;
+        overflow-wrap: break-word !important;
+    }
+
+    /* ── Section titles ── */
+    .section-title {
+        font-size: 20px !important;
+        margin-bottom: 12px !important;
+    }
+
+    /* ── Sidebar & right panel ── */
+    .sidebar,
+    .right-panel {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 16px !important;
+    }
+
+    /* ── Category list full width ── */
+    .list-unstyled li a {
+        padding: 12px 14px !important;
+        font-size: 14px !important;
+        word-break: break-word !important;
+    }
+
+    /* ── Navbar full width ── */
+    .top-navbar {
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* ── Footer ── */
+    .footer {
+        padding: 24px 16px 16px !important;
+    }
+
+    .footer-container {
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+
+    .footer-section {
+        min-width: unset !important;
+        width: 100% !important;
+    }
+}
