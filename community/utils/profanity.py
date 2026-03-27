@@ -530,7 +530,11 @@ _MULTI_CHAR_MAP: dict[str, str] = {
 }
 
 _REPEATED_CHARS_RE = re.compile(r'(.)\1+')   # collapse ALL repeats to 1
-_SEPARATOR_RE = re.compile(r'[\s\.\-_\*\^\~\`\'\"]+')
+# NEW — comprehensive punctuation stripping:
+_SEPARATOR_RE = re.compile(
+    r'[\s\.\-_\*\^\~\`\'\",:;!?()\[\]{}<>/\\#%&+=|'
+    r'\u2014\u2013\u2012\u2011\u2010\u00ad]+'  # em-dash, en-dash, hyphens
+)
 
 
 def _strip_accents(text: str) -> str:
@@ -581,22 +585,27 @@ def _get_normalized_whitelist() -> set[str]:
     return _NORMALIZED_WHITELIST
 
 
+# NEW — checks if any whitelisted stem appears anywhere in the token:
 def _is_whitelisted(token: str) -> bool:
     """
     Return True if `token` (already normalized) is safe.
 
-    Checks two conditions:
-      1. Exact match — the entire token is a whitelisted stem.
-      2. Prefix match — the token starts with a whitelisted stem, meaning
-         the bad substring is part of an innocent root word
-         (e.g. 'inapropriate' starts with normalized('inappropriate')).
+    Checks whether any whitelisted stem appears anywhere in the token:
+      - Exact match:     token == stem
+      - Prefix match:    token.startswith(stem)  e.g. 'klasic' matches 'class'
+      - Substring match: stem in token            e.g. 'inapropriate' matches 'appropriat'
 
-    Both `token` and whitelist entries have been through normalize_text(),
-    so repeat-collapse and leet-decode are already applied.
+    The substring check handles innocent words with negating prefixes
+    like 'in-', 'un-', 'dis-', 'mis-' that precede a whitelisted root.
     """
     nwl = _get_normalized_whitelist()
     if token in nwl:
         return True
+    for w in nwl:
+        if w in token:   # covers startswith AND mid-token — all previous cases still pass
+            return True
+    return False
+
     for w in nwl:
         if token.startswith(w):
             return True
