@@ -56,6 +56,74 @@ PROFANITY_LIST: list[str] = [
 # ---------------------------------------------------------------------------
 WHITELIST: set[str] = {
 
+    # ── "ass" / "arse" family — common everyday words ───────────────────────
+    # These everyday words contain 'as' or 'ars' as a substring and must
+    # be whitelisted or they trigger false positives on normal sentences.
+    'year',           # years, yearly — contains 'ears' → 'ars' hit
+    'ears',          # ears, nearby — contains 'ars'
+    'bears',          # bears, bearing, bearable
+    'tears',          # tears, tearful
+    'wears',          # wears, wearing, wearable
+    'fears',          # fears, fearsome
+    'clears',         # clears, clearance
+    'appears',        # appears, appearance — contains 'ars' via 'ears'
+    'smears',
+    'shears',
+    'spears',
+    'gears',
+    'hears',          # hears, hearing
+    'nears',
+    'swears',
+    'asked',          # asked, asking, ask — contains 'ask' → 'as' hit
+    'task',           # tasks, tasking
+    'was',            # was — contains 'as'
+    'has',            # has — contains 'as'
+    'reason',         # reason, reasonable, reasoning — contains 'eas' → 'as'
+    'season',         # season, seasonal, seasoning
+    'please',         # please, pleasure, pleasant
+    'ease',           # easy, easily, easing, uneasy, disease, grease
+    'release',
+    'increase',
+    'decrease',
+    'lease',          # leasing, leaseholder
+    'grease',
+    'crease',
+    'disease',
+    'phrase',         # phrase, paraphrase
+    'base',           # basic, basis, baseball, basement, database
+    'case',           # cases, casework, suitcase, staircase
+    'phase',          # phases, phasing
+    'chase',          # chases, chasing
+    'erase',          # erases, erasing
+    'place',          # places, placement, replace, misplace
+    'space',          # spaces, spacious, aerospace
+    'face',           # faces, surface, interface, replace
+    'grace',          # graceful, gracious, disgrace
+    'race',           # races, racial, embrace
+    'trace',          # traces, tracing
+    'pace',           # paces, spacious
+    'lace',           # laces, necklace, replace
+    'brace',          # braces, embrace
+    'alas',           # alas — contains 'as'
+    'atlas',          # atlas, atlases
+    'alias',          # aliases
+    'bias',           # biases, unbiased
+    'ideas',          # ideas
+    'areas',          # areas
+    'eras',           # eras (historical periods)
+    'extras',         # extras
+    'ultras',         # ultras
+    'paras',          # paragraphs (informal)
+    'boas',           # boa constrictors
+    'llamas',         # llamas
+    'dramas',         # dramas, dramatic
+    'panoramas',
+    'arson',          # arson, arsonist — contains 'ars'
+    'arsenal',        # arsenal — already below but added here for 'ars' hit
+    'arse',           # 'arse' itself is on banned list, but 'arsen' prefix is clean
+    'arsenic',        # arsenic — chemical element
+    'arse',
+
     # ── "ass" family ────────────────────────────────────────────────────────
     # Classic Scunthorpe cases
     'assassin',       # assassination, assassinate, assassinating …
@@ -509,7 +577,12 @@ def check_profanity(text: str) -> bool:
     # ── Pass 2: sliding window (catches "f u c k" style splits) ─────────────
     for window_size in range(2, 7):
         for i in range(len(raw_tokens) - window_size + 1):
-            joined = ''.join(raw_tokens[i:i + window_size])
+            window = raw_tokens[i:i + window_size]
+            # Only join short tokens (1-2 chars) — real split evasions like
+            # "f u c k". Joining normal words causes false positives.
+            if any(len(t) > 2 for t in window):
+                continue
+            joined = ''.join(window)
             normalized_joined = normalize_text(joined)
             if _is_whitelisted(normalized_joined):
                 continue
@@ -559,7 +632,10 @@ def get_profanity_matches(text: str) -> list[str]:
     # Pass 2 — sliding window (was missing in original get_profanity_matches)
     for window_size in range(2, 7):
         for i in range(len(raw_tokens) - window_size + 1):
-            joined = ''.join(raw_tokens[i:i + window_size])
+            window = raw_tokens[i:i + window_size]
+            if any(len(t) > 2 for t in window):
+                continue
+            joined = ''.join(window)
             normalized_joined = normalize_text(joined)
             if _is_whitelisted(normalized_joined):
                 continue
