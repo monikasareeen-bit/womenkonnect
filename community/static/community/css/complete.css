@@ -1963,3 +1963,33 @@ input[type="password"] {
         gap: 20px !important;
     }
 }
+/* =========================================
+   MOBILE REORDER FIX
+   Forces discussions to appear FIRST on mobile
+   sidebar (categories) second, stats third
+========================================= */
+
+@media (max-width: 640px) {
+    .layout-container {
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 0 12px !important;
+        margin: 20px auto !important;
+        gap: 16px !important;
+    }
+
+    /* Main content (discussions) → show FIRST */
+    .layout-container > main.main-content {
+        order: 1;
+    }
+
+    /* Left sidebar (categories) → show SECOND */
+    .layout-container > aside.sidebar {
+        order: 2;
+    }
+
+    /* Right panel (community stats) → show LAST */
+    .layout-container > aside.right-panel {
+        order: 3;
+    }
+}
