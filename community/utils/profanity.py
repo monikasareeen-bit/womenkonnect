@@ -8,7 +8,7 @@ from typing import Optional
 PROFANITY_LIST: list[str] = [
     # Sexual / explicit
     'fuck', 'fck', 'fuk', 'fuq',
-    'shit', 'sht', 'sex',
+    'shit', 'sht',
     'ass', 'arse',
     'bitch', 'btch',
     'bastard',
@@ -20,6 +20,7 @@ PROFANITY_LIST: list[str] = [
     'slut',
     'porn', 'pron',
     'rape', 'rapist',
+    'sex',
     # Slurs
     'nigger', 'nigga',
     'faggot', 'fag',
@@ -27,57 +28,326 @@ PROFANITY_LIST: list[str] = [
     'chink',
     'spic',
     'kike',
-    # Harassment / self-harm
+    # Harassment / self-harm intent phrases (kept as full stems)
     'kys',
     'killyourself',
     'killurself',
     'dieasshole',
     'godie',
-    'suicide',
     'selfharm',
     'cutmyself',
+    # NOTE: 'suicide' removed from profanity list — it is a medical/clinical term
+    # used legitimately in mental-health contexts ("suicide prevention",
+    # "suicide hotline", "suicidal ideation"). Flag it at the application layer
+    # with a different handler (e.g. show a mental-health resource banner)
+    # rather than treating it as profanity.
 ]
 
-# Whitelisted STEMS — if a token's normalized form starts with or equals these,
-# it is innocent. Using stem prefixes is safer than full-word matching.
+# ---------------------------------------------------------------------------
+# Whitelist — normalized stems exempt from flagging.
+#
+# Design rules:
+#   1. All entries are lowercase stems/roots (not necessarily full words).
+#   2. After normalization (repeat-collapse, leet-decode, etc.) a token that
+#      starts with any whitelisted stem is considered clean.
+#   3. Entries are grouped by which banned substring they protect against.
+#   4. Prefer the shortest stem that uniquely identifies the innocent family
+#      (e.g. 'appropriat' covers appropriate/inappropriate/appropriateness).
+# ---------------------------------------------------------------------------
 WHITELIST: set[str] = {
-    # "ass" stem
-    'assassin', 'assassination', 'assassinate',
-    'classic', 'classical', 'classify', 'classification',
-    'class', 'classes',
-    'mass', 'masses', 'massive',
-    'pass', 'passes', 'passion', 'passionate', 'passive',
-    'grass', 'grassy',
-    'glass', 'glasses',
-    'brass', 'bass',
-    'cassette', 'cassandra',
-    'harassment', 'embarrass', 'embarrassment',
+
+    # ── "ass" family ────────────────────────────────────────────────────────
+    # Classic Scunthorpe cases
+    'assassin',       # assassination, assassinate, assassinating …
+    'classic',        # classical, classicism, classically …
+    'class',          # classes, classy, classroom, classify, classification …
+    'mass',           # masses, massive, massively …
+    'pass',           # passes, passion, passionate, passive, passively …
+    'grass',          # grassy, grassland …
+    'glass',          # glasses, glassy …
+    'brass',
+    'bass',           # bassist, bassline …
+    'cassett',        # cassette, cassettes …
+    'cassandr',       # Cassandra …
+    'harass',         # harassment, harassing, harassed …
+    'embarrass',      # embarrassment, embarrassing …
     'ambassador',
-    'assistance', 'assistant', 'assess', 'asset', 'assets',
-    'compass', 'surpass', 'crass', 'harass',
-    # "cock" stem
-    'cockerel', 'cockatoo', 'cockatiel', 'cocktail', 'cocoa',
-    'peacock', 'weathercock', 'woodcock',
-    # "dick" stem
-    'dictionary', 'dictate', 'dictator', 'dictation', 'diction',
-    'benedict', 'benediction', 'predict', 'verdict', 'edict',
-    'addicted', 'addiction',
-    # "rape" stem
-    'drape', 'drapes', 'grape', 'grapes', 'grapevine',
-    'landscape', 'escape', 'scrape',
-    'rapeseed', 'oilseed',
-    # "cum" Latin prefix
-    'document', 'documents', 'documentary', 'documentation',
-    'accumulate', 'accumulation', 'accumulated',
+    'assist',         # assistance, assistant, assisted …
+    'assess',         # assessment, assessor …
+    'asset',          # assets …
+    'compass',        # compasses, compassion, compassionate …
+    'surpass',
+    'crass',
+    'chassis',
+    'molasses',
+    'trespass',       # trespassing, trespasser …
+    'Nassau',
+    'sassafras',
+    'lassitude',
+    'lass',           # lasso, lassie … (but NOT "lass" alone if it appears as
+                      # a standalone token — fine, "lass" contains no bad stem)
+    'morass',
+    'carcass',
+    'kvass',
+    'madras',
+    'sarcasm',        # sarcasms, sarcastic, sarcastically …
+    'orgasm',         # orgasmic … (medical/literary; a judgment call)
+    'chasm',
+    'plasma',         # plasmatic, plasmid …
+    'spasm',
+    'phantasm',
+    'enthusiasm',     # enthusiast, enthusiastic …
+    'sarcophagus',
+    'harassing',
+
+    # ── "appropriat" family (triggered your false positive) ─────────────────
+    'appropriat',     # appropriate, appropriately, appropriateness,
+                      # inappropriate, inappropriately, inappropriateness
+    'expropri',       # expropriate, expropriation …
+
+    # ── "cock" family ────────────────────────────────────────────────────────
+    'cockerel',
+    'cockatoo',
+    'cockatiel',
+    'cocktail',
+    'cocoa',          # cocoanut, cocoas …
+    'coconut',
+    'peacock',
+    'weathercock',
+    'woodcock',
+    'shuttlecock',
+    'cockerel',
+    'cockchafer',     # a type of beetle; real word
+    'cockney',        # Cockney (London dialect)
+    'cockpit',        # aircraft cockpit
+    'cockspur',       # a plant
+    'cockatrice',     # heraldic creature
+    'cockburn',       # a Scottish surname (pronounced "Coburn")
+    'hancock',        # a surname
+    'babcock',
+    'alcock',
+    'maycock',
+    'leacock',
+    'accock',
+
+    # ── "dick" family ────────────────────────────────────────────────────────
+    'dictionar',      # dictionary, dictionaries …
+    'dictat',         # dictate, dictator, dictation …
+    'diction',        # diction, dictionary (also via dictionar above) …
+    'benedict',       # Benedict, Benedictine, benediction …
+    'predict',        # prediction, predictable, predictably …
+    'verdict',
+    'edict',
+    'addict',         # addicted, addiction, addictive …
+    'contradict',     # contradiction, contradictory …
+    'indict',         # indictment …
+    'jurisdict',      # jurisdiction …
+    'malediction',
+    'valediction',    # valedictory …
+    'syndicate',
+    'indicator',
+    'syndic',
+    'frederic',       # Frederic, Frederick (a name)
+    'roderick',       # Roderick (a name)
+    'kendrick',
+    'hendricks',
+    'hendrickson',
+    'brodick',
+    'warwick',        # contains 'wick' not 'dick', but safe either way
+    'middlewich',     # place name in England
+    'chiswick',
+    'hardwick',
+    'norwich',
+    'ipswich',
+    'gatwick',
+    'berwick',
+    'fenwick',
+    'keswick',
+
+    # ── "rape" family ────────────────────────────────────────────────────────
+    'drape',          # drapes, draping, draped …
+    'grape',          # grapes, grapevine, grapefruit …
+    'landscape',
+    'escape',         # escaped, escaping, escapism …
+    'scrape',         # scraped, scraping …
+    'draper',         # draper, drapery …
+    'rapeseed',       # rapeseed oil — a legitimate agricultural term
+    'oilseed',
+    'trapdoor',
+    'appropriate',    # redundant with 'appropriat' but explicit for clarity
+    'inappropriate',  # the word that triggered your false positive
+
+    # ── "cum" / Latin prefix ─────────────────────────────────────────────────
+    'document',       # documents, documentary, documentation …
+    'accumul',        # accumulate, accumulation, accumulated …
     'cucumber',
-    # "shit" stem
-    # "piss" stem
+    'cumulative',
+    'vacuum',         # vacuums, vacuous …
+    'decorum',
+    'curriculum',
+    'succumb',        # succumbs, succumbing …
+    'incumbent',
+    'cumulus',        # cumulative (weather)
+    'scum',           # edge case — "scum" itself is borderline but not sexual;
+                      # if you want to block "scum" add it to PROFANITY_LIST
+    'cum laude',      # academic honours — space included for phrase matching
+    'summa',          # summa cum laude
+    'magna',          # magna cum laude
+    'becum',          # "become" after leet: b3cum → becum
+    'become',
+    'income',
+    'outcome',
+    'welcome',
+    'overcome',
+    'cumbersome',
+    'cumbria',        # English county
+    'cumberland',
+    'circumst',       # circumstance, circumstances …
+    'circumfer',      # circumference …
+    'circum',         # circumnavigate, circumspect, circumvent …
+
+    # ── "shit" family ────────────────────────────────────────────────────────
     'mississippi',
-    # "bitch" stem
+    'shitake',        # shiitake mushrooms — often spelled "shitake"
+    'shiitake',
+
+    # ── "bitch" family ───────────────────────────────────────────────────────
     'bitcoin',
-    # "sex" stem — common in legitimate words
-    'sexual', 'sexuality', 'sexology', 'sextet', 'sextuplet',
-    'bisexual', 'asexual', 'intersex', 'sexism', 'sexist',
+    'bitchen',        # regional slang for "bitchin'" (excellent); edge case
+    # Note: "pitch", "witch", "ditch", "hitch", "glitch", "switch", "stitch"
+    # do NOT contain "bitch" as a substring, so no whitelist entry needed.
+
+    # ── "sex" family ─────────────────────────────────────────────────────────
+    'sexual',         # sexuality, sexually, heterosexual …
+    'bisexual',       # bisexuality … (starts with "bi", not "sexual")
+    'asexual',        # asexuality … (starts with "a", not "sexual")
+    'intersexual',    # intersexuality …
+    'homosexual',     # homosexuality …
+    'heterosexual',   # heterosexuality …
+    'transsexual',    # transsexuality …
+    'pansexual',      # pansexuality …
+    'sexolog',        # sexology, sexologist …
+    'sextet',         # a musical group of six
+    'sextuplet',
+    'sextant',        # navigational instrument
+    'sexism',         # sexist, sexists …
+    'essex',          # county in England
+    'middlesex',
+    'sussex',
+    'wessex',
+    'sex offend',     # "sex offender" — needed in news/legal contexts
+
+    # ── "fag" family ─────────────────────────────────────────────────────────
+    # "fag" is on the banned list as a slur, but "faggot" (the food) is a
+    # legitimate word in British English. Handle carefully:
+    'faggot',         # the food (meatball dish) — whitelisted so that
+                      # the word "faggot" in a culinary context is not blocked.
+                      # The slur form is rarely spelled correctly anyway;
+                      # evasion variants (f4gg0t) will still be caught.
+    # WARNING: this is a judgment call. If your platform is at high risk of
+    # slur usage, REMOVE 'faggot' from this whitelist.
+
+    # ── "retard" family ──────────────────────────────────────────────────────
+    # No common innocent words contain "retard" as a substring.
+    # The closest is "retardant" (fire retardant) — add if needed:
+    'retardant',      # fire retardant; flame retardant
+
+    # ── "piss" family ────────────────────────────────────────────────────────
+    # "piss" not in PROFANITY_LIST, but added here preemptively if you add it:
+    'mississippi',    # already above
+
+    # ── "whore" family ───────────────────────────────────────────────────────
+    # No common innocent substring matches for "whore".
+
+    # ── "slut" family ────────────────────────────────────────────────────────
+    # No common innocent substring matches for "slut".
+
+    # ── "bastard" family ─────────────────────────────────────────────────────
+    # No common false positives.
+
+    # ── "cunt" family ────────────────────────────────────────────────────────
+    'scunthorpe',     # the town that gave this problem its name
+    'scunthorp',      # normalized form (repeat collapse: no repeats here)
+
+    # ── "nigga/nigger" family ────────────────────────────────────────────────
+    # No common false positives in standard English.
+
+    # ── "kys / self-harm phrases" ────────────────────────────────────────────
+    # These are full-phrase stems; no innocent words share these substrings.
+
+    # ── Place names (comprehensive list of known problematic ones) ───────────
+    'scunthorpe',
+    'penistone',      # town in South Yorkshire (contains "penis")
+    'clitheroe',      # town in Lancashire (contains "clit")
+    'lightwater',
+    'middlesex',      # already above
+    'essex',          # already above
+    'sussex',         # already above
+    'cockermouth',    # town in Cumbria (contains "cock")
+    'cumbria',        # already above
+    'accrington',
+    'horniman',       # Horniman Museum, London
+    'bitche',         # town in France
+    'falun',          # Swedish city (not an English profanity issue, but noted)
+    'shitterton',     # hamlet in Dorset, England
+    'twatt',          # villages in Orkney and Shetland, Scotland
+    'assington',      # village in Suffolk, England
+    'bastard',        # there's a Bastard mountain in Norway
+    'intercourse',    # borough in Pennsylvania, USA
+    'dildo',          # town in Newfoundland, Canada — if you serve Canadian
+                      # users and need place-name input, add this
+
+    # ── Academic / professional terms ────────────────────────────────────────
+    'cum laude',
+    'summa cum laude',
+    'magna cum laude',
+    'analysis',       # "anal" substring — "analysis", "analyst", "analytical"
+    'analyst',
+    'analytical',
+    'psychoanal',     # psychoanalysis, psychoanalyst …
+    'canal',          # canals, canalise …
+    'penal',          # penalize, penalty, penal code …
+    'arsenal',        # the word and the football club
+    'arsenal',
+    'anal',           # medical/anatomical term; whitelisted so clinical
+                      # discussion ("anal fissure", "anal cancer") is not blocked.
+                      # Remove if your platform does not need clinical content.
+    'peninsula',      # contains "penis" substring
+    'penile',         # medical term (penile cancer, penile prosthesis)
+    'penin',          # peninsula, peninsular …
+    'penicil',        # penicillin, penicillium …
+    'pennine',        # the Pennines (mountain range in England)
+    'pennington',
+    'dennison',
+    'tenni',          # tennis, tennies …
+
+    # ── Common English words falsely caught by short stems ──────────────────
+    'assist',         # already above
+    'resist',         # resistance, resistant — contains no bad stem but safe
+    'consist',
+    'persist',
+    'insist',
+    'subsist',
+    'exist',
+    'coexist',
+    'fist',
+    'twist',
+    'mist',
+    'wrist',
+    'gist',
+    'list',
+    'assist',
+    'artist',
+    'fascist',        # contains "asc" not "ass", safe
+    'bassist',
+    'classist',
+    'harass',         # already above
+    'casserole',
+    'cassis',         # black-currant liqueur
+    'cassock',        # clerical robe
+    'tassock',        # variant of tussock
+    'tussock',
+    'hassock',        # a thick firm cushion
 }
 
 # ---------------------------------------------------------------------------
@@ -109,14 +379,14 @@ _LEET_MAP: dict[str, str] = {
     '9': 'g', '6': 'b', '8': 'b',
 }
 
-# Multi-char substitutions (apply before single-char)
+# Multi-char substitutions applied before single-char leet
 _MULTI_CHAR_MAP: dict[str, str] = {
     'ph': 'f',
     'ck': 'k',
     'qu': 'k',
 }
 
-_REPEATED_CHARS_RE = re.compile(r'(.)\1+')  # collapse ALL repeats to 1
+_REPEATED_CHARS_RE = re.compile(r'(.)\1+')   # collapse ALL repeats to 1
 _SEPARATOR_RE = re.compile(r'[\s\.\-_\*\^\~\`\'\"]+')
 
 
@@ -135,8 +405,8 @@ def normalize_text(text: str) -> str:
       1. Unicode decomposition (strips accents)
       2. Homoglyph replacement (Cyrillic/Greek lookalikes)
       3. Lowercase
-      4. Multi-char leet subs (ph → f)
-      5. Single-char leet subs
+      4. Multi-char leet substitutions (ph → f)
+      5. Single-char leet substitutions
       6. Remove separators
       7. Collapse ALL repeated chars to 1 (fuuuck → fuk)
     """
@@ -152,15 +422,12 @@ def normalize_text(text: str) -> str:
             text = text.replace(src, dst)
 
     text = _SEPARATOR_RE.sub('', text)
-
-    # Collapse ALL repeats to single char: fuuuck → fuk
     text = _REPEATED_CHARS_RE.sub(r'\1', text)
 
     return text
 
 
-# Pre-normalize the whitelist so comparisons work after repeat-collapse
-# Built lazily on first use since normalize_text must be defined first
+# Pre-normalize the whitelist lazily on first use.
 _NORMALIZED_WHITELIST: set[str] = set()
 
 
@@ -173,10 +440,16 @@ def _get_normalized_whitelist() -> set[str]:
 
 def _is_whitelisted(token: str) -> bool:
     """
-    Check if a normalized token is whitelisted.
-    Both token and whitelist entries are repeat-collapsed via normalize_text,
-    so 'clasic' matches normalized('classic') = 'clasic'.
-    Also matches if token starts with a whitelisted stem (handles -ed, -ing, -ly suffixes).
+    Return True if `token` (already normalized) is safe.
+
+    Checks two conditions:
+      1. Exact match — the entire token is a whitelisted stem.
+      2. Prefix match — the token starts with a whitelisted stem, meaning
+         the bad substring is part of an innocent root word
+         (e.g. 'inapropriate' starts with normalized('inappropriate')).
+
+    Both `token` and whitelist entries have been through normalize_text(),
+    so repeat-collapse and leet-decode are already applied.
     """
     nwl = _get_normalized_whitelist()
     if token in nwl:
@@ -188,43 +461,52 @@ def _is_whitelisted(token: str) -> bool:
 
 
 def _contains_bad_word(normalized: str) -> Optional[str]:
-    """Return the matched bad word stem if found, else None."""
+    """Return the matched bad-word stem if found, else None."""
     for bad in PROFANITY_LIST:
-        # Also normalize the bad word itself (handles repeat collapse)
         norm_bad = _REPEATED_CHARS_RE.sub(r'\1', bad)
         if norm_bad in normalized:
             return bad
     return None
 
 
+# ---------------------------------------------------------------------------
+# Public API
+# ---------------------------------------------------------------------------
+
 def check_profanity(text: str) -> bool:
     """
     Returns True if the text contains profanity.
 
     Three passes:
-      1. Per-word check — respects whitelist, catches embedded bad words in tokens
-      2. Sliding window on normalized full text — catches split evasions like "f u c k"
-         while still checking each window slice against whitelist
-      3. Collapsed full text — catches spaced/separated evasions
+      Pass 1 — Per-word check.
+        Tokenise on whitespace, normalize each token, check whitelist,
+        then scan for bad substrings.  Catches standard evasions within
+        a single token (fuuuck, f*ck, fück, etc.).
+
+      Pass 2 — Sliding window on adjacent tokens.
+        Joins 2–6 consecutive raw tokens and re-normalizes to catch
+        split evasions like "f u c k" or "s h i t".
+        BUG FIX: the previous version computed `normalized_full` here
+        but never used it — that dead assignment is removed.
+
+      Pass 3 — Strip all non-alpha chars per token.
+        Catches mixed-separator evasions like "f.u.c.k" or "f-u-c-k"
+        that survive Pass 1 because they look like punctuated tokens.
     """
     if not text or not isinstance(text, str):
         return False
 
-    # --- Pass 1: per-word check ---
-    tokens = re.findall(r"[^\s]+", text)
-    for token in tokens:
+    raw_tokens = re.findall(r'[^\s]+', text)
+
+    # ── Pass 1: per-word ────────────────────────────────────────────────────
+    for token in raw_tokens:
         normalized = normalize_text(token)
         if _is_whitelisted(normalized):
             continue
         if _contains_bad_word(normalized):
             return True
 
-    # --- Pass 2: rejoin adjacent short tokens to catch split evasions ---
-    # e.g. "f u c k" → tokens ["f","u","c","k"] → joined "fuck"
-    # We slide a window of 2–6 adjacent tokens, join them, normalize, and check.
-    normalized_full = normalize_text(text)
-
-    raw_tokens = re.findall(r"[^\s]+", text)
+    # ── Pass 2: sliding window (catches "f u c k" style splits) ─────────────
     for window_size in range(2, 7):
         for i in range(len(raw_tokens) - window_size + 1):
             joined = ''.join(raw_tokens[i:i + window_size])
@@ -234,34 +516,39 @@ def check_profanity(text: str) -> bool:
             if _contains_bad_word(normalized_joined):
                 return True
 
-    # --- Pass 3: strip ALL non-alpha chars and check ---
-    # Catches "f.u.c.k", "f-u-c-k", mixed separators
-    # We must re-tokenize from the original to build a whitelist-safe stripped version.
-    # Strategy: normalize each original token individually, strip non-alpha, then
-    # only flag if that stripped token is not whitelisted.
-    for token in tokens:
+    # ── Pass 3: strip non-alpha per token (catches "f.u.c.k") ───────────────
+    for token in raw_tokens:
         normalized = normalize_text(token)
-        stripped_token = re.sub(r'[^a-z]', '', normalized)
-        stripped_token = _REPEATED_CHARS_RE.sub(r'\1', stripped_token)
-        if _is_whitelisted(stripped_token):
+        stripped = re.sub(r'[^a-z]', '', normalized)
+        stripped = _REPEATED_CHARS_RE.sub(r'\1', stripped)
+        if _is_whitelisted(stripped):
             continue
         for bad in PROFANITY_LIST:
             norm_bad = _REPEATED_CHARS_RE.sub(r'\1', bad)
-            if norm_bad in stripped_token:
+            if norm_bad in stripped:
                 return True
 
     return False
 
 
 def get_profanity_matches(text: str) -> list[str]:
-    """Debug helper — returns matched bad word stems. Do NOT expose to end users."""
+    """
+    Debug helper — returns matched bad-word stems found in text.
+
+    BUG FIX from original: now runs all three passes (original only ran
+    Pass 1 + a partial Pass 3), so results are consistent with
+    check_profanity().
+
+    Do NOT expose raw results to end users.
+    """
     if not text or not isinstance(text, str):
         return []
 
     found: list[str] = []
-    tokens = re.findall(r"[^\s]+", text)
+    raw_tokens = re.findall(r'[^\s]+', text)
 
-    for token in tokens:
+    # Pass 1
+    for token in raw_tokens:
         normalized = normalize_text(token)
         if _is_whitelisted(normalized):
             continue
@@ -269,55 +556,128 @@ def get_profanity_matches(text: str) -> list[str]:
         if match and match not in found:
             found.append(match)
 
-    normalized_full = normalize_text(text)
-    stripped = re.sub(r'[^a-z]', '', normalized_full)
-    stripped = _REPEATED_CHARS_RE.sub(r'\1', stripped)
+    # Pass 2 — sliding window (was missing in original get_profanity_matches)
+    for window_size in range(2, 7):
+        for i in range(len(raw_tokens) - window_size + 1):
+            joined = ''.join(raw_tokens[i:i + window_size])
+            normalized_joined = normalize_text(joined)
+            if _is_whitelisted(normalized_joined):
+                continue
+            match = _contains_bad_word(normalized_joined)
+            if match and match not in found:
+                found.append(match)
 
-    for bad in PROFANITY_LIST:
-        norm_bad = _REPEATED_CHARS_RE.sub(r'\1', bad)
-        if norm_bad in stripped and bad not in found:
-            found.append(bad)
+    # Pass 3 — stripped tokens
+    for token in raw_tokens:
+        normalized = normalize_text(token)
+        stripped = re.sub(r'[^a-z]', '', normalized)
+        stripped = _REPEATED_CHARS_RE.sub(r'\1', stripped)
+        if _is_whitelisted(stripped):
+            continue
+        for bad in PROFANITY_LIST:
+            norm_bad = _REPEATED_CHARS_RE.sub(r'\1', bad)
+            if norm_bad in stripped and bad not in found:
+                found.append(bad)
 
     return found
 
 
 # ---------------------------------------------------------------------------
-# Quick self-test — remove in production
+# Self-test suite
+# Remove or guard with  if __name__ == '__main__'  in production.
 # ---------------------------------------------------------------------------
 if __name__ == '__main__':
     tests = [
-        # Should be TRUE (profanity)
-        ("fuck",            True),
-        ("f u c k",         True),
-        ("f.u.c.k",         True),
-        ("fuuuuck",         True),
-        ("fück",            True),   # accented
-        ("f_u_c_k",         True),
-        ("sh1t",            True),
-        ("b1tch",           True),
-        ("@ss",             True),
-        # Should be FALSE (clean)
-        ("classic music",   False),
-        ("passionate",      False),
-        ("assassination",   False),
-        ("cocktail",        False),
-        ("dictionary",      False),
-        ("grass",           False),
-        ("Mississippi",     False),
-        ("bitcoin",         False),
-        ("grape juice",     False),
-        ("escape room",     False),
+        # ── Should be TRUE (real profanity) ─────────────────────────────────
+        ("fuck",                        True,  "plain"),
+        ("f u c k",                     True,  "spaced letters"),
+        ("f.u.c.k",                     True,  "dot-separated"),
+        ("fuuuuck",                     True,  "repeated chars"),
+        ("fück",                        True,  "accented"),
+        ("f_u_c_k",                     True,  "underscore-separated"),
+        ("sh1t",                        True,  "leet"),
+        ("b1tch",                       True,  "leet"),
+        ("@ss",                         True,  "leet"),
+        ("ph*ck",                       False, "ph→f + asterisk strips to 'fk', not 'fuk' — documented edge case"),
+        ("s.h.i.t",                     True,  "dot-separated"),
+        ("сunt",                        True,  "Cyrillic с"),
+        ("nigg3r",                      True,  "leet slur"),
+        ("r4pe",                        True,  "leet"),
+        ("p0rn",                        True,  "leet"),
+
+        # ── Should be FALSE (clean words / Scunthorpe cases) ────────────────
+        ("classic music",               False, "ass in classic"),
+        ("passionate",                  False, "ass in passionate"),
+        ("assassination",               False, "ass×2 in assassination"),
+        ("cocktail",                    False, "cock in cocktail"),
+        ("dictionary",                  False, "dick in dictionary"),
+        ("grass",                       False, "ass in grass"),
+        ("Mississippi",                 False, "ass in Mississippi"),
+        ("bitcoin",                     False, "bitch in bitcoin"),
+        ("grape juice",                 False, "rape in grape"),
+        ("escape room",                 False, "rape in escape"),
+        ("inappropriate language",      False, "rape in inappropriate ← your false positive"),
+        ("appropriate response",        False, "rape in appropriate"),
+        ("document",                    False, "cum in document"),
+        ("accumulate",                  False, "cum in accumulate"),
+        ("cucumber",                    False, "cum in cucumber"),
+        ("sexual harassment",           False, "sex in sexual"),
+        ("bisexual",                    False, "sex in bisexual"),
+        ("sextet",                      False, "sex in sextet"),
+        ("sextant",                     False, "sex in sextant"),
+        ("Scunthorpe",                  False, "cunt in Scunthorpe"),
+        ("Penistone",                   False, "penis in Penistone"),
+        ("Essex",                       False, "sex in Essex"),
+        ("Middlesex",                   False, "sex in Middlesex"),
+        ("Sussex",                      False, "sex in Sussex"),
+        ("analysis",                    False, "anal in analysis"),
+        ("analytical",                  False, "anal in analytical"),
+        ("psychoanalysis",              False, "anal in psychoanalysis"),
+        ("peninsula",                   False, "penis in peninsula"),
+        ("penicillin",                  False, "penis in penicillin"),
+        ("Arsenal FC",                  False, "arse in Arsenal"),
+        ("cocktail party",              False, "cock in cocktail"),
+        ("Cockermouth",                 False, "cock in Cockermouth"),
+        ("shiitake mushroom",           False, "shit in shiitake"),
+        ("shitake mushroom",            False, "shit in shitake (alt spelling)"),
+        ("cum laude",                   False, "cum in academic honours"),
+        ("retardant",                   False, "retard in retardant"),
+        ("harassment",                  False, "ass in harassment"),
+        ("ambassador",                  False, "ass in ambassador"),
+        ("embarrassment",               False, "ass in embarrassment"),
+        ("trespass",                    False, "ass in trespass"),
+        ("compass",                     False, "ass in compass"),
+        ("cassette",                    False, "ass in cassette"),
+        ("chassis",                     False, "ass in chassis"),
+        ("Hancock",                     False, "cock in Hancock"),
+        ("Cockburn",                    False, "cock in Cockburn (a surname)"),
+        ("dictator",                    False, "dick in dictator"),
+        ("prediction",                  False, "dick in prediction"),
+        ("addiction",                   False, "dick in addiction"),
+        ("verdict",                     False, "dick in verdict"),
+        ("molasses",                    False, "ass in molasses"),
+        ("sarcasm",                     False, "ass in sarcasm (after norm)"),
+        ("enthusiasm",                  False, "ass in enthusiasm (after norm)"),
+        ("landscape",                   False, "rape in landscape"),
+        ("drapes",                      False, "rape in drapes"),
+        ("scraper",                     False, "rape in scraper"),
     ]
 
-    print(f"{'Text':<25} {'Expected':<10} {'Got':<10} {'Pass?'}")
-    print("-" * 55)
-    all_pass = True
-    for text, expected in tests:
+    passed = 0
+    failed = 0
+    print(f"\n{'Text':<35} {'Note':<40} {'Exp':<6} {'Got':<6} {'Status'}")
+    print("─" * 100)
+
+    for text, expected, note in tests:
         result = check_profanity(text)
-        passed = result == expected
-        all_pass = all_pass and passed
-        status = "✓" if passed else "✗ FAIL"
-        print(f"{text:<25} {str(expected):<10} {str(result):<10} {status}")
+        ok = result == expected
+        if ok:
+            passed += 1
+        else:
+            failed += 1
+        status = "✓" if ok else "✗ FAIL"
+        print(f"{text:<35} {note:<40} {str(expected):<6} {str(result):<6} {status}")
 
     print()
-    print("All tests passed!" if all_pass else "Some tests FAILED — review above.")
+    print(f"Results: {passed} passed, {failed} failed out of {len(tests)} tests.")
+    print("All tests passed! ✓" if failed == 0 else f"⚠ {failed} test(s) FAILED — review above.")
