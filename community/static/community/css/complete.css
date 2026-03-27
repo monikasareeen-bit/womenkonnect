@@ -1713,27 +1713,25 @@ input[type="password"] {
     -webkit-text-fill-color: initial !important;
 }
 /* ============================================================
-   WOMENCONNECT — FINAL MOBILE FIX
+   WOMENCONNECT — FINAL RESPONSIVE FIX
    
-   HOW TO USE:
+   INSTRUCTIONS:
    1. Open complete.css
-   2. DELETE everything from the comment
-      "MOBILE FIXES — append to complete.css" 
-      all the way to the end of the file
-   3. Paste this entire block in its place
-   4. Save, git push, done.
+   2. Find the line: /* MOBILE FIXES — append to complete.css
+   3. DELETE everything from that line to the very end of file
+   4. Paste this entire block in its place
+   5. git add, git commit, git push
    ============================================================ */
 
-/* ── Prevent horizontal scroll ───────────────────────────── */
+/* ── Prevent horizontal scroll globally ──────────────────── */
 html, body {
     overflow-x: hidden !important;
     max-width: 100vw !important;
     width: 100% !important;
 }
-
 * { box-sizing: border-box !important; }
 
-/* ── Hamburger button — hidden on desktop ─────────────────── */
+/* ── Hamburger — hidden on desktop ───────────────────────── */
 .hamburger-btn {
     display: none;
     flex-direction: column;
@@ -1758,9 +1756,8 @@ html, body {
 .hamburger-btn.is-active span:nth-child(2) { opacity: 0; }
 .hamburger-btn.is-active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* ── Login / Sign Up pill buttons in nav ─────────────────── */
+/* ── Auth buttons ─────────────────────────────────────────── */
 .nav-auth-btns { display: flex; align-items: center; gap: 10px; }
-
 .nav-btn-login {
     color: #ffffff !important;
     border: 1.5px solid rgba(255,255,255,0.65) !important;
@@ -1770,6 +1767,7 @@ html, body {
     font-weight: 500 !important;
     text-decoration: none !important;
     background: transparent !important;
+    -webkit-text-fill-color: #ffffff !important;
 }
 .nav-btn-signup {
     color: #e8558b !important;
@@ -1780,54 +1778,80 @@ html, body {
     font-size: 13px !important;
     font-weight: 700 !important;
     text-decoration: none !important;
+    -webkit-text-fill-color: #e8558b !important;
 }
 
-/* ── Category chip bar — hidden on desktop ───────────────── */
-.mobile-category-bar { display: none; }
+/* ── Hide chip bar everywhere — we don't use it ──────────── */
+.mobile-category-bar { display: none !important; }
 
 
 /* ============================================================
-   MOBILE  ≤ 768px
+   TABLET  768px – 1100px
+   3-col → 2-col (hide right panel)
    ============================================================ */
-@media (max-width: 768px) {
+@media (max-width: 1100px) and (min-width: 641px) {
+    .layout-container {
+        grid-template-columns: 220px 1fr !important;
+        gap: 24px !important;
+        padding: 0 20px !important;
+        margin: 30px auto !important;
+    }
+    .right-panel { display: none !important; }
+    .home-grid   { grid-template-columns: 1fr 1fr !important; gap: 20px !important; }
+}
 
-    /* ─── CRITICAL FIX: post titles were invisible ──────────
-       The global h1-h6 rule uses -webkit-text-fill-color:transparent
-       for the gradient effect. On mobile inside .post-row cards
-       this makes titles disappear. Override it here.          */
+
+/* ============================================================
+   MOBILE  ≤ 640px
+   Same 3-column LOOK — just scaled down to fit the screen.
+   Sidebar shrinks, main content stays readable.
+   ============================================================ */
+@media (max-width: 640px) {
+
+    /* ── CRITICAL: fix invisible post titles ─────────────────
+       Global h1-h6 uses -webkit-text-fill-color:transparent
+       for gradient effect. Inside cards on mobile this makes
+       titles completely invisible. Override selectively.      */
     .post-row h5,
     .post-row .post-title,
-    .post-row .post-title a {
+    .post-row .post-title a,
+    .post-row a {
         -webkit-text-fill-color: #3d3d4d !important;
         background: none !important;
-        background-clip: unset !important;
         -webkit-background-clip: unset !important;
+        background-clip: unset !important;
         color: #3d3d4d !important;
-        font-size: 13px !important;
+        font-size: 12px !important;
         font-weight: 700 !important;
-        line-height: 1.45 !important;
-        margin-bottom: 5px !important;
+        line-height: 1.4 !important;
+        margin-bottom: 4px !important;
         word-break: break-word !important;
         display: block !important;
     }
 
-    /* Also fix section titles which may be invisible */
     .section-title {
         -webkit-text-fill-color: #e8558b !important;
         background: none !important;
         color: #e8558b !important;
-        font-size: 15px !important;
-        margin-bottom: 10px !important;
-        padding-bottom: 8px !important;
+        font-size: 13px !important;
+        margin-bottom: 8px !important;
+        padding-bottom: 6px !important;
     }
 
-    /* ─── NAVBAR ──────────────────────────────────────────── */
+    .post-meta {
+        font-size: 10px !important;
+        line-height: 1.3 !important;
+        -webkit-text-fill-color: #999 !important;
+        color: #999 !important;
+    }
+
+    /* ── Navbar: logo left, hamburger right ──────────────── */
     .top-navbar {
         flex-direction: row !important;
         flex-wrap: nowrap !important;
         justify-content: space-between !important;
         align-items: center !important;
-        padding: 10px 16px !important;
+        padding: 8px 12px !important;
         gap: 0 !important;
         position: sticky !important;
         top: 0 !important;
@@ -1836,46 +1860,43 @@ html, body {
     }
 
     .hamburger-btn { display: flex !important; }
-
-    .logo img  { height: 38px !important; }
+    .logo img      { height: 32px !important; }
     .logo span,
-    .logo-text { font-size: 15px !important; }
+    .logo-text     { font-size: 14px !important; }
 
-    /* Nav links slide down when hamburger opened */
+    /* Nav slides down from hamburger */
     .nav-links {
         display: none !important;
         position: absolute !important;
-        top: 58px !important;
+        top: 52px !important;
         left: 0 !important;
         right: 0 !important;
         background: linear-gradient(160deg, #e8558b 0%, #9b7fa8 100%) !important;
         flex-direction: column !important;
         align-items: stretch !important;
-        padding: 10px 0 14px !important;
+        padding: 8px 0 12px !important;
         z-index: 1050 !important;
         box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important;
         border-top: 1px solid rgba(255,255,255,0.2) !important;
     }
     .nav-links.nav-open { display: flex !important; }
-
     .nav-links a {
-        padding: 13px 20px !important;
-        font-size: 15px !important;
+        padding: 12px 18px !important;
+        font-size: 14px !important;
         color: #fff !important;
+        -webkit-text-fill-color: #fff !important;
         border-left: 3px solid transparent !important;
     }
     .nav-links a:hover {
         background: rgba(255,255,255,0.15) !important;
-        border-left-color: rgba(255,255,255,0.7) !important;
+        border-left-color: rgba(255,255,255,0.6) !important;
         opacity: 1 !important;
     }
-
-    /* Dropdown inside mobile nav */
     .nav-links .dropbtn {
         width: 100% !important;
         text-align: left !important;
-        padding: 13px 20px !important;
-        font-size: 15px !important;
+        padding: 12px 18px !important;
+        font-size: 14px !important;
         color: #fff !important;
     }
     .nav-links .dropdown-menu {
@@ -1889,109 +1910,75 @@ html, body {
     .nav-links .dropdown-menu a,
     .nav-links .dropdown-menu .logout-btn {
         color: #fff !important;
+        -webkit-text-fill-color: #fff !important;
         background: transparent !important;
         padding: 10px 28px !important;
         border-left: none !important;
     }
-
-    /* Auth buttons inside dropdown */
     .nav-auth-btns {
         flex-direction: row !important;
-        gap: 10px !important;
-        padding: 10px 20px 4px !important;
+        padding: 10px 18px 4px !important;
+        gap: 8px !important;
     }
     .nav-btn-login,
     .nav-btn-signup {
         flex: 1 !important;
         text-align: center !important;
-        padding: 9px 10px !important;
-        font-size: 14px !important;
+        padding: 8px 10px !important;
+        font-size: 13px !important;
     }
 
-    /* ─── LAYOUT: 3-col grid → flex column ───────────────── */
+    /* ── SAME 3-COLUMN LAYOUT — just scaled ─────────────────
+       Desktop:  260px | 1fr       | 260px
+       Mobile:   90px  | 1fr       | 0 (hidden)
+       The sidebar becomes a narrow strip. Right panel hides.  */
     .layout-container {
-        display: flex !important;
-        flex-direction: column !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 12px auto !important;
-        padding: 0 12px !important;
-        gap: 14px !important;
-    }
-
-    /* Main content first */
-    .layout-container > main.main-content {
-        order: 1 !important;
-        width: 100% !important;
-        min-height: unset !important;
-    }
-
-    /* Left sidebar (categories) second */
-    .layout-container > aside.sidebar {
-        order: 2 !important;
-        display: block !important;
-        width: 100% !important;
-        padding: 14px 16px !important;
-        border-radius: 12px !important;
-    }
-
-    /* Right panel (stats) third */
-    .layout-container > aside.right-panel {
-        order: 3 !important;
-        display: block !important;
-        width: 100% !important;
-        padding: 14px 16px !important;
-        border-radius: 12px !important;
-    }
-
-    /* ─── CATEGORY CHIPS (replaces sidebar on home) ──────── */
-    .mobile-category-bar {
-        display: flex !important;
-        overflow-x: auto !important;
-        gap: 8px !important;
-        padding: 4px 0 12px 0 !important;
-        margin-bottom: 12px !important;
-        scrollbar-width: none !important;
-        -webkit-overflow-scrolling: touch !important;
-    }
-    .mobile-category-bar::-webkit-scrollbar { display: none !important; }
-    .mobile-category-bar a {
-        flex-shrink: 0 !important;
-        padding: 7px 14px !important;
-        border-radius: 20px !important;
-        background: #fff !important;
-        border: 1.5px solid #e8558b !important;
-        color: #e8558b !important;
-        font-size: 12px !important;
-        font-weight: 600 !important;
-        white-space: nowrap !important;
-        text-decoration: none !important;
-        /* fix gradient text bleed on chips */
-        -webkit-text-fill-color: #e8558b !important;
-        background-clip: unset !important;
-        -webkit-background-clip: unset !important;
-    }
-    .mobile-category-bar a:active {
-        background: #e8558b !important;
-        color: #fff !important;
-        -webkit-text-fill-color: #fff !important;
-    }
-
-    /* ─── CATEGORIES IN SIDEBAR: 2-col grid ─────────────── */
-    .sidebar .list-unstyled {
         display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 6px !important;
+        grid-template-columns: 90px 1fr !important;
+        grid-template-rows: auto !important;
+        gap: 10px !important;
+        margin: 12px auto !important;
+        padding: 0 8px !important;
+        max-width: 100% !important;
+        width: 100% !important;
     }
+
+    /* Sidebar: narrow column, scrollable if needed */
+    .layout-container > aside.sidebar {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+        padding: 10px 6px !important;
+        border-radius: 10px !important;
+        font-size: 11px !important;
+        position: sticky !important;
+        top: 56px !important;
+        max-height: calc(100vh - 60px) !important;
+        overflow-y: auto !important;
+        scrollbar-width: none !important;
+    }
+    .layout-container > aside.sidebar::-webkit-scrollbar { display: none !important; }
+
+    /* Sidebar heading */
+    .sidebar .sidebar-card { padding: 8px 6px !important; }
+    .sidebar .sidebar-card h4 {
+        font-size: 11px !important;
+        margin-bottom: 8px !important;
+        -webkit-text-fill-color: transparent !important;
+    }
+
+    /* Category links: single column, small */
+    .sidebar .list-unstyled { display: flex !important; flex-direction: column !important; gap: 4px !important; }
+    .sidebar .list-unstyled li { margin-bottom: 0 !important; }
     .sidebar .list-unstyled li a {
-        padding: 9px 10px !important;
-        font-size: 12px !important;
+        padding: 7px 6px !important;
+        font-size: 10px !important;
         line-height: 1.3 !important;
+        border-radius: 6px !important;
         transform: none !important;
-        /* fix transparent text in sidebar links */
         -webkit-text-fill-color: #3d3d4d !important;
         color: #3d3d4d !important;
-        background: linear-gradient(90deg, transparent 0%, #fef5f8 100%) !important;
+        display: block !important;
+        word-break: break-word !important;
     }
     .sidebar .list-unstyled li a:hover {
         -webkit-text-fill-color: #e8558b !important;
@@ -1999,97 +1986,68 @@ html, body {
         transform: none !important;
     }
 
-    /* ─── HOME GRID: 2 columns side by side ──────────────── */
-    .home-wrapper {
+    /* Start Discussion block in sidebar */
+    .sidebar .sidebar-card + .sidebar-card,
+    .sidebar [class*="start"],
+    .sidebar [class*="new-post"] {
+        margin-top: 8px !important;
+    }
+
+    /* Main content: takes remaining space */
+    .layout-container > main.main-content {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
         width: 100% !important;
+        min-height: unset !important;
         overflow: hidden !important;
     }
+
+    /* Right panel: hidden on mobile (same as IndusLadies) */
+    .layout-container > aside.right-panel {
+        display: none !important;
+    }
+
+    /* ── HOME GRID: 2 columns ─────────────────────────────── */
+    .home-wrapper { width: 100% !important; overflow: hidden !important; }
     .home-grid {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
-        gap: 10px !important;
-        width: 100% !important;
+        gap: 6px !important;
         margin-top: 0 !important;
-    }
-    .discussion-column {
         width: 100% !important;
-        min-width: 0 !important;
     }
+    .discussion-column { min-width: 0 !important; width: 100% !important; }
 
-    /* ─── POST ROWS ───────────────────────────────────────── */
+    /* ── POST ROWS ───────────────────────────────────────────*/
     .post-row {
-        padding: 10px 12px !important;
-        margin-bottom: 8px !important;
-        border-radius: 10px !important;
-        width: 100% !important;
-    }
-    /* meta text */
-    .post-meta {
-        font-size: 11px !important;
-        line-height: 1.4 !important;
-        color: #999 !important;
-        /* override any gradient fill */
-        -webkit-text-fill-color: #999 !important;
-        background: none !important;
+        padding: 8px 8px !important;
+        margin-bottom: 6px !important;
+        border-radius: 8px !important;
+        border-left-width: 3px !important;
     }
 
-    /* ─── POST CARDS (detail / category pages) ───────────── */
-    .post-card {
-        padding: 14px !important;
-        margin-bottom: 12px !important;
-    }
-    .post-title {
-        font-size: 16px !important;
-        line-height: 1.4 !important;
-    }
-    .post-title a {
-        -webkit-text-fill-color: #3d3d4d !important;
-        color: #3d3d4d !important;
-    }
-    .post-content  { font-size: 14px !important; }
-    .post-actions  { flex-wrap: wrap !important; gap: 8px !important; }
+    /* ── POST CARDS (detail pages) ───────────────────────── */
+    .post-card    { padding: 12px !important; margin-bottom: 10px !important; }
+    .post-title   { font-size: 15px !important; }
+    .post-title a { -webkit-text-fill-color: #3d3d4d !important; color: #3d3d4d !important; }
+    .post-content { font-size: 13px !important; }
+    .post-actions { flex-wrap: wrap !important; gap: 6px !important; }
 
-    /* ─── COMMUNITY STATS ─────────────────────────────────── */
-    .right-panel .sidebar-card { padding: 14px 16px !important; }
-    .right-panel .stat-item    { padding: 8px 12px !important; font-size: 13px !important; }
-    .sidebar-card h4 {
-        font-size: 15px !important;
-        margin-bottom: 10px !important;
-        /* keep gradient on stat card title but ensure visible */
-        -webkit-text-fill-color: transparent !important;
-    }
+    /* ── REPLY SECTION ───────────────────────────────────── */
+    .reply-card     { padding: 12px !important; }
+    .reply-content  { font-size: 13px !important; }
+    .add-reply-card { padding: 14px 12px !important; }
+    textarea.form-control { min-height: 100px !important; font-size: 14px !important; }
 
-    /* ─── REPLY CARDS ─────────────────────────────────────── */
-    .reply-card    { padding: 14px !important; }
-    .reply-content { font-size: 14px !important; }
-    .add-reply-card { padding: 18px 14px !important; }
-    textarea.form-control { min-height: 120px !important; font-size: 15px !important; }
+    /* ── FOOTER ──────────────────────────────────────────── */
+    .footer { padding: 20px 12px 14px !important; }
+    .footer-container { flex-direction: column !important; gap: 16px !important; align-items: center !important; }
+    .footer-section   { min-width: unset !important; width: 100% !important; }
 
-    /* ─── FOOTER ──────────────────────────────────────────── */
-    .footer { padding: 24px 16px 16px !important; }
-    .footer-container {
-        flex-direction: column !important;
-        gap: 20px !important;
-        align-items: center !important;
-    }
-    .footer-section { min-width: unset !important; width: 100% !important; }
-}
-
-
-/* ============================================================
-   SMALL PHONES  ≤ 400px
-   ============================================================ */
-@media (max-width: 400px) {
-
-    .layout-container { padding: 0 8px !important; }
-
-    /* Single column home grid on tiny screens */
-    .home-grid { grid-template-columns: 1fr !important; gap: 8px !important; }
-
-    /* Single column categories */
-    .sidebar .list-unstyled { grid-template-columns: 1fr !important; }
-
-    .post-row h5,
-    .post-row .post-title,
-    .post-row .post-title a { font-size: 13px !important; }
+    /* ── GENERAL TYPOGRAPHY SCALE ────────────────────────── */
+    h1 { font-size: 20px !important; }
+    h2 { font-size: 17px !important; }
+    h3 { font-size: 15px !important; }
+    h4 { font-size: 13px !important; }
+    p  { font-size: 13px !important; }
 }
