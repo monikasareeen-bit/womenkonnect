@@ -1712,13 +1712,28 @@ input, textarea, select {
 input[type="password"] {
     -webkit-text-fill-color: initial !important;
 }
-/* =========================================
-   MOBILE FIXES — append to complete.css
-   Fixes: navbar overflow, hamburger menu,
-   login/signup visibility, sidebar stacking
-========================================= */
+/* ============================================================
+   WOMENCONNECT — FINAL MOBILE FIX
+   
+   HOW TO USE:
+   1. Open complete.css
+   2. DELETE everything from the comment
+      "MOBILE FIXES — append to complete.css" 
+      all the way to the end of the file
+   3. Paste this entire block in its place
+   4. Save, git push, done.
+   ============================================================ */
 
-/* ── Hamburger button (hidden on desktop) ── */
+/* ── Prevent horizontal scroll ───────────────────────────── */
+html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    width: 100% !important;
+}
+
+* { box-sizing: border-box !important; }
+
+/* ── Hamburger button — hidden on desktop ─────────────────── */
 .hamburger-btn {
     display: none;
     flex-direction: column;
@@ -1731,7 +1746,6 @@ input[type="password"] {
     z-index: 1100;
     flex-shrink: 0;
 }
-
 .hamburger-btn span {
     display: block;
     width: 24px;
@@ -1740,41 +1754,23 @@ input[type="password"] {
     border-radius: 2px;
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
+.hamburger-btn.is-active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger-btn.is-active span:nth-child(2) { opacity: 0; }
+.hamburger-btn.is-active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Animate to X when open */
-.hamburger-btn.is-active span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-}
-.hamburger-btn.is-active span:nth-child(2) {
-    opacity: 0;
-}
-.hamburger-btn.is-active span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-}
-
-/* ── Auth buttons in nav (Login + Sign Up) ── */
-.nav-auth-btns {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+/* ── Login / Sign Up pill buttons in nav ─────────────────── */
+.nav-auth-btns { display: flex; align-items: center; gap: 10px; }
 
 .nav-btn-login {
     color: #ffffff !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.65) !important;
+    border: 1.5px solid rgba(255,255,255,0.65) !important;
     padding: 6px 16px !important;
     border-radius: 20px !important;
     font-size: 13px !important;
     font-weight: 500 !important;
     text-decoration: none !important;
-    transition: background 0.2s ease !important;
     background: transparent !important;
 }
-
-.nav-btn-login:hover {
-    background: rgba(255, 255, 255, 0.15) !important;
-}
-
 .nav-btn-signup {
     color: #e8558b !important;
     background: #ffffff !important;
@@ -1784,392 +1780,48 @@ input[type="password"] {
     font-size: 13px !important;
     font-weight: 700 !important;
     text-decoration: none !important;
-    transition: background 0.2s ease !important;
 }
 
-.nav-btn-signup:hover {
-    background: #fef5f8 !important;
-}
+/* ── Category chip bar — hidden on desktop ───────────────── */
+.mobile-category-bar { display: none; }
 
-/* =========================================
-   MOBILE BREAKPOINT  ≤ 640px
-========================================= */
-@media (max-width: 640px) {
-
-    /* Navbar: single row — logo | hamburger */
-    .top-navbar {
-        flex-wrap: nowrap !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        padding: 10px 16px !important;
-        gap: 0 !important;
-    }
-
-    /* Show hamburger */
-    .hamburger-btn {
-        display: flex !important;
-    }
-
-    /* Logo sizing */
-    .logo img {
-        height: 38px !important;
-    }
-    .logo span,
-    .logo-text {
-        font-size: 15px !important;
-    }
-
-    /* Nav links: hidden by default, slide down when open */
-    .nav-links {
-        display: none !important;
-        position: absolute !important;
-        top: 60px !important;          /* height of navbar */
-        left: 0 !important;
-        right: 0 !important;
-        background: linear-gradient(160deg, #e8558b 0%, #9b7fa8 100%) !important;
-        flex-direction: column !important;
-        align-items: stretch !important;
-        padding: 12px 0 16px !important;
-        gap: 2px !important;
-        z-index: 1050 !important;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.18) !important;
-        border-top: 1px solid rgba(255,255,255,0.2) !important;
-    }
-
-    .nav-links.nav-open {
-        display: flex !important;
-    }
-
-    .nav-links a {
-        padding: 12px 20px !important;
-        font-size: 15px !important;
-        font-weight: 500 !important;
-        border-radius: 0 !important;
-        color: #ffffff !important;
-        border-left: 3px solid transparent !important;
-        transition: background 0.2s, border-color 0.2s !important;
-    }
-
-    .nav-links a:hover {
-        background: rgba(255,255,255,0.15) !important;
-        border-left-color: rgba(255,255,255,0.7) !important;
-        text-decoration: none !important;
-        opacity: 1 !important;
-    }
-
-    /* Dropdown button in mobile menu */
-    .nav-links .dropbtn {
-        width: 100% !important;
-        text-align: left !important;
-        padding: 12px 20px !important;
-        font-size: 15px !important;
-        color: #ffffff !important;
-    }
-
-    .nav-links .dropdown-menu {
-        position: static !important;
-        box-shadow: none !important;
-        background: rgba(255,255,255,0.12) !important;
-        border: none !important;
-        border-radius: 0 !important;
-        margin: 0 !important;
-    }
-
-    .nav-links .dropdown-menu a,
-    .nav-links .dropdown-menu .logout-btn {
-        color: #ffffff !important;
-        background: transparent !important;
-        border-left: none !important;
-        padding: 10px 28px !important;
-    }
-
-    .nav-links .dropdown-menu a:hover,
-    .nav-links .dropdown-menu .logout-btn:hover {
-        background: rgba(255,255,255,0.15) !important;
-        padding-left: 32px !important;
-    }
-
-    /* Auth buttons inside mobile menu */
-    .nav-auth-btns {
-        flex-direction: row !important;
-        gap: 10px !important;
-        padding: 10px 20px 4px !important;
-    }
-
-    .nav-btn-login,
-    .nav-btn-signup {
-        flex: 1 !important;
-        text-align: center !important;
-        padding: 9px 10px !important;
-        font-size: 14px !important;
-    }
-
-    /* ── Layout: single column stacking ── */
-    .layout-container {
-        grid-template-columns: 1fr !important;
-        margin: 20px auto !important;
-        padding: 0 12px !important;
-        gap: 16px !important;
-    }
-
-    /* sidebar + right panel collapse nicely */
-    .sidebar,
-    .right-panel {
-        padding: 16px !important;
-        border-radius: 12px !important;
-    }
-
-    /* ── Home grid: single column ── */
-    .home-grid {
-        grid-template-columns: 1fr !important;
-        gap: 16px !important;
-    }
-
-    /* ── Categories sidebar card ── */
-    .list-unstyled li a {
-        padding: 13px 14px !important;
-        font-size: 14px !important;
-    }
-
-    /* ── Post cards ── */
-    .post-card,
-    .post-row {
-        padding: 14px !important;
-    }
-
-    .post-actions {
-        flex-wrap: wrap !important;
-        gap: 8px !important;
-    }
-}
-
-/* =========================================
-   TABLET  641px – 1024px
-========================================= */
-@media (min-width: 641px) and (max-width: 1024px) {
-    .top-navbar {
-        padding: 14px 24px !important;
-        flex-wrap: nowrap !important;
-        gap: 12px !important;
-    }
-
-    .layout-container {
-        grid-template-columns: 200px 1fr !important;
-        padding: 0 20px !important;
-    }
-
-    /* Hide right panel on tablet to save space */
-    .right-panel {
-        display: none !important;
-    }
-
-    .home-grid {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
-    }
-}
-/* =========================================
-   MOBILE: CHIP CATEGORIES + 2-COL DISCUSSIONS
-   (replaces all previous mobile overrides)
-========================================= */
-
-html, body {
-    overflow-x: hidden !important;
-    width: 100% !important;
-}
-
-/* Hide chip bar on desktop */
-.mobile-category-bar {
-    display: none;
-}
-
-@media (max-width: 768px) {
-
-    /* Navbar */
-    .top-navbar {
-        flex-wrap: nowrap !important;
-        flex-direction: row !important;
-        padding: 10px 16px !important;
-        gap: 0 !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-    }
-
-    /* Show hamburger */
-    .hamburger-btn {
-        display: flex !important;
-    }
-
-    /* Hide nav links by default on mobile */
-    .nav-links {
-        display: none !important;
-        position: absolute !important;
-        top: 60px !important;
-        left: 0 !important;
-        right: 0 !important;
-        background: linear-gradient(160deg, #e8558b 0%, #9b7fa8 100%) !important;
-        flex-direction: column !important;
-        align-items: stretch !important;
-        padding: 12px 0 16px !important;
-        gap: 2px !important;
-        z-index: 1050 !important;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.18) !important;
-    }
-
-    .nav-links.nav-open {
-        display: flex !important;
-    }
-
-    /* Layout: full width, no sidebars */
-    .layout-container {
-        display: block !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 12px auto !important;
-        padding: 0 10px !important;
-        box-sizing: border-box !important;
-    }
-
-    /* Hide sidebars — chips replace categories */
-    .layout-container > aside.sidebar,
-    .layout-container > aside.right-panel {
-        display: none !important;
-    }
-
-    /* Main content full width */
-    .layout-container > main.main-content {
-        width: 100% !important;
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-        min-height: unset !important;
-    }
-
-    /* Show category chips bar */
-    .mobile-category-bar {
-        display: flex !important;
-        overflow-x: auto !important;
-        gap: 8px !important;
-        padding: 10px 0 12px 0 !important;
-        margin-bottom: 14px !important;
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
-        -webkit-overflow-scrolling: touch !important;
-    }
-
-    .mobile-category-bar::-webkit-scrollbar {
-        display: none !important;
-    }
-
-    .mobile-category-bar a {
-        flex-shrink: 0 !important;
-        padding: 6px 14px !important;
-        border-radius: 20px !important;
-        background: #ffffff !important;
-        border: 1.5px solid #e8558b !important;
-        color: #e8558b !important;
-        font-size: 12px !important;
-        font-weight: 600 !important;
-        text-decoration: none !important;
-        white-space: nowrap !important;
-    }
-
-    .mobile-category-bar a:active {
-        background: #e8558b !important;
-        color: #ffffff !important;
-    }
-
-    /* Home wrapper full width */
-    .home-wrapper {
-        width: 100% !important;
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-        overflow: hidden !important;
-    }
-
-    /* Two columns side by side — like PC */
-    .home-grid {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 8px !important;
-        width: 100% !important;
-        margin-top: 0 !important;
-        box-sizing: border-box !important;
-    }
-
-    .discussion-column {
-        width: 100% !important;
-        min-width: 0 !important;
-        box-sizing: border-box !important;
-    }
-
-    /* Section titles compact */
-    .section-title {
-        font-size: 13px !important;
-        margin-bottom: 8px !important;
-        padding-bottom: 6px !important;
-    }
-
-    /* Post rows compact */
-    .post-row {
-        padding: 8px 10px !important;
-        margin-bottom: 6px !important;
-        border-radius: 8px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-    }
-
-    .post-row h5,
-    .post-row .post-title {
-        font-size: 11px !important;
-        line-height: 1.35 !important;
-        margin-bottom: 4px !important;
-        word-break: break-word !important;
-        overflow-wrap: break-word !important;
-    }
-
-    .post-meta {
-        font-size: 9px !important;
-        line-height: 1.3 !important;
-    }
-
-    /* Footer */
-    .footer {
-        padding: 24px 16px 16px !important;
-    }
-
-    .footer-container {
-        flex-direction: column !important;
-        gap: 20px !important;
-    }
-
-    .footer-section {
-        min-width: unset !important;
-        width: 100% !important;
-    }
-}
-/* ============================================================
-   WOMENCONNECT — MOBILE FIX (append to end of complete.css)
-   Fixes: sidebar visibility, text size, layout stacking,
-   start-discussion button, readable cards on all pages
-   ============================================================ */
-
-/* ── 1. Prevent horizontal scroll on ALL screens ─────────── */
-html, body {
-    overflow-x: hidden !important;
-    max-width: 100vw !important;
-}
-
-* {
-    box-sizing: border-box !important;
-}
 
 /* ============================================================
    MOBILE  ≤ 768px
    ============================================================ */
 @media (max-width: 768px) {
 
-    /* ── Navbar: single row, no wrap ── */
+    /* ─── CRITICAL FIX: post titles were invisible ──────────
+       The global h1-h6 rule uses -webkit-text-fill-color:transparent
+       for the gradient effect. On mobile inside .post-row cards
+       this makes titles disappear. Override it here.          */
+    .post-row h5,
+    .post-row .post-title,
+    .post-row .post-title a {
+        -webkit-text-fill-color: #3d3d4d !important;
+        background: none !important;
+        background-clip: unset !important;
+        -webkit-background-clip: unset !important;
+        color: #3d3d4d !important;
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        line-height: 1.45 !important;
+        margin-bottom: 5px !important;
+        word-break: break-word !important;
+        display: block !important;
+    }
+
+    /* Also fix section titles which may be invisible */
+    .section-title {
+        -webkit-text-fill-color: #e8558b !important;
+        background: none !important;
+        color: #e8558b !important;
+        font-size: 15px !important;
+        margin-bottom: 10px !important;
+        padding-bottom: 8px !important;
+    }
+
+    /* ─── NAVBAR ──────────────────────────────────────────── */
     .top-navbar {
         flex-direction: row !important;
         flex-wrap: nowrap !important;
@@ -2180,14 +1832,16 @@ html, body {
         position: sticky !important;
         top: 0 !important;
         z-index: 1000 !important;
+        width: 100% !important;
     }
 
-    /* Show hamburger */
-    .hamburger-btn {
-        display: flex !important;
-    }
+    .hamburger-btn { display: flex !important; }
 
-    /* Nav dropdown: hidden until toggled */
+    .logo img  { height: 38px !important; }
+    .logo span,
+    .logo-text { font-size: 15px !important; }
+
+    /* Nav links slide down when hamburger opened */
     .nav-links {
         display: none !important;
         position: absolute !important;
@@ -2200,11 +1854,9 @@ html, body {
         padding: 10px 0 14px !important;
         z-index: 1050 !important;
         box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important;
+        border-top: 1px solid rgba(255,255,255,0.2) !important;
     }
-
-    .nav-links.nav-open {
-        display: flex !important;
-    }
+    .nav-links.nav-open { display: flex !important; }
 
     .nav-links a {
         padding: 13px 20px !important;
@@ -2212,15 +1864,51 @@ html, body {
         color: #fff !important;
         border-left: 3px solid transparent !important;
     }
-
     .nav-links a:hover {
         background: rgba(255,255,255,0.15) !important;
         border-left-color: rgba(255,255,255,0.7) !important;
-        text-decoration: none !important;
         opacity: 1 !important;
     }
 
-    /* ── Layout: stack all 3 columns vertically ── */
+    /* Dropdown inside mobile nav */
+    .nav-links .dropbtn {
+        width: 100% !important;
+        text-align: left !important;
+        padding: 13px 20px !important;
+        font-size: 15px !important;
+        color: #fff !important;
+    }
+    .nav-links .dropdown-menu {
+        position: static !important;
+        box-shadow: none !important;
+        background: rgba(255,255,255,0.12) !important;
+        border: none !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+    }
+    .nav-links .dropdown-menu a,
+    .nav-links .dropdown-menu .logout-btn {
+        color: #fff !important;
+        background: transparent !important;
+        padding: 10px 28px !important;
+        border-left: none !important;
+    }
+
+    /* Auth buttons inside dropdown */
+    .nav-auth-btns {
+        flex-direction: row !important;
+        gap: 10px !important;
+        padding: 10px 20px 4px !important;
+    }
+    .nav-btn-login,
+    .nav-btn-signup {
+        flex: 1 !important;
+        text-align: center !important;
+        padding: 9px 10px !important;
+        font-size: 14px !important;
+    }
+
+    /* ─── LAYOUT: 3-col grid → flex column ───────────────── */
     .layout-container {
         display: flex !important;
         flex-direction: column !important;
@@ -2231,83 +1919,91 @@ html, body {
         gap: 14px !important;
     }
 
-    /* ── Left sidebar: show as compact card ── */
+    /* Main content first */
+    .layout-container > main.main-content {
+        order: 1 !important;
+        width: 100% !important;
+        min-height: unset !important;
+    }
+
+    /* Left sidebar (categories) second */
     .layout-container > aside.sidebar {
+        order: 2 !important;
         display: block !important;
         width: 100% !important;
         padding: 14px 16px !important;
         border-radius: 12px !important;
-        order: 2 !important;   /* appears AFTER main content */
     }
 
-    /* Categories in sidebar: 2-column grid on mobile */
+    /* Right panel (stats) third */
+    .layout-container > aside.right-panel {
+        order: 3 !important;
+        display: block !important;
+        width: 100% !important;
+        padding: 14px 16px !important;
+        border-radius: 12px !important;
+    }
+
+    /* ─── CATEGORY CHIPS (replaces sidebar on home) ──────── */
+    .mobile-category-bar {
+        display: flex !important;
+        overflow-x: auto !important;
+        gap: 8px !important;
+        padding: 4px 0 12px 0 !important;
+        margin-bottom: 12px !important;
+        scrollbar-width: none !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    .mobile-category-bar::-webkit-scrollbar { display: none !important; }
+    .mobile-category-bar a {
+        flex-shrink: 0 !important;
+        padding: 7px 14px !important;
+        border-radius: 20px !important;
+        background: #fff !important;
+        border: 1.5px solid #e8558b !important;
+        color: #e8558b !important;
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        white-space: nowrap !important;
+        text-decoration: none !important;
+        /* fix gradient text bleed on chips */
+        -webkit-text-fill-color: #e8558b !important;
+        background-clip: unset !important;
+        -webkit-background-clip: unset !important;
+    }
+    .mobile-category-bar a:active {
+        background: #e8558b !important;
+        color: #fff !important;
+        -webkit-text-fill-color: #fff !important;
+    }
+
+    /* ─── CATEGORIES IN SIDEBAR: 2-col grid ─────────────── */
     .sidebar .list-unstyled {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
         gap: 6px !important;
     }
-
     .sidebar .list-unstyled li a {
         padding: 9px 10px !important;
         font-size: 12px !important;
-        border-radius: 8px !important;
         line-height: 1.3 !important;
-        transform: none !important;   /* disable translateX on mobile */
+        transform: none !important;
+        /* fix transparent text in sidebar links */
+        -webkit-text-fill-color: #3d3d4d !important;
+        color: #3d3d4d !important;
+        background: linear-gradient(90deg, transparent 0%, #fef5f8 100%) !important;
     }
-
     .sidebar .list-unstyled li a:hover {
+        -webkit-text-fill-color: #e8558b !important;
+        color: #e8558b !important;
         transform: none !important;
     }
 
-    /* ── Main content: full width, first ── */
-    .layout-container > main.main-content {
-        display: block !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        min-height: unset !important;
-        order: 1 !important;   /* appears FIRST on mobile */
-    }
-
-    /* ── Right panel: community stats, compact ── */
-    .layout-container > aside.right-panel {
-        display: block !important;
-        width: 100% !important;
-        padding: 14px 16px !important;
-        border-radius: 12px !important;
-        order: 3 !important;   /* appears LAST */
-    }
-
-    /* Stats inline on mobile */
-    .right-panel .sidebar-card {
-        padding: 14px 16px !important;
-    }
-
-    .right-panel .stat-item {
-        padding: 8px 12px !important;
-        font-size: 13px !important;
-        margin-bottom: 8px !important;
-    }
-
-    /* ── START DISCUSSION section ── */
-    /* This targets the "Start Discussion / + New Post" block
-       wherever it appears in a sidebar-card */
-    .sidebar-card {
-        padding: 16px !important;
-        border-radius: 12px !important;
-        margin-bottom: 10px !important;
-    }
-
-    .sidebar-card h4 {
-        font-size: 15px !important;
-        margin-bottom: 10px !important;
-    }
-
-    /* ── Home page grid: 2 columns, readable text ── */
+    /* ─── HOME GRID: 2 columns side by side ──────────────── */
     .home-wrapper {
         width: 100% !important;
         overflow: hidden !important;
     }
-
     .home-grid {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
@@ -2315,154 +2011,85 @@ html, body {
         width: 100% !important;
         margin-top: 0 !important;
     }
-
-    .section-title {
-        font-size: 14px !important;     /* was 13px — too small */
-        margin-bottom: 10px !important;
-        padding-bottom: 8px !important;
+    .discussion-column {
+        width: 100% !important;
+        min-width: 0 !important;
     }
 
-    /* Post cards: readable size */
+    /* ─── POST ROWS ───────────────────────────────────────── */
     .post-row {
         padding: 10px 12px !important;
         margin-bottom: 8px !important;
         border-radius: 10px !important;
+        width: 100% !important;
     }
-
-    /* FIX: text was 11px before — now properly readable */
-    .post-row h5,
-    .post-row .post-title {
-        font-size: 13px !important;
-        line-height: 1.45 !important;
-        margin-bottom: 5px !important;
-        word-break: break-word !important;
-    }
-
-    /* FIX: meta was 9px — now readable */
+    /* meta text */
     .post-meta {
         font-size: 11px !important;
         line-height: 1.4 !important;
         color: #999 !important;
+        /* override any gradient fill */
+        -webkit-text-fill-color: #999 !important;
+        background: none !important;
     }
 
-    /* ── Post detail / category pages ── */
+    /* ─── POST CARDS (detail / category pages) ───────────── */
     .post-card {
-        padding: 14px 14px !important;
+        padding: 14px !important;
         margin-bottom: 12px !important;
     }
-
     .post-title {
         font-size: 16px !important;
         line-height: 1.4 !important;
     }
-
-    .post-content {
-        font-size: 14px !important;
+    .post-title a {
+        -webkit-text-fill-color: #3d3d4d !important;
+        color: #3d3d4d !important;
     }
+    .post-content  { font-size: 14px !important; }
+    .post-actions  { flex-wrap: wrap !important; gap: 8px !important; }
 
-    .post-actions {
-        flex-wrap: wrap !important;
-        gap: 8px !important;
-    }
-
-    /* ── Reply cards ── */
-    .reply-card {
-        padding: 14px !important;
-    }
-
-    .reply-content {
-        font-size: 14px !important;
-    }
-
-    /* ── Add reply form ── */
-    .add-reply-card {
-        padding: 18px 14px !important;
-    }
-
-    textarea.form-control {
-        min-height: 120px !important;
+    /* ─── COMMUNITY STATS ─────────────────────────────────── */
+    .right-panel .sidebar-card { padding: 14px 16px !important; }
+    .right-panel .stat-item    { padding: 8px 12px !important; font-size: 13px !important; }
+    .sidebar-card h4 {
         font-size: 15px !important;
+        margin-bottom: 10px !important;
+        /* keep gradient on stat card title but ensure visible */
+        -webkit-text-fill-color: transparent !important;
     }
 
-    /* ── Mobile chip category bar ── */
-    .mobile-category-bar {
-        display: flex !important;
-        overflow-x: auto !important;
-        gap: 8px !important;
-        padding: 6px 0 10px 0 !important;
-        margin-bottom: 12px !important;
-        scrollbar-width: none !important;
-        -webkit-overflow-scrolling: touch !important;
-    }
+    /* ─── REPLY CARDS ─────────────────────────────────────── */
+    .reply-card    { padding: 14px !important; }
+    .reply-content { font-size: 14px !important; }
+    .add-reply-card { padding: 18px 14px !important; }
+    textarea.form-control { min-height: 120px !important; font-size: 15px !important; }
 
-    .mobile-category-bar::-webkit-scrollbar {
-        display: none !important;
-    }
-
-    .mobile-category-bar a {
-        flex-shrink: 0 !important;
-        padding: 7px 14px !important;
-        border-radius: 20px !important;
-        background: #ffffff !important;
-        border: 1.5px solid #e8558b !important;
-        color: #e8558b !important;
-        font-size: 12px !important;
-        font-weight: 600 !important;
-        white-space: nowrap !important;
-        text-decoration: none !important;
-        transition: background 0.2s, color 0.2s !important;
-    }
-
-    .mobile-category-bar a:active,
-    .mobile-category-bar a.active {
-        background: #e8558b !important;
-        color: #ffffff !important;
-    }
-
-    /* ── Footer ── */
-    .footer {
-        padding: 24px 16px 16px !important;
-    }
-
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    .footer { padding: 24px 16px 16px !important; }
     .footer-container {
         flex-direction: column !important;
         gap: 20px !important;
         align-items: center !important;
     }
-
-    .footer-section {
-        min-width: unset !important;
-        width: 100% !important;
-    }
-
-    /* ── Typography: sensible mobile scale ── */
-    h1 { font-size: 22px !important; }
-    h2 { font-size: 18px !important; }
-    h3 { font-size: 16px !important; }
-    h4 { font-size: 15px !important; }
+    .footer-section { min-width: unset !important; width: 100% !important; }
 }
 
+
 /* ============================================================
-   SMALL MOBILE  ≤ 400px
-   (very small phones — categories go single column)
+   SMALL PHONES  ≤ 400px
    ============================================================ */
 @media (max-width: 400px) {
 
-    .sidebar .list-unstyled {
-        grid-template-columns: 1fr !important;
-    }
+    .layout-container { padding: 0 8px !important; }
 
-    .home-grid {
-        grid-template-columns: 1fr !important;   /* stack on tiny screens */
-        gap: 8px !important;
-    }
+    /* Single column home grid on tiny screens */
+    .home-grid { grid-template-columns: 1fr !important; gap: 8px !important; }
 
-    .layout-container {
-        padding: 0 8px !important;
-    }
+    /* Single column categories */
+    .sidebar .list-unstyled { grid-template-columns: 1fr !important; }
 
     .post-row h5,
-    .post-row .post-title {
-        font-size: 13px !important;
-    }
+    .post-row .post-title,
+    .post-row .post-title a { font-size: 13px !important; }
 }
