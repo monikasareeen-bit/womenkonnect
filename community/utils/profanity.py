@@ -61,6 +61,9 @@ WHITELIST: set[str] = {
     # be whitelisted or they trigger false positives on normal sentences.
     # Single common words that ARE the normalized form of 'ass' hits
     'as',             # as — "as if", "as well", "such as" etc.
+    'saas',           # saas = mother-in-law in Hindi — contains 'ass' substring
+    'saasu',          # saasu maa — contains 'ass' substring
+    'sasur',          # father-in-law in Hindi
     'ask',            # ask, asked, asking, asks
     'aspect',         # aspects, aspective
     'assist',         # assistance, assistant (already present but 'as' needs own entry)
