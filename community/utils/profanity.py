@@ -61,6 +61,24 @@ WHITELIST: set[str] = {
     # be whitelisted or they trigger false positives on normal sentences.
     # Single common words that ARE the normalized form of 'ass' hits
     'as',             # as — "as if", "as well", "such as" etc.
+    WHITELIST: set[str] = {
+    # ... existing entries ...
+
+    # ── Hindi/Urdu family terms (common on Indian platforms) ─────────────────
+    'naas',           # naas (common Hindi word)
+    'paas',           # paas = near/close in Hindi
+    'taas',           # taas (Hindi word)
+    'raas',           # raas (dance form / Hindi word)
+    'maas',           # maas = meat in Hindi
+    'jaas',           # jaas (Hindi)
+    'baas',           # baas (Hindi)
+    'kaas',           # kaas (Hindi)
+    'khaas',          # khaas = special in Hindi
+    'khaas',
+    'pyaas',          # pyaas = thirst in Hindi
+    'aas',            # aas = hope in Hindi/Urdu
+    'paas',
+    'naas',
     'saas',           # saas = mother-in-law in Hindi — contains 'ass' substring
     'saasu',          # saasu maa — contains 'ass' substring
     'sasur',          # father-in-law in Hindi
