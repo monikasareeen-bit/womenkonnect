@@ -61,7 +61,7 @@ WHITELIST: set[str] = {
     # be whitelisted or they trigger false positives on normal sentences.
     # Single common words that ARE the normalized form of 'ass' hits
     'as',             # as — "as if", "as well", "such as" etc.
-    WHITELIST: set[str] = {
+    
     # ... existing entries ...
 
     # ── Hindi/Urdu family terms (common on Indian platforms) ─────────────────
