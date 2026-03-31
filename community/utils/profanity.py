@@ -517,6 +517,11 @@ WHITELIST: set[str] = {
     'tassock',        # variant of tussock
     'tussock',
     'hassock',        # a thick firm cushion
+    # ── "spic" family ────────────────────────────────────────────────────────
+    'spice',          # spices, spicy, spiced, spiciness
+    'auspice',        # auspices, auspicious
+    'hospice',        # hospices
+    'uspici',         # suspicious, unsuspicious
 }
 
 # ---------------------------------------------------------------------------
