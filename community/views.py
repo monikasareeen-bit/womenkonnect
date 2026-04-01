@@ -52,12 +52,12 @@ def register(request):
                 })
                 messages.success(request, "✅ Account created! Check your email to activate.")
             except Exception as e:
-                print(f"EMAIL ERROR: {str(e)}")
-                import traceback
-                traceback.print_exc()
+                    
+                print(f"RESEND ERROR: {type(e).__name__}: {str(e)}")
                 user.delete()
                 messages.error(request, f"Registration failed: {str(e)}")
                 return render(request, "community/register.html", {"form": form})
+                
             return redirect('login')
         else:
             messages.error(request, "Please correct the errors below.")
