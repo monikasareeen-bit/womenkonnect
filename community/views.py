@@ -76,8 +76,8 @@ def login_view(request):
             password = form.cleaned_data['password']
 
             try:
-                user_obj = User.objects.get(email=email)
-                user = authenticate(request, username=user_obj.username, password=password)
+                user_obj = User.objects.get(email__iexact=email)
+                user = authenticate(request, username=email, password=password)
             except User.DoesNotExist:
                 user = None
 
