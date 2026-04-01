@@ -2093,3 +2093,60 @@ html, body {
         word-break: break-word !important;
     }
 }
+/* ============================================================
+   MOBILE NAV FIXES — Sign Up visibility + menu overlap
+   ============================================================ */
+
+@media (max-width: 640px) {
+
+    /* Fix Sign Up button — white text on gradient background */
+    .nav-links .nav-auth-btns .nav-btn-signup {
+        color: #e8558b !important;
+        -webkit-text-fill-color: #e8558b !important;
+        background: #ffffff !important;
+        border-radius: 20px !important;
+        padding: 8px 16px !important;
+        font-weight: 700 !important;
+        display: block !important;
+        text-align: center !important;
+    }
+
+    .nav-links .nav-auth-btns .nav-btn-login {
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+        background: transparent !important;
+        border: 1.5px solid rgba(255,255,255,0.7) !important;
+        border-radius: 20px !important;
+        padding: 8px 16px !important;
+        display: block !important;
+        text-align: center !important;
+    }
+
+    /* Push auth card below the navbar height so menu doesn't overlap */
+    .auth-container {
+        margin-top: 60px !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+    /* Ensure hamburger nav sits above everything else */
+    .nav-links.nav-open {
+        z-index: 1050 !important;
+    }
+
+    /* Auth buttons row: side by side inside nav */
+    .nav-links .nav-auth-btns {
+        flex-direction: row !important;
+        justify-content: center !important;
+        padding: 10px 18px !important;
+        gap: 10px !important;
+    }
+
+    .nav-links .nav-auth-btns a {
+        flex: 1 !important;
+        max-width: 140px !important;
+        border-left: none !important;    /* override the nav-links a border */
+        padding: 8px 10px !important;
+        font-size: 13px !important;
+    }
+}
