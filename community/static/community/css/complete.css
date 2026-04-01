@@ -2150,3 +2150,23 @@ html, body {
         font-size: 13px !important;
     }
 }
+/* ============================================================
+   FIX: Post row titles invisible due to gradient h-tag override
+   ============================================================ */
+
+.post-row h5,
+.post-row .post-title,
+.post-row .post-title a,
+.post-row a {
+    -webkit-text-fill-color: #3d3d4d !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    color: #3d3d4d !important;
+}
+
+.post-row h5:hover,
+.post-row .post-title a:hover {
+    -webkit-text-fill-color: var(--primary-pink) !important;
+    color: var(--primary-pink) !important;
+}
