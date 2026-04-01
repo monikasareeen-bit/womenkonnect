@@ -6,7 +6,8 @@ from django.conf.urls.static import static
 from django.views.generic.base import RedirectView
 from django.contrib.sitemaps.views import sitemap
 from django.contrib.sitemaps import GenericSitemap
-from community.models import Post
+from django.http import HttpResponse          # ← was missing
+from community.models import Post, Category   # ← Category was missing
 
 sitemaps = {
     'posts': GenericSitemap({
@@ -31,6 +32,7 @@ urlpatterns = [
     path('', include('community.urls')),
     path('favicon.ico', RedirectView.as_view(url='/static/community/images/womenkonnect-logo.svg', permanent=True)),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
+    path('robots.txt', robots_txt),           # ← was missing
     path('password-reset/',
         auth_views.PasswordResetView.as_view(
             template_name='community/auth/password_reset.html'
@@ -57,10 +59,8 @@ urlpatterns = [
     ),
 ]
 
-# Serve media files (PythonAnywhere handles via static file mapping in production)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-# Error handlers
 handler404 = 'community.views.handler404'
 handler500 = 'community.views.handler500'
 handler403 = 'community.views.handler403'
