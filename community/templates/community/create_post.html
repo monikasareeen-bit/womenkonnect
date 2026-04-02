@@ -62,6 +62,7 @@
                 <textarea name="content" id="id_content" class="form-control"
                           placeholder="Share your thoughts..."
                           rows="10" required>{{ form.content.value|default:'' }}</textarea>
+                          {% include 'community/partials/emoji_picker.html' with target_id="id_content" %}
                 {% if form.content.errors %}
                     <div class="text-danger small mt-1">{{ form.content.errors }}</div>
                 {% endif %}

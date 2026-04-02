@@ -1,0 +1,479 @@
+{% comment %}
+  EMOJI PICKER — drop this partial into your post creation/edit template.
+  
+  HOW TO USE:
+  1. Copy this file to: community/templates/community/partials/emoji_picker.html
+  2. In your post form template, include it right below your textarea:
+       {% include 'community/partials/emoji_picker.html' with target_id="id_content" %}
+  3. Make sure your textarea has an id (Django's default is "id_<fieldname>",
+     e.g. id_content for a field named "content").
+  
+  The {% with target_id="..." %} argument tells the picker which textarea to insert into.
+  If you skip it, it defaults to "id_content".
+{% endcomment %}
+
+{% with field_id=target_id|default:"id_content" %}
+
+<div class="wk-emoji-picker-wrap" data-target="{{ field_id }}">
+
+  <!-- Trigger button -->
+  <button type="button" class="wk-emoji-trigger" aria-label="Add emoji" title="Add emoji">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M8 13s1.5 2 4 2 4-2 4-2"/>
+      <line x1="9" y1="9" x2="9.01" y2="9"/>
+      <line x1="15" y1="9" x2="15.01" y2="9"/>
+    </svg>
+    <span>Emoji</span>
+  </button>
+
+  <!-- Picker panel -->
+  <div class="wk-emoji-panel" role="dialog" aria-label="Emoji picker" hidden>
+
+    <!-- Search -->
+    <div class="wk-emoji-search-wrap">
+      <input type="text" class="wk-emoji-search" placeholder="Search emojis…" autocomplete="off">
+    </div>
+
+    <!-- Category tabs -->
+    <div class="wk-emoji-tabs" role="tablist">
+      <button class="wk-tab active" data-cat="all"      role="tab">All</button>
+      <button class="wk-tab" data-cat="smileys"   role="tab">😀</button>
+      <button class="wk-tab" data-cat="people"    role="tab">👩</button>
+      <button class="wk-tab" data-cat="nature"    role="tab">🌸</button>
+      <button class="wk-tab" data-cat="food"      role="tab">🍎</button>
+      <button class="wk-tab" data-cat="travel"    role="tab">✈️</button>
+      <button class="wk-tab" data-cat="objects"   role="tab">💡</button>
+      <button class="wk-tab" data-cat="symbols"   role="tab">❤️</button>
+    </div>
+
+    <!-- Emoji grid -->
+    <div class="wk-emoji-grid" role="listbox" aria-label="Emojis"></div>
+
+    <!-- Recents row -->
+    <div class="wk-recents-wrap" hidden>
+      <p class="wk-recents-label">Recently used</p>
+      <div class="wk-recents-row"></div>
+    </div>
+  </div>
+</div>
+
+{% endwith %}
+
+
+<!-- ─── Styles (scoped with .wk- prefix, safe to include once) ─────────── -->
+<style>
+/* Only inject once even if partial is included multiple times */
+.wk-emoji-picker-wrap {
+  position: relative;
+  display: inline-block;
+  margin-top: 6px;
+  font-family: inherit;
+}
+
+/* Trigger button */
+.wk-emoji-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1.5px solid #e8a4c9;
+  border-radius: 20px;
+  background: #fff0f7;
+  color: #c0357a;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s, box-shadow 0.18s, transform 0.12s;
+}
+.wk-emoji-trigger:hover {
+  background: #fce4f0;
+  box-shadow: 0 2px 8px rgba(192,53,122,.18);
+  transform: translateY(-1px);
+}
+.wk-emoji-trigger:active { transform: translateY(0); }
+
+/* Panel */
+.wk-emoji-panel {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  z-index: 9999;
+  width: 320px;
+  background: #fff;
+  border: 1.5px solid #f0c6dd;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(192,53,122,.18), 0 2px 8px rgba(0,0,0,.08);
+  overflow: hidden;
+  animation: wk-panel-in 0.18s ease;
+}
+.wk-emoji-panel[hidden] { display: none !important; }
+
+@keyframes wk-panel-in {
+  from { opacity: 0; transform: translateY(6px) scale(.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Search */
+.wk-emoji-search-wrap {
+  padding: 10px 10px 6px;
+  background: #fdf5fa;
+  border-bottom: 1px solid #f0d5e8;
+}
+.wk-emoji-search {
+  width: 100%;
+  padding: 7px 12px;
+  border: 1.5px solid #e8b4d4;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  outline: none;
+  background: #fff;
+  box-sizing: border-box;
+  color: #333;
+  transition: border-color 0.15s;
+}
+.wk-emoji-search:focus { border-color: #c0357a; }
+
+/* Tabs */
+.wk-emoji-tabs {
+  display: flex;
+  gap: 2px;
+  padding: 6px 8px;
+  background: #fdf5fa;
+  border-bottom: 1px solid #f0d5e8;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.wk-emoji-tabs::-webkit-scrollbar { display: none; }
+.wk-tab {
+  flex-shrink: 0;
+  padding: 4px 10px;
+  border: 1.5px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #a0506a;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.wk-tab:hover { background: #fce4f0; }
+.wk-tab.active {
+  background: #c0357a;
+  color: #fff;
+  border-color: #c0357a;
+}
+
+/* Grid */
+.wk-emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 2px;
+  padding: 8px;
+  max-height: 210px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #e8a4c9 transparent;
+}
+.wk-emoji-grid::-webkit-scrollbar { width: 4px; }
+.wk-emoji-grid::-webkit-scrollbar-thumb { background: #e8a4c9; border-radius: 4px; }
+
+.wk-emoji-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background 0.12s, transform 0.1s;
+  line-height: 1;
+}
+.wk-emoji-btn:hover {
+  background: #fce4f0;
+  transform: scale(1.18);
+}
+.wk-emoji-btn:active { transform: scale(1.05); }
+
+/* Recents */
+.wk-recents-wrap {
+  padding: 4px 10px 8px;
+  border-top: 1px solid #f0d5e8;
+}
+.wk-recents-label {
+  margin: 0 0 4px;
+  font-size: 0.7rem;
+  color: #a0506a;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.wk-recents-row {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+}
+
+/* No results */
+.wk-no-results {
+  grid-column: 1 / -1;
+  padding: 18px 0;
+  text-align: center;
+  color: #c08aaa;
+  font-size: 0.85rem;
+}
+</style>
+
+
+<!-- ─── Script ──────────────────────────────────────────────────────────── -->
+<script>
+(function () {
+  /* ── Emoji data ── */
+  const EMOJI_DATA = {
+    smileys: [
+      '😀','😁','😂','🤣','😃','😄','😅','😆','😇','😈','😉','😊','😋','😌','😍','🥰',
+      '😎','😏','😐','😑','😒','😓','😔','😕','🙃','🙂','😖','😗','😘','😙','😚','😛',
+      '😜','😝','😞','😟','😠','😡','😢','😣','😤','😥','😦','😧','😨','😩','😪','😫',
+      '😬','😭','😮','😯','😰','😱','😲','😳','🥺','😴','😵','🤐','🤑','🤒','🤓','🤔',
+      '🤕','🤗','🤘','🤙','🤚','🤛','🤜','🤝','🤞','🤟','🤠','🤡','🤢','🤣','🤤','🤥',
+      '🤦','🤧','🤨','🤩','🤪','🤫','🤬','🤭','🤮','🤯','🥱','🥲','🥳','🥴','🥵','🥶',
+    ],
+    people: [
+      '👶','👧','🧒','👦','👩','🧑','👨','👵','🧓','👴','👮','🕵️','💂','🧑‍⚕️','👩‍⚕️','👨‍⚕️',
+      '🧑‍🌾','👩‍🌾','👨‍🌾','🧑‍🍳','👩‍🍳','👨‍🍳','🧑‍🎓','👩‍🎓','👨‍🎓','🧑‍🎤','👩‍🎤','👨‍🎤','🧑‍🏫','👩‍🏫',
+      '👨‍🏫','🧑‍🏭','👩‍🏭','👨‍🏭','🧑‍💻','👩‍💻','👨‍💻','🧑‍💼','👩‍💼','👨‍💼','🧑‍🔧','👩‍🔧','👨‍🔧',
+      '💃','🕺','🧖','🧘','🏃','🚶','🧗','🏇','⛹️','🏋️','🤸','🤺','🤼','🤾','🏌️',
+      '🤹','👼','🤰','🤱','🙇','💁','🙅','🙆','🙋','🤦','🤷','💆','💇','🛀','🧎',
+    ],
+    nature: [
+      '🌸','🌺','🌻','🌹','🌷','🌼','💐','🌿','🍀','🌱','🌲','🌳','🌴','🌵','🌾',
+      '🍁','🍂','🍃','🍄','🌰','🦔','🐝','🐛','🦋','🐌','🐚','🐞','🐜','🦟','🦗',
+      '🕷️','🦂','🐢','🐍','🦎','🐊','🦕','🦖','🐲','🐉','🦕','🐸','🦓','🦍','🦧',
+      '🐘','🦛','🦏','🐪','🐫','🦒','🦘','🦬','🐃','🐂','🐄','🐎','🐖','🐏','🐑',
+      '🦙','🐐','🦌','🐕','🐩','🦮','🐕‍🦺','🐈','🐈‍⬛','🐓','🦃','🦤','🦚','🦜','🦢','🦩',
+      '🕊️','🐇','🦝','🦨','🦡','🦦','🦥','🐁','🐀','🐿️','🦔','🐾','🌍','🌎','🌏',
+      '⭐','🌟','💫','✨','☀️','🌤️','⛅','🌦️','🌧️','⛈️','🌩️','🌨️','❄️','☃️','⛄','🌬️',
+    ],
+    food: [
+      '🍎','🍏','🍊','🍋','🍌','🍍','🥭','🍇','🍓','🫐','🍈','🍒','🍑','🥝','🍅',
+      '🫒','🥥','🥑','🍆','🥔','🥕','🌽','🌶️','🫑','🥒','🥬','🥦','🧄','🧅','🍄',
+      '🥜','🫘','🌰','🍞','🥐','🥖','🥨','🥯','🧀','🥚','🍳','🧈','🥞','🧇','🥓',
+      '🥩','🍗','🍖','🌭','🍔','🍟','🍕','🫓','🥙','🧆','🌮','🌯','🫔','🥗','🥘',
+      '🫕','🥫','🍝','🍜','🍲','🍛','🍣','🍱','🥟','🦪','🍤','🍙','🍚','🍘','🍥',
+      '🥮','🍢','🧁','🍰','🎂','🍮','🍭','🍬','🍫','🍿','🍩','🍪','🌰','🥜','🍯',
+      '🍼','🥛','☕','🍵','🧃','🥤','🧋','🍶','🍺','🍻','🥂','🍷','🥃','🍸','🍹',
+    ],
+    travel: [
+      '✈️','🚀','🛸','🚁','🛺','🚗','🚕','🚙','🚌','🚎','🏎️','🚓','🚑','🚒','🚐',
+      '🛻','🚚','🚛','🚜','🏍️','🛵','🚲','🛴','🛹','🛼','🚏','🛣️','🛤️','⛽','🚨',
+      '🚥','🚦','🚧','⚓','🛟','⛵','🚤','🛥️','🛳️','⛴️','🚢','✈️','🛩️','🛫','🛬',
+      '🪂','💺','🚂','🚃','🚄','🚅','🚆','🚇','🚈','🚉','🚊','🚝','🚞','🚋','🚌',
+      '🗺️','🧭','🏔️','⛰️','🌋','🗻','🏕️','🏖️','🏜️','🏝️','🏞️','🏟️','🏛️','🏗️','🏘️',
+      '🏚️','🏠','🏡','🏢','🏣','🏤','🏥','🏦','🏨','🏩','🏪','🏫','🏬','🏭','🏯',
+      '🗼','🗽','⛪','🕌','🛕','🕍','⛩️','🕋','⛲','⛺','🌁','🌃','🏙️','🌄','🌅',
+    ],
+    objects: [
+      '💡','🔦','🕯️','🪔','🧲','💻','🖥️','🖨️','⌨️','🖱️','🖲️','💾','💿','📀','📱',
+      '☎️','📞','📟','📠','📺','📷','📸','📹','🎥','📽️','🎞️','📡','🔭','🔬','🩺',
+      '🩻','🔋','🔌','💡','🔦','🕯️','🪔','🧱','🔑','🗝️','🔒','🔓','🔨','🪓','⛏️',
+      '⚒️','🛠️','🗡️','⚔️','🛡️','🔧','🔩','⚙️','🗜️','⚖️','🦯','🔗','⛓️','🪝','🧰',
+      '🪤','🪣','💊','💉','🩸','🩹','🩼','🩺','🩻','🚪','🛗','🪞','🪟','🛏️','🛋️',
+      '🚽','🪠','🚿','🛁','🪤','🪒','🧴','🧷','🧹','🧺','🧻','🪣','🧼','🫧','🪥',
+      '📚','📖','📝','✏️','🖊️','🖋️','📌','📍','📎','🖇️','📏','📐','✂️','🗃️','🗄️',
+    ],
+    symbols: [
+      '❤️','🧡','💛','💚','💙','💜','🖤','🤍','🤎','💔','❣️','💕','💞','💓','💗',
+      '💖','💘','💝','💟','☮️','✝️','☪️','🕉️','☸️','✡️','🔯','🕎','☯️','🛐','⛎',
+      '♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓','🆔','⚛️','🉑','☢️',
+      '☣️','📴','📳','🈶','🈚','🈸','🈺','🈷️','✴️','🆚','💮','🉐','㊙️','㊗️','🈴',
+      '🈵','🈹','🈲','🅰️','🅱️','🆎','🆑','🅾️','🆘','❌','⭕','🛑','⛔','📛','🚫',
+      '💯','💢','♨️','🚷','🚯','🚳','🚱','🔞','📵','🚭','❗','❕','❓','❔','‼️',
+      '⁉️','🔅','🔆','〽️','⚠️','🚸','🔱','⚜️','🔰','♻️','✅','🈯','💹','❎','🌐',
+      '💠','Ⓜ️','🌀','💤','🏧','🚾','♿','🅿️','🛗','🈳','🈂️','🛂','🛃','🛄','🛅',
+      '🚹','🚺','🚼','⚧️','🚻','🚮','🎦','📶','🈁','🔣','ℹ️','🔤','🔡','🔠','🆖',
+      '🆗','🆙','🆒','🆕','🆓','0️⃣','1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣','🔟',
+    ],
+  };
+
+  /* Flatten all */
+  const ALL_EMOJIS = Object.values(EMOJI_DATA).flat();
+
+  const MAX_RECENTS = 16;
+  const STORAGE_KEY = 'wk_emoji_recents';
+
+  function getRecents() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch { return []; }
+  }
+  function addRecent(emoji) {
+    let r = getRecents().filter(e => e !== emoji);
+    r.unshift(emoji);
+    r = r.slice(0, MAX_RECENTS);
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(r)); } catch {}
+  }
+
+  function initPicker(wrap) {
+    const targetId  = wrap.dataset.target;
+    const trigger   = wrap.querySelector('.wk-emoji-trigger');
+    const panel     = wrap.querySelector('.wk-emoji-panel');
+    const grid      = wrap.querySelector('.wk-emoji-grid');
+    const search    = wrap.querySelector('.wk-emoji-search');
+    const tabs      = wrap.querySelectorAll('.wk-tab');
+    const recentsWrap = wrap.querySelector('.wk-recents-wrap');
+    const recentsRow  = wrap.querySelector('.wk-recents-row');
+
+    let activeCat = 'all';
+    let open = false;
+
+    function getTarget() {
+      return document.getElementById(targetId);
+    }
+
+    function insertEmoji(emoji) {
+      const ta = getTarget();
+      if (!ta) return;
+      const start = ta.selectionStart;
+      const end   = ta.selectionEnd;
+      const val   = ta.value;
+      ta.value = val.slice(0, start) + emoji + val.slice(end);
+      ta.selectionStart = ta.selectionEnd = start + emoji.length;
+      ta.focus();
+      // Trigger React/Vue/Django reactive events
+      ta.dispatchEvent(new Event('input',  { bubbles: true }));
+      ta.dispatchEvent(new Event('change', { bubbles: true }));
+      addRecent(emoji);
+      renderRecents();
+    }
+
+    function makeBtn(emoji) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'wk-emoji-btn';
+      b.textContent = emoji;
+      b.setAttribute('role', 'option');
+      b.setAttribute('aria-label', emoji);
+      b.addEventListener('click', () => insertEmoji(emoji));
+      return b;
+    }
+
+    function renderGrid(emojis) {
+      grid.innerHTML = '';
+      if (!emojis.length) {
+        const msg = document.createElement('p');
+        msg.className = 'wk-no-results';
+        msg.textContent = 'No emojis found 😕';
+        grid.appendChild(msg);
+        return;
+      }
+      emojis.forEach(e => grid.appendChild(makeBtn(e)));
+    }
+
+    function renderRecents() {
+      const r = getRecents();
+      if (!r.length) { recentsWrap.hidden = true; return; }
+      recentsWrap.hidden = false;
+      recentsRow.innerHTML = '';
+      r.forEach(e => recentsRow.appendChild(makeBtn(e)));
+    }
+
+    function renderCat(cat) {
+      const q = search.value.trim().toLowerCase();
+      let emojis = cat === 'all' ? ALL_EMOJIS : (EMOJI_DATA[cat] || []);
+      if (q) emojis = ALL_EMOJIS; // search across all
+      renderGrid(emojis);
+    }
+
+    function openPanel() {
+      panel.hidden = false;
+      open = true;
+      trigger.setAttribute('aria-expanded', 'true');
+      renderCat(activeCat);
+      renderRecents();
+      search.value = '';
+      search.focus();
+    }
+    function closePanel() {
+      panel.hidden = true;
+      open = false;
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      open ? closePanel() : openPanel();
+    });
+
+    document.addEventListener('click', (e) => {
+      if (open && !wrap.contains(e.target)) closePanel();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (open && e.key === 'Escape') { closePanel(); trigger.focus(); }
+    });
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        activeCat = tab.dataset.cat;
+        search.value = '';
+        renderCat(activeCat);
+      });
+    });
+
+    search.addEventListener('input', () => {
+      const q = search.value.trim().toLowerCase();
+      if (!q) { renderCat(activeCat); return; }
+      // Very simple name search using codepoint descriptions isn't feasible,
+      // so we just filter by showing all and matching the Unicode name via a
+      // tiny lookup table of keywords → emoji subsets.
+      const KEYWORDS = {
+        happy: ['😀','😁','😄','😃','😆','😊','🥰','😍','🤗','🥳'],
+        sad:   ['😢','😭','😞','😔','😟','🥺','😿'],
+        love:  ['❤️','🥰','😍','💕','💞','💓','💗','💖','💘','💝','💟','🤍','🧡','💛','💚','💙','💜'],
+        laugh: ['😂','🤣','😆','😄','😁'],
+        cool:  ['😎','🤙','👌','🆒','✌️'],
+        fire:  ['🔥'],
+        star:  ['⭐','🌟','💫','✨','🌠'],
+        flower:['🌸','🌺','🌻','🌹','🌷','🌼','💐'],
+        heart: ['❤️','💕','💞','💓','💗','💖','💘','💝','💟','🤍','🧡','💛','💚','💙','💜','🖤','🤎'],
+        food:  EMOJI_DATA.food,
+        travel:EMOJI_DATA.travel,
+        animal:['🐶','🐱','🐭','🐹','🐰','🦊','🐻','🐼','🐨','🐯','🦁','🐮','🐷','🐸','🐵'],
+        sun:   ['☀️','🌤️','🌞','⭐'],
+        rain:  ['🌧️','⛈️','🌦️','☔','💧'],
+        moon:  ['🌙','🌛','🌜','🌚','🌝','🌕'],
+        music: ['🎵','🎶','🎸','🎹','🎺','🎻','🥁','🎤','🎧','🎼'],
+        party: ['🎉','🎊','🥳','🎈','🎁','🎀'],
+        book:  ['📚','📖','📝','✏️'],
+        work:  ['💼','🧑‍💼','👩‍💼','👨‍💼','💻','📊','📈'],
+        sport: ['⚽','🏀','🏈','⚾','🎾','🏐','🏉','🎱','🏓','🏸','🥊','🎯'],
+      };
+      let matches = [];
+      for (const [kw, emojis] of Object.entries(KEYWORDS)) {
+        if (kw.includes(q)) matches.push(...emojis);
+      }
+      // Fallback: just render the full list when no keyword matches
+      if (!matches.length) matches = ALL_EMOJIS;
+      // Deduplicate
+      matches = [...new Set(matches)];
+      renderGrid(matches);
+    });
+  }
+
+  /* Init all pickers on the page */
+  function initAll() {
+    document.querySelectorAll('.wk-emoji-picker-wrap').forEach(initPicker);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll);
+  } else {
+    initAll();
+  }
+})();
+</script>
