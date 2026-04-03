@@ -66,9 +66,10 @@ WHITELIST: set[str] = {
 
     # ── Hindi/Urdu family terms (common on Indian platforms) ─────────────────
         
-    'rishta',      # rishta = relationship in Hindi/Urdu
-    'rishtey',     # plural
-    'rishtedaar',  # relatives
+    'rishta',         # rishta = relationship in Hindi/Urdu
+    'rishtey',        # plural
+    'rishtedaar',     # relatives
+    'rishto'
     'naas',           # naas (common Hindi word)
     'paas',           # paas = near/close in Hindi
     'taas',           # taas (Hindi word)
