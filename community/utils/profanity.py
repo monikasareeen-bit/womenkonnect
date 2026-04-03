@@ -69,7 +69,7 @@ WHITELIST: set[str] = {
     'rishta',         # rishta = relationship in Hindi/Urdu
     'rishtey',        # plural
     'rishtedaar',     # relatives
-    'rishton'
+    'rishton',
     'naas',           # naas (common Hindi word)
     'paas',           # paas = near/close in Hindi
     'taas',           # taas (Hindi word)
