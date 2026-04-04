@@ -45,6 +45,7 @@
                                 class="form-control" 
                                 placeholder="Share your thoughts..."
                                 required>{{ reply.content }}</textarea>
+                                {% include 'community/partials/emoji_picker.html' with target_id="content" %}
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-between">
