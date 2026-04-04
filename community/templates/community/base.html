@@ -3,20 +3,66 @@
 <html lang="en">
 
 <head>
-    <meta name="google-site-verification" content="OsV8TY_Bk50_P1bEFjQnuuedkiMtJOnYwsVTAJPLocw" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}WomenKonnect{% endblock %}</title>
 
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap"
-        rel="stylesheet">
+    <!-- ── Google Verification ─────────────────────────────────── -->
+    <meta name="google-site-verification" content="OsV8TY_Bk50_P1bEFjQnuuedkiMtJOnYwsVTAJPLocw" />
 
-    <!-- Font Awesome -->
+    <!-- ── Primary SEO ────────────────────────────────────────── -->
+    <title>{% block title %}WomenKonnect – Safe Community for Women in India{% endblock %}</title>
+    <meta name="description"   content="{% block meta_description %}WomenKonnect is a safe, supportive online community for women in India to discuss, share experiences, seek advice, and grow together.{% endblock %}">
+    <meta name="keywords"      content="{% block meta_keywords %}women community India, safe space for women, women discussion forum, women support group India, women empowerment, Indian women network{% endblock %}">
+    <meta name="author"        content="WomenKonnect">
+    <meta name="robots"        content="index, follow">
+    <link rel="canonical"      href="{% block canonical %}https://www.womenkonnect.co.in{% endblock %}">
+
+    <!-- ── Open Graph (WhatsApp / Facebook previews) ──────────── -->
+    <meta property="og:type"        content="{% block og_type %}website{% endblock %}">
+    <meta property="og:site_name"   content="WomenKonnect">
+    <meta property="og:title"       content="{% block og_title %}WomenKonnect – Safe Community for Women in India{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}A safe, supportive space for women to share, discuss, and grow together.{% endblock %}">
+    <meta property="og:url"         content="{% block og_url %}https://www.womenkonnect.co.in{% endblock %}">
+    <meta property="og:image"       content="{% block og_image %}{% static 'community/images/womenkonnect-logo.svg' %}{% endblock %}">
+    <meta property="og:locale"      content="en_IN">
+
+    <!-- ── Twitter / X card ───────────────────────────────────── -->
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="{% block twitter_title %}WomenKonnect – Safe Community for Women in India{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}A safe, supportive space for women to share, discuss, and grow together.{% endblock %}">
+    <meta name="twitter:image"       content="{% block twitter_image %}{% static 'community/images/womenkonnect-logo.svg' %}{% endblock %}">
+
+    <!-- ── Structured Data: Organization (helps Google Knowledge panel) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "WomenKonnect",
+      "url": "https://www.womenkonnect.co.in",
+      "logo": "{% static 'community/images/womenkonnect-logo.svg' %}",
+      "description": "A safe and supportive online community for women in India.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "support@womenkonnect.co.in",
+        "contactType": "customer support"
+      },
+      "sameAs": [
+        "https://www.facebook.com/",
+        "https://twitter.com/",
+        "https://www.instagram.com/"
+      ]
+    }
+    </script>
+
+    {% block extra_structured_data %}{% endblock %}
+
+    <!-- ── Google Fonts ───────────────────────────────────────── -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- ── Font Awesome ───────────────────────────────────────── -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- Main CSS -->
+    <!-- ── Main CSS ───────────────────────────────────────────── -->
     <link rel="stylesheet" href="{% static 'community/css/complete.css' %}">
 
     {% block extra_css %}{% endblock %}
@@ -27,7 +73,6 @@
     <!-- Navbar -->
     <header>
         <div class="top-navbar">
-            <!-- Logo -->
             <div class="logo">
                 <a href="{% url 'home' %}">
                     <img src="{% static 'community/images/womenkonnect-logo.svg' %}" alt="WomenKonnect" height="60">
@@ -35,14 +80,12 @@
                 </a>
             </div>
 
-            <!-- Hamburger button (mobile only) -->
             <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
 
-            <!-- Navigation Links -->
             <nav class="nav-links" id="navLinks">
                 <a href="{% url 'home' %}">Home</a>
                 <a href="{% url 'about' %}">About</a>
@@ -69,17 +112,13 @@
         </div>
     </header>
 
-    <!-- Main Layout -->
     <div class="layout-container">
-
-        <!-- Left Sidebar -->
         <aside class="sidebar">
             {% block sidebar %}
             {% include 'community/partials/sidebar.html' %}
             {% endblock %}
         </aside>
 
-        <!-- Main Content -->
         <main class="main-content">
             {% if messages %}
             <div class="messages" style="max-width:600px;margin:20px auto;">
@@ -91,7 +130,6 @@
             {% block content %}{% endblock %}
         </main>
 
-        <!-- Right Panel -->
         <aside class="right-panel">
             {% block right_panel %}
             <div class="sidebar-card">
@@ -107,34 +145,22 @@
             </div>
             {% endblock %}
         </aside>
-
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
-            <!-- About Section -->
             <div class="footer-section about">
                 <img src="{% static 'community/images/womenkonnect-logo.svg' %}" alt="WomenKonnect" height="40"
                     style="margin-bottom: 10px; filter: brightness(0) invert(1);">
                 <p>A safe and supportive space for women to share, discuss, and grow together.</p>
                 <div class="social-icons">
-                    <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
+                    <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
 
-            <!-- Quick Links -->
             <div class="footer-section links">
                 <h3 class="footer-title">Quick Links</h3>
                 <ul>
@@ -147,7 +173,6 @@
                 </ul>
             </div>
 
-            <!-- Contact Info -->
             <div class="footer-section contact">
                 <h3 class="footer-title">Contact Us</h3>
                 <p><i class="fas fa-envelope"></i> support@womenkonnect.co.in</p>
@@ -155,7 +180,6 @@
                 <p><i class="fas fa-map-marker-alt"></i> India</p>
             </div>
         </div>
-
         <div class="footer-bottom">
             &copy; {% now "Y" %} WomenKonnect. All rights reserved.
         </div>
@@ -163,10 +187,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // ── Dropdown (user menu) ──
             const dropbtn = document.querySelector('.dropbtn');
             const dropdownMenu = document.querySelector('.dropdown-menu');
-
             if (dropbtn && dropdownMenu) {
                 dropbtn.addEventListener('click', function (e) {
                     e.stopPropagation();
@@ -177,18 +199,14 @@
                 });
             }
 
-            // ── Hamburger menu ──
             const hamburgerBtn = document.getElementById('hamburgerBtn');
             const navLinks = document.getElementById('navLinks');
-
             if (hamburgerBtn && navLinks) {
                 hamburgerBtn.addEventListener('click', function () {
                     const isOpen = navLinks.classList.toggle('nav-open');
                     hamburgerBtn.classList.toggle('is-active', isOpen);
                     hamburgerBtn.setAttribute('aria-expanded', isOpen);
                 });
-
-                // Close menu when a nav link is tapped
                 navLinks.querySelectorAll('a').forEach(function (link) {
                     link.addEventListener('click', function () {
                         navLinks.classList.remove('nav-open');
@@ -196,8 +214,6 @@
                         hamburgerBtn.setAttribute('aria-expanded', 'false');
                     });
                 });
-
-                // Close on outside tap
                 document.addEventListener('click', function (e) {
                     if (!hamburgerBtn.contains(e.target) && !navLinks.contains(e.target)) {
                         navLinks.classList.remove('nav-open');
@@ -209,5 +225,4 @@
         });
     </script>
 </body>
-
 </html>

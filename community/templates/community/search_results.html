@@ -1,39 +1,68 @@
 {% extends "community/base.html" %}
 
-{% block title %}Search Results{% endblock %}
+{% block title %}{% if query %}Search: "{{ query }}"{% else %}Search Posts{% endif %} – WomenKonnect{% endblock %}
+
+{% block meta_description %}{% if query %}Search results for "{{ query }}" on WomenKonnect – women's community discussions, advice, and support.{% else %}Search thousands of discussions on WomenKonnect, the safe community for women in India.{% endif %}{% endblock %}
+
+{% block meta_keywords %}{{ query }}, women community, women forum India, women discussion{% endblock %}
+
+{# Tell Google not to index search result pages — avoids duplicate/thin content penalty #}
+{% block extra_css %}
+<meta name="robots" content="noindex, follow">
+{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-    <h2>Search Results{% if query %} for "{{ query }}"{% endif %}</h2>
+    <h1 style="font-size: 1.5rem; margin-bottom: 16px;">
+        {% if query %}Search results for <em>"{{ query }}"</em>{% else %}Search Posts{% endif %}
+    </h1>
 
-    <form method="GET" action="{% url 'search' %}" class="mb-4">
+    <form method="GET" action="{% url 'search' %}" class="mb-4" role="search">
         <div class="input-group">
-            <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="Search posts...">
+            <label for="searchInput" class="visually-hidden">Search posts</label>
+            <input
+                type="search"
+                id="searchInput"
+                name="q"
+                value="{{ query }}"
+                class="form-control"
+                placeholder="Search discussions…"
+                aria-label="Search posts"
+                minlength="2"
+            >
             <button type="submit" class="btn btn-primary">Search</button>
         </div>
     </form>
 
     {% if posts %}
-        <p>{{ posts|length }} result(s) found.</p>
+        <p style="color: #888; font-size: 0.9rem; margin-bottom: 20px;">{{ posts|length }} result{{ posts|length|pluralize }} found</p>
+
         {% for post in posts %}
-        <div class="card mb-3">
+        <article class="card mb-3" itemscope itemtype="https://schema.org/DiscussionForumPosting">
             <div class="card-body">
-                <h5 class="card-title">
-                    <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
-                </h5>
+                <h2 class="card-title" style="font-size: 1.1rem;" itemprop="headline">
+                    <a href="{% url 'post_detail' post.pk %}" itemprop="url">{{ post.title }}</a>
+                </h2>
                 <p class="text-muted small">
-                    By {{ post.author.username }} in {{ post.category.name }} &bull;
-                    {{ post.created_at|timesince }} ago &bull;
-                    {{ post.reply_count }} replies
+                    <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+                        By <span itemprop="name">{{ post.author.username }}</span>
+                    </span>
+                    in {{ post.category.name }} &bull;
+                    <time itemprop="datePublished" datetime="{{ post.created_at|date:'c' }}">{{ post.created_at|timesince }} ago</time>
+                    &bull; {{ post.reply_count }} repl{{ post.reply_count|pluralize:"y,ies" }}
                 </p>
-                <p class="card-text">{{ post.content|truncatewords:30 }}</p>
+                <p class="card-text" itemprop="text">{{ post.content|truncatewords:30 }}</p>
             </div>
-        </div>
+        </article>
         {% endfor %}
+
     {% elif query %}
-        <p>No posts found matching "{{ query }}".</p>
+        <div style="text-align:center; padding: 40px 0; color: #777;">
+            <p style="font-size: 1.1rem;">No posts found matching <strong>"{{ query }}"</strong>.</p>
+            <p>Try different keywords or <a href="{% url 'create_post' %}">start a new discussion</a>.</p>
+        </div>
     {% else %}
-        <p>Enter at least 2 characters to search.</p>
+        <p style="color: #888;">Enter at least 2 characters to search.</p>
     {% endif %}
 </div>
 {% endblock %}

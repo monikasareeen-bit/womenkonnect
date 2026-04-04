@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /accounts/
+Disallow: /search/
+Disallow: /profile/
+Disallow: /verify/
+
+Sitemap: https://www.womenkonnect.co.in/sitemap.xml
