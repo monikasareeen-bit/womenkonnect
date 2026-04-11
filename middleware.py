@@ -1,5 +1,4 @@
 from django.shortcuts import redirect
-from django.conf import settings
 
 EXEMPT_URLS = [
     '/login/',
@@ -21,9 +20,12 @@ class LoginRequiredMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
+        print(f">>> MIDDLEWARE RUNNING | path={request.path} | auth={request.user.is_authenticated}")
         if not request.user.is_authenticated:
             path = request.path
             exempt = any(path.startswith(url) for url in EXEMPT_URLS)
+            print(f">>> EXEMPT={exempt}")
             if not exempt:
+                print(f">>> REDIRECTING TO LOGIN")
                 return redirect(f"/login/?next={path}")
         return self.get_response(request)
