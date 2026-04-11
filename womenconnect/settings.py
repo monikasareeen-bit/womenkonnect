@@ -56,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
 
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'womenconnect.middleware.LoginRequiredMiddleware', 
 ]
 
 # ========================
@@ -141,7 +142,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # ========================
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'login'
 
 # IMPORTANT: include your EmailBackend
 AUTHENTICATION_BACKENDS = [
