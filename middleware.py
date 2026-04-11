@@ -2,21 +2,18 @@ from django.shortcuts import redirect
 from django.conf import settings
 
 EXEMPT_URLS = [
-    '/accounts/login/',
-    '/accounts/logout/',
-    '/verify/',           # email activation links
-    '/activate/',         # your activation view
-    '/register/',
     '/login/',
-    '/forgot-password/',
+    '/logout/',
+    '/register/',
+    '/activate/',
     '/password-reset/',
-    '/reset/',
     '/password-reset-confirm/',
     '/robots.txt',
     '/sitemap.xml',
     '/favicon.ico',
     '/static/',
     '/media/',
+    '/sugaradmin/',
 ]
 
 class LoginRequiredMiddleware:
@@ -28,5 +25,5 @@ class LoginRequiredMiddleware:
             path = request.path
             exempt = any(path.startswith(url) for url in EXEMPT_URLS)
             if not exempt:
-                return redirect(f"{settings.LOGIN_URL}?next={path}")
+                return redirect(f"/login/?next={path}")
         return self.get_response(request)
