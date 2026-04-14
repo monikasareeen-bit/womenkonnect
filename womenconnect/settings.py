@@ -90,13 +90,12 @@ TEMPLATES = [
 # ========================
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE_URL')
+        default='postgresql://postgres:womenconnect123!@db.hncgkruxikwynaqtvzji.supabase.co:5432/postgres?sslmode=require'
     )
 }
 
 if not DEBUG:
     DATABASES['default']['CONN_MAX_AGE'] = 60
-
 # ========================
 # PASSWORD VALIDATION
 # ========================
