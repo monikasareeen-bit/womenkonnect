@@ -90,7 +90,7 @@ TEMPLATES = [
 # ========================
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://postgres:womenconnect123!@db.hncgkruxikwynaqtvzji.supabase.co:5432/postgres?sslmode=require'
+        default=os.environ.get('DATABASE_URL')
     )
 }
 
