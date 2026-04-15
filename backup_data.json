@@ -1,0 +1,2019 @@
+﻿[
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "community",
+    "model": "category"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "community",
+    "model": "post"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "community",
+    "model": "reply"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "community",
+    "model": "userprofile"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "community",
+    "model": "notification"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "community",
+    "model": "report"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "axes",
+    "model": "accessattempt"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "axes",
+    "model": "accesslog"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "fields": {
+    "app_label": "axes",
+    "model": "accessfailurelog"
+  }
+},
+{
+  "model": "community.category",
+  "pk": 1,
+  "fields": {
+    "name": "Career & Financial Independence",
+    "slug": "career-financial-independence",
+    "description": "A career is more than a paycheck.\r\nFinancial independence is more than money in the bank.\r\n\r\nIt is choice.\r\nIt is dignity.\r\nIt is the quiet confidence of knowing you can stand on your own feet.\r\n\r\nFor many, especially women, earning isnΓÇÖt just about ambition ΓÇö itΓÇÖs about freedom. The freedom to leave unhealthy situations. The freedom to support dreams. The freedom to make decisions without fear.\r\n\r\nBut the journey isnΓÇÖt always smooth. There are doubts, societal expectations, pauses for family, comparisons, and the pressure to ΓÇ£have it all figured out.ΓÇ¥ Through it all, building your own financial foundation becomes an act of self-respect.\r\n\r\nHere, we talk about:\r\n\r\nBuilding careers without losing yourself\r\n\r\nRestarting after breaks\r\n\r\nNegotiating worth ΓÇö professionally and personally\r\n\r\nSaving, investing, and planning smartly\r\n\r\nRedefining success on your own terms\r\n\r\nBecause financial independence isnΓÇÖt about ego ΓÇö itΓÇÖs about empowerment.\r\n\r\nWhen you earn, you donΓÇÖt just change your bank balance.\r\nYou change your voice, your choices, and your future. Γ£¿",
+    "icon": "≡ƒÆ╝",
+    "color": "#FF69B4",
+    "created_at": "2026-03-03T12:45:30.351Z"
+  }
+},
+{
+  "model": "community.category",
+  "pk": 2,
+  "fields": {
+    "name": "Conditioning & Marriage Pressure",
+    "slug": "conditioning-marriage-pressure",
+    "description": "From childhood, a girl is gently taught\r\nThat dreams are delicate, but marriage is a must.\r\nHer wings are praised ΓÇö yet quietly clipped,\r\nAs ΓÇ£settle downΓÇ¥ is wrapped in love and trust.\r\n\r\nSociety scripts her timeline in gold,\r\nAs if her worth blooms only with a ring.\r\nBut a woman is not a deadline to be met ΓÇö\r\nShe is a whole universe, becoming. Γ£¿",
+    "icon": "≡ƒÆì",
+    "color": "#FF69B4",
+    "created_at": "2026-03-03T12:46:07.673Z"
+  }
+},
+{
+  "model": "community.category",
+  "pk": 3,
+  "fields": {
+    "name": "Courage Stories (Small Wins Matter)",
+    "slug": "courage-stories-small-wins-matter",
+    "description": "Courage is often imagined as something loud ΓÇö grand speeches, bold decisions, life-changing leaps. But more often, courage is quiet.\r\n\r\nIt is showing up on a hard day.\r\nIt is saying ΓÇ£noΓÇ¥ when youΓÇÖve always said ΓÇ£yes.ΓÇ¥\r\nIt is choosing rest without guilt.\r\nIt is trying again after failing privately.\r\n\r\nSmall wins donΓÇÖt trend. They donΓÇÖt make headlines. But they change lives ΓÇö slowly, steadily, deeply.\r\n\r\nEvery time you set a boundary, speak your truth, apply for that opportunity, leave what hurts you, or simply get out of bed when your heart feels heavy ΓÇö that is courage.\r\n\r\nThis space is for those moments.\r\nThe unseen battles.\r\nThe personal breakthroughs.\r\nThe everyday bravery that deserves recognition.\r\n\r\nBecause transformation isnΓÇÖt built in one dramatic moment ΓÇö\r\nitΓÇÖs built in a hundred small, brave choices.\r\n\r\nHere, we celebrate progress over perfection.\r\nGrowth over comparison.\r\nEffort over applause.\r\n\r\nYour small win matters. And so do you. Γ£¿",
+    "icon": "≡ƒÆ¬",
+    "color": "#FF69B4",
+    "created_at": "2026-03-03T12:46:53.973Z"
+  }
+},
+{
+  "model": "community.category",
+  "pk": 4,
+  "fields": {
+    "name": "Health & Self Care",
+    "slug": "health-self-care",
+    "description": "Health is not just the absence of illness ΓÇö it is the presence of balance.\r\nAnd self-care is not luxury ΓÇö it is responsibility.\r\n\r\nIn a world that praises productivity, we often put ourselves last. We ignore exhaustion, normalize stress, skip checkups, and silence our bodyΓÇÖs signals ΓÇö all in the name of ΓÇ£managing everything.ΓÇ¥\r\n\r\nBut your body keeps score.\r\nYour mind keeps records.\r\nAnd burnout is not a badge of honor.\r\n\r\nSelf-care is not always spa days and vacations.\r\nSometimes it is:\r\n\r\nSleeping on time\r\n\r\nSaying no without guilt\r\n\r\nEating nourishing food\r\n\r\nMoving your body gently\r\n\r\nTaking medical advice seriously\r\n\r\nChoosing rest over overcommitment\r\n\r\nHealth is physical, emotional, hormonal, and mental. It deserves attention without apology.\r\n\r\nHere, we focus on:\r\n\r\nPreventive health awareness\r\n\r\nDaily self-care routines that actually work\r\n\r\nManaging stress and energy\r\n\r\nWomenΓÇÖs health conversations without taboo\r\n\r\nBuilding sustainable habits ΓÇö not extreme ones\r\n\r\nBecause caring for yourself is not selfish.\r\nIt is the foundation that allows you to care for everything else.\r\n\r\nYour well-being matters ΓÇö every single day. ≡ƒî╕",
+    "icon": "≡ƒ⌐║",
+    "color": "#FF69B4",
+    "created_at": "2026-03-03T12:47:31.368Z"
+  }
+},
+{
+  "model": "community.category",
+  "pk": 5,
+  "fields": {
+    "name": "Identity & Self-Discovery",
+    "slug": "identity-self-discovery",
+    "description": "Who am I ΓÇö beyond the roles, beyond the expectations, beyond the names the world has given me?\r\n\r\nIdentity is not a fixed label; it is a journey. From childhood conditioning to societal definitions, we are often told who we should be long before we discover who we truly are. We inherit beliefs, absorb expectations, and sometimes mistake them for our own voice.\r\n\r\nSelf-discovery begins the moment we pause and question ΓÇö\r\nDo I believe this because it is mine, or because it was handed to me?\r\n\r\nIt is the courage to unlearn.\r\nThe strength to sit with discomfort.\r\nThe honesty to admit we are still evolving.\r\n\r\nIn a world that pushes timelines and predefined paths, choosing to explore your own inner landscape is a quiet rebellion. Identity is not about fitting into a mold ΓÇö it is about peeling away layers until you meet your most authentic self.\r\n\r\nHere, we will talk about:\r\n\r\nBreaking free from conditioning\r\n\r\nRedefining success on your own terms\r\n\r\nHealing past narratives\r\n\r\nEmbracing change and growth\r\n\r\nBecoming, without apology\r\n\r\nBecause self-discovery is not selfish ΓÇö it is sacred. Γ£¿",
+    "icon": "≡ƒñ░",
+    "color": "#FF69B4",
+    "created_at": "2026-03-03T12:48:24.098Z"
+  }
+},
+{
+  "model": "community.category",
+  "pk": 6,
+  "fields": {
+    "name": "Marriage, In-Laws & Boundaries",
+    "slug": "marriage-in-laws-boundaries",
+    "description": "Marriage is not just the union of two people ΓÇö it is often the merging of families, traditions, expectations, and unspoken rules. In the middle of this beautiful complexity, one thing quietly determines whether love flourishes or fades: boundaries.\r\n\r\nToo often, boundaries are misunderstood as rebellion, disrespect, or distance. But in reality, boundaries are clarity. They are the gentle lines that protect individuality while nurturing togetherness.\r\n\r\nA healthy marriage does not require shrinking yourself to fit into someone elseΓÇÖs comfort. Nor does it demand silence in the name of harmony. Respect is not built on fear or obligation ΓÇö it grows from communication, mutual understanding, and emotional safety.\r\n\r\nWhen in-laws enter the equation, emotions can deepen ΓÇö loyalties, habits, cultural norms. It becomes even more important to remember:\r\nYou can honor a family without abandoning yourself.\r\nYou can be kind without being controlled.\r\nYou can love deeply while still protecting your peace.\r\n\r\nThis space is for honest conversations about:\r\n\r\nSetting healthy emotional and physical boundaries\r\n\r\nNavigating expectations without guilt\r\n\r\nBalancing partnership and extended family dynamics\r\n\r\nProtecting your individuality within marriage\r\n\r\nBecause boundaries do not break relationships ΓÇö they strengthen the right ones. ≡ƒÆ¢",
+    "icon": "≡ƒÆ¢",
+    "color": "#FF69B4",
+    "created_at": "2026-03-03T12:49:03.603Z"
+  }
+},
+{
+  "model": "community.category",
+  "pk": 7,
+  "fields": {
+    "name": "Mental Health & Emotional Support",
+    "slug": "mental-health-emotional-support",
+    "description": "Not every battle is visible.\r\nNot every strong person feels strong every day.\r\n\r\nMental health is not a trend, not a weakness, not an ΓÇ£overreaction.ΓÇ¥ It is the foundation of how we think, feel, cope, and connect. And yet, for so many, it is the most neglected part of well-being.\r\n\r\nWe are taught to endure.\r\nTo adjust.\r\nTo ΓÇ£be positive.ΓÇ¥\r\n\r\nBut rarely are we taught how to sit with sadness, process anger, heal from trauma, or ask for help without shame.\r\n\r\nEmotional support is not about fixing someone. It is about listening without judgment. It is about creating spaces where vulnerability feels safe, not embarrassing.\r\n\r\nHere, we open conversations about:\r\n\r\nAnxiety, burnout, and emotional exhaustion\r\n\r\nSetting boundaries for mental peace\r\n\r\nBreaking stigma around therapy\r\n\r\nHealing from past wounds\r\n\r\nBuilding healthy emotional support systems\r\n\r\nBecause strength is not suppressing your emotions ΓÇö\r\nstrength is acknowledging them and still choosing to move forward gently.\r\n\r\nYour feelings are valid.\r\nYour healing matters.\r\nAnd you donΓÇÖt have to carry everything alone. Γ£¿",
+    "icon": "≡ƒºá",
+    "color": "#FF69B4",
+    "created_at": "2026-03-03T12:49:37.310Z"
+  }
+},
+{
+  "model": "community.category",
+  "pk": 8,
+  "fields": {
+    "name": "Community Talk",
+    "slug": "community-talk",
+    "description": "Every voice carries a story.\r\nEvery story deserves a space.\r\n\r\nCommunity is not just a group of people ΓÇö it is a shared heartbeat. It is where experiences meet understanding, where differences become dialogue, and where silence finds courage to speak.\r\n\r\nCommunity Talk is a space for open conversations ΓÇö honest, respectful, and real. Here, we discuss what matters. The everyday challenges, the quiet victories, the questions we hesitate to ask elsewhere.\r\n\r\nThis is where perspectives expand.\r\nWhere support replaces judgment.\r\nWhere learning happens through listening.\r\n\r\nYou donΓÇÖt need perfect words.\r\nYou donΓÇÖt need complete answers.\r\nYou just need the willingness to share.\r\n\r\nBecause when one person speaks, many feel seen.\r\nAnd when many listen, everyone grows.\r\n\r\nLetΓÇÖs talk. LetΓÇÖs understand. LetΓÇÖs build something meaningful together. Γ£¿",
+    "icon": "≡ƒùú∩╕Å",
+    "color": "#FF69B4",
+    "created_at": "2026-03-03T12:51:08.582Z"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": [
+      "admin",
+      "logentry"
+    ],
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view permission",
+    "content_type": [
+      "auth",
+      "permission"
+    ],
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view group",
+    "content_type": [
+      "auth",
+      "group"
+    ],
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view user",
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view content type",
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ],
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view session",
+    "content_type": [
+      "sessions",
+      "session"
+    ],
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add category",
+    "content_type": [
+      "community",
+      "category"
+    ],
+    "codename": "add_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change category",
+    "content_type": [
+      "community",
+      "category"
+    ],
+    "codename": "change_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete category",
+    "content_type": [
+      "community",
+      "category"
+    ],
+    "codename": "delete_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view category",
+    "content_type": [
+      "community",
+      "category"
+    ],
+    "codename": "view_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add post",
+    "content_type": [
+      "community",
+      "post"
+    ],
+    "codename": "add_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change post",
+    "content_type": [
+      "community",
+      "post"
+    ],
+    "codename": "change_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete post",
+    "content_type": [
+      "community",
+      "post"
+    ],
+    "codename": "delete_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view post",
+    "content_type": [
+      "community",
+      "post"
+    ],
+    "codename": "view_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add reply",
+    "content_type": [
+      "community",
+      "reply"
+    ],
+    "codename": "add_reply"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change reply",
+    "content_type": [
+      "community",
+      "reply"
+    ],
+    "codename": "change_reply"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete reply",
+    "content_type": [
+      "community",
+      "reply"
+    ],
+    "codename": "delete_reply"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view reply",
+    "content_type": [
+      "community",
+      "reply"
+    ],
+    "codename": "view_reply"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add user profile",
+    "content_type": [
+      "community",
+      "userprofile"
+    ],
+    "codename": "add_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change user profile",
+    "content_type": [
+      "community",
+      "userprofile"
+    ],
+    "codename": "change_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete user profile",
+    "content_type": [
+      "community",
+      "userprofile"
+    ],
+    "codename": "delete_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view user profile",
+    "content_type": [
+      "community",
+      "userprofile"
+    ],
+    "codename": "view_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add notification",
+    "content_type": [
+      "community",
+      "notification"
+    ],
+    "codename": "add_notification"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change notification",
+    "content_type": [
+      "community",
+      "notification"
+    ],
+    "codename": "change_notification"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete notification",
+    "content_type": [
+      "community",
+      "notification"
+    ],
+    "codename": "delete_notification"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view notification",
+    "content_type": [
+      "community",
+      "notification"
+    ],
+    "codename": "view_notification"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add report",
+    "content_type": [
+      "community",
+      "report"
+    ],
+    "codename": "add_report"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change report",
+    "content_type": [
+      "community",
+      "report"
+    ],
+    "codename": "change_report"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete report",
+    "content_type": [
+      "community",
+      "report"
+    ],
+    "codename": "delete_report"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view report",
+    "content_type": [
+      "community",
+      "report"
+    ],
+    "codename": "view_report"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add access attempt",
+    "content_type": [
+      "axes",
+      "accessattempt"
+    ],
+    "codename": "add_accessattempt"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change access attempt",
+    "content_type": [
+      "axes",
+      "accessattempt"
+    ],
+    "codename": "change_accessattempt"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete access attempt",
+    "content_type": [
+      "axes",
+      "accessattempt"
+    ],
+    "codename": "delete_accessattempt"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view access attempt",
+    "content_type": [
+      "axes",
+      "accessattempt"
+    ],
+    "codename": "view_accessattempt"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add access log",
+    "content_type": [
+      "axes",
+      "accesslog"
+    ],
+    "codename": "add_accesslog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change access log",
+    "content_type": [
+      "axes",
+      "accesslog"
+    ],
+    "codename": "change_accesslog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete access log",
+    "content_type": [
+      "axes",
+      "accesslog"
+    ],
+    "codename": "delete_accesslog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view access log",
+    "content_type": [
+      "axes",
+      "accesslog"
+    ],
+    "codename": "view_accesslog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can add access failure",
+    "content_type": [
+      "axes",
+      "accessfailurelog"
+    ],
+    "codename": "add_accessfailurelog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can change access failure",
+    "content_type": [
+      "axes",
+      "accessfailurelog"
+    ],
+    "codename": "change_accessfailurelog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can delete access failure",
+    "content_type": [
+      "axes",
+      "accessfailurelog"
+    ],
+    "codename": "delete_accessfailurelog"
+  }
+},
+{
+  "model": "auth.permission",
+  "fields": {
+    "name": "Can view access failure",
+    "content_type": [
+      "axes",
+      "accessfailurelog"
+    ],
+    "codename": "view_accessfailurelog"
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$jjmKlmmsZMnzeNnH8OiUuA$iw9Jn0U5mgWTil/VL2GVn5deXSwlcyHTmjTIP9vUxE8=",
+    "last_login": "2026-03-10T17:58:11.200Z",
+    "is_superuser": true,
+    "username": "monikasatija",
+    "first_name": "",
+    "last_name": "",
+    "email": "monikasareeen@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-03-03T08:54:11.932Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$kxOCEAWSQhchUtuzuStuW7$hVXNFmuvz2AFZHa/VG40cYIKyJ+ByV937BqK1DKPJJo=",
+    "last_login": "2026-03-07T13:25:46.700Z",
+    "is_superuser": false,
+    "username": "monika",
+    "first_name": "",
+    "last_name": "",
+    "email": "monika.satija9883@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-03T15:12:26.705Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$aoRtDBa74ssqutPCOkl4fF$WQYVw/bSrCdcvszTX61V2KjIg2oH1kWF/VPgvBZwOKk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Monika",
+    "first_name": "",
+    "last_name": "",
+    "email": "monikas@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-07T14:46:06.021Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$jz9AL4BCRIlZ23oETuGbQJ$zfKbWHs8k0trr3ISxyztRzEVlkoA8fKvlQAkCMV9vtQ=",
+    "last_login": "2026-03-07T14:49:39.293Z",
+    "is_superuser": false,
+    "username": "sonam",
+    "first_name": "",
+    "last_name": "",
+    "email": "sonam@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-07T14:47:13.155Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$lJPfc4frwn4SUEmUl1upXB$PfnnnN8vpeEww4WmEhlvPC5Ivwdn3g03bM4XEKNhAu4=",
+    "last_login": "2026-03-07T16:47:17.947Z",
+    "is_superuser": false,
+    "username": "swati",
+    "first_name": "",
+    "last_name": "",
+    "email": "swatimittal7@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-07T16:46:23.086Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$9fnv1b0ZHdASBE3m0zXQzs$B3crhCoZEtNZ1leogeJx0aDINqNt+6gmbaBsYjxBQUo=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "ritika",
+    "first_name": "",
+    "last_name": "",
+    "email": "ritika28@gmail.com",
+    "is_staff": false,
+    "is_active": false,
+    "date_joined": "2026-03-10T12:53:47.263Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$ztb7u2ZyYM96ALbviFGkuO$L7qrhilPAmay8tpSk1meaSa4u9I6z6W2iZQdGLnyaaU=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "anika",
+    "first_name": "",
+    "last_name": "",
+    "email": "anika@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-10T13:13:43.354Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$eGCl7GSAAWFiGqwKShWj0c$edU6jp3bMb0qQrlDYm+BhG6YVbdxh6BbIXth5NrcJbE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "santabanta",
+    "first_name": "",
+    "last_name": "",
+    "email": "santa@123.com",
+    "is_staff": false,
+    "is_active": false,
+    "date_joined": "2026-03-10T16:33:25.723Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$2XYU0OrNCPHULNER8WUMNN$keQexVC/AD9kNLM5M/pfch3g3niDcoV3FF2Ou+Fa8aM=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "penguin",
+    "first_name": "",
+    "last_name": "",
+    "email": "prenting@gmail.com",
+    "is_staff": false,
+    "is_active": false,
+    "date_joined": "2026-03-10T16:36:49.768Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$ZpQrvt3gK9dWeMUOCSZGsz$e9c4sASnyknvEdHb9VQg2C3C9YaxHEAcLfomMGjGpBg=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Shimpy",
+    "first_name": "",
+    "last_name": "",
+    "email": "shimpymittal14@gmail.com",
+    "is_staff": false,
+    "is_active": false,
+    "date_joined": "2026-03-11T14:51:48.215Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$600000$lJv1TUiMunvl6JqAuUwMLG$bFOs7jwNUI9GSQ7/L+h7rcnVfYxLUwkhqfDmdBGDVU8=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "oneuser",
+    "first_name": "",
+    "last_name": "",
+    "email": "gauravsatija7@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-11T18:27:48.995Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "monikasatija"
+    ],
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-03T14:18:34.662Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "monika"
+    ],
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-07T10:32:11.732Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "Monika"
+    ],
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-07T14:46:07.305Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "sonam"
+    ],
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-07T14:47:14.557Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "swati"
+    ],
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-07T16:46:24.043Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "ritika"
+    ],
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-10T12:53:48.311Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "anika"
+    ],
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-10T13:13:44.352Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 8,
+  "fields": {
+    "user": [
+      "santabanta"
+    ],
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-10T16:33:26.647Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 9,
+  "fields": {
+    "user": [
+      "penguin"
+    ],
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-10T16:36:50.359Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 10,
+  "fields": {
+    "user": [
+      "Shimpy"
+    ],
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-11T14:51:48.734Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 11,
+  "fields": {
+    "user": [
+      "oneuser"
+    ],
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-11T18:27:49.547Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.post",
+  "pk": 1,
+  "fields": {
+    "title": "first post",
+    "content": "this is my first post",
+    "author": [
+      "monikasatija"
+    ],
+    "category": 1,
+    "created_at": "2026-03-03T15:14:54.795Z",
+    "updated_at": "2026-03-03T15:14:54.795Z",
+    "is_pinned": false,
+    "is_locked": false,
+    "view_count": 36,
+    "likes": [
+      [
+        "monikasatija"
+      ],
+      [
+        "monika"
+      ],
+      [
+        "swati"
+      ]
+    ]
+  }
+},
+{
+  "model": "community.post",
+  "pk": 2,
+  "fields": {
+    "title": "CTTalk",
+    "content": "Community First Post",
+    "author": [
+      "monika"
+    ],
+    "category": 8,
+    "created_at": "2026-03-03T16:01:29.811Z",
+    "updated_at": "2026-03-03T16:01:29.811Z",
+    "is_pinned": false,
+    "is_locked": false,
+    "view_count": 17,
+    "likes": [
+      [
+        "swati"
+      ]
+    ]
+  }
+},
+{
+  "model": "community.post",
+  "pk": 3,
+  "fields": {
+    "title": "jhjhj",
+    "content": "bnnbvhghgj,hhhjhjkhhkjhkhk  kjkjjljlkkjljj",
+    "author": [
+      "swati"
+    ],
+    "category": 8,
+    "created_at": "2026-03-07T16:54:49.380Z",
+    "updated_at": "2026-03-07T16:54:49.380Z",
+    "is_pinned": false,
+    "is_locked": false,
+    "view_count": 2,
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 4,
+  "fields": {
+    "title": "nothing",
+    "content": "nothing  nothingnothingnothingnothingnothingnothingnothingnothing",
+    "author": [
+      "swati"
+    ],
+    "category": 1,
+    "created_at": "2026-03-07T16:57:44.571Z",
+    "updated_at": "2026-03-07T16:57:44.571Z",
+    "is_pinned": false,
+    "is_locked": false,
+    "view_count": 14,
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 5,
+  "fields": {
+    "title": "Marriage",
+    "content": "What is marriage?????????????",
+    "author": [
+      "monikasatija"
+    ],
+    "category": 2,
+    "created_at": "2026-03-10T02:59:28.745Z",
+    "updated_at": "2026-03-10T02:59:28.746Z",
+    "is_pinned": false,
+    "is_locked": false,
+    "view_count": 3,
+    "likes": []
+  }
+},
+{
+  "model": "community.reply",
+  "pk": 3,
+  "fields": {
+    "post": 1,
+    "author": [
+      "monika"
+    ],
+    "content": "hi monika",
+    "parent": null,
+    "quoted_user": [
+      "monika"
+    ],
+    "created_at": "2026-03-03T15:50:08.013Z",
+    "updated_at": "2026-03-03T15:50:08.013Z",
+    "likes": [
+      [
+        "swati"
+      ]
+    ]
+  }
+},
+{
+  "model": "community.reply",
+  "pk": 5,
+  "fields": {
+    "post": 2,
+    "author": [
+      "monika"
+    ],
+    "content": "secondpost",
+    "parent": null,
+    "quoted_user": null,
+    "created_at": "2026-03-03T16:03:50.022Z",
+    "updated_at": "2026-03-03T16:03:50.022Z",
+    "likes": [
+      [
+        "swati"
+      ]
+    ]
+  }
+},
+{
+  "model": "community.reply",
+  "pk": 6,
+  "fields": {
+    "post": 1,
+    "author": [
+      "swati"
+    ],
+    "content": "nice",
+    "parent": null,
+    "quoted_user": [
+      "monika"
+    ],
+    "created_at": "2026-03-07T16:47:43.563Z",
+    "updated_at": "2026-03-07T16:47:43.563Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.reply",
+  "pk": 7,
+  "fields": {
+    "post": 2,
+    "author": [
+      "swati"
+    ],
+    "content": "gud",
+    "parent": null,
+    "quoted_user": null,
+    "created_at": "2026-03-07T16:53:34.878Z",
+    "updated_at": "2026-03-07T16:53:34.878Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.reply",
+  "pk": 8,
+  "fields": {
+    "post": 2,
+    "author": [
+      "swati"
+    ],
+    "content": "reply on post",
+    "parent": null,
+    "quoted_user": [
+      "monika"
+    ],
+    "created_at": "2026-03-07T16:53:49.379Z",
+    "updated_at": "2026-03-07T16:54:08.890Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.reply",
+  "pk": 9,
+  "fields": {
+    "post": 1,
+    "author": [
+      "sonam"
+    ],
+    "content": "why it is not posting",
+    "parent": null,
+    "quoted_user": [
+      "monika"
+    ],
+    "created_at": "2026-03-08T15:31:29.656Z",
+    "updated_at": "2026-03-08T15:31:29.656Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.reply",
+  "pk": 10,
+  "fields": {
+    "post": 1,
+    "author": [
+      "sonam"
+    ],
+    "content": "focus",
+    "parent": null,
+    "quoted_user": [
+      "swati"
+    ],
+    "created_at": "2026-03-08T15:31:47.289Z",
+    "updated_at": "2026-03-08T15:31:47.289Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.reply",
+  "pk": 11,
+  "fields": {
+    "post": 1,
+    "author": [
+      "sonam"
+    ],
+    "content": "on your",
+    "parent": null,
+    "quoted_user": [
+      "swati"
+    ],
+    "created_at": "2026-03-08T15:32:07.254Z",
+    "updated_at": "2026-03-08T15:32:07.254Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.reply",
+  "pk": 12,
+  "fields": {
+    "post": 1,
+    "author": [
+      "sonam"
+    ],
+    "content": "career",
+    "parent": null,
+    "quoted_user": [
+      "sonam"
+    ],
+    "created_at": "2026-03-08T16:08:46.919Z",
+    "updated_at": "2026-03-08T16:08:46.919Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.reply",
+  "pk": 13,
+  "fields": {
+    "post": 1,
+    "author": [
+      "sonam"
+    ],
+    "content": "dumbyouass",
+    "parent": null,
+    "quoted_user": null,
+    "created_at": "2026-03-08T16:09:26.287Z",
+    "updated_at": "2026-03-08T16:09:26.287Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.reply",
+  "pk": 14,
+  "fields": {
+    "post": 4,
+    "author": [
+      "sonam"
+    ],
+    "content": "donkey",
+    "parent": null,
+    "quoted_user": null,
+    "created_at": "2026-03-08T16:24:04.479Z",
+    "updated_at": "2026-03-08T16:24:04.479Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.reply",
+  "pk": 15,
+  "fields": {
+    "post": 4,
+    "author": [
+      "sonam"
+    ],
+    "content": "bakvas na kar",
+    "parent": null,
+    "quoted_user": [
+      "sonam"
+    ],
+    "created_at": "2026-03-08T16:24:42.091Z",
+    "updated_at": "2026-03-08T16:24:42.091Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.reply",
+  "pk": 16,
+  "fields": {
+    "post": 4,
+    "author": [
+      "sonam"
+    ],
+    "content": "pagal",
+    "parent": null,
+    "quoted_user": [
+      "sonam"
+    ],
+    "created_at": "2026-03-08T16:24:51.918Z",
+    "updated_at": "2026-03-08T16:24:51.919Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.reply",
+  "pk": 18,
+  "fields": {
+    "post": 5,
+    "author": [
+      "monikasatija"
+    ],
+    "content": "This we call that ok",
+    "parent": null,
+    "quoted_user": null,
+    "created_at": "2026-03-10T02:59:50.416Z",
+    "updated_at": "2026-03-10T02:59:50.416Z",
+    "likes": []
+  }
+},
+{
+  "model": "community.notification",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "monikasatija"
+    ],
+    "notification_type": "like",
+    "message": "monika liked your post",
+    "post": 1,
+    "reply": null,
+    "from_user": [
+      "monika"
+    ],
+    "is_read": true,
+    "created_at": "2026-03-03T15:16:36.131Z"
+  }
+},
+{
+  "model": "community.notification",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "monikasatija"
+    ],
+    "notification_type": "reply",
+    "message": "monika replied to your post",
+    "post": 1,
+    "reply": 3,
+    "from_user": [
+      "monika"
+    ],
+    "is_read": false,
+    "created_at": "2026-03-03T15:50:08.060Z"
+  }
+},
+{
+  "model": "community.notification",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "monikasatija"
+    ],
+    "notification_type": "like",
+    "message": "swati liked your post",
+    "post": 1,
+    "reply": null,
+    "from_user": [
+      "swati"
+    ],
+    "is_read": false,
+    "created_at": "2026-03-07T16:47:27.826Z"
+  }
+},
+{
+  "model": "community.notification",
+  "pk": 7,
+  "fields": {
+    "user": [
+      "monikasatija"
+    ],
+    "notification_type": "reply",
+    "message": "swati replied to your post",
+    "post": 1,
+    "reply": 6,
+    "from_user": [
+      "swati"
+    ],
+    "is_read": false,
+    "created_at": "2026-03-07T16:47:43.597Z"
+  }
+},
+{
+  "model": "community.notification",
+  "pk": 8,
+  "fields": {
+    "user": [
+      "monika"
+    ],
+    "notification_type": "like",
+    "message": "swati liked your reply",
+    "post": 1,
+    "reply": 3,
+    "from_user": [
+      "swati"
+    ],
+    "is_read": false,
+    "created_at": "2026-03-07T16:47:47.908Z"
+  }
+},
+{
+  "model": "community.notification",
+  "pk": 9,
+  "fields": {
+    "user": [
+      "monika"
+    ],
+    "notification_type": "like",
+    "message": "swati liked your post",
+    "post": 2,
+    "reply": null,
+    "from_user": [
+      "swati"
+    ],
+    "is_read": false,
+    "created_at": "2026-03-07T16:53:28.588Z"
+  }
+},
+{
+  "model": "community.notification",
+  "pk": 10,
+  "fields": {
+    "user": [
+      "monika"
+    ],
+    "notification_type": "reply",
+    "message": "swati replied to your post",
+    "post": 2,
+    "reply": 7,
+    "from_user": [
+      "swati"
+    ],
+    "is_read": false,
+    "created_at": "2026-03-07T16:53:34.907Z"
+  }
+},
+{
+  "model": "community.notification",
+  "pk": 11,
+  "fields": {
+    "user": [
+      "monika"
+    ],
+    "notification_type": "like",
+    "message": "swati liked your reply",
+    "post": 2,
+    "reply": 5,
+    "from_user": [
+      "swati"
+    ],
+    "is_read": false,
+    "created_at": "2026-03-07T16:53:37.770Z"
+  }
+},
+{
+  "model": "community.notification",
+  "pk": 12,
+  "fields": {
+    "user": [
+      "monika"
+    ],
+    "notification_type": "reply",
+    "message": "swati replied to your post",
+    "post": 2,
+    "reply": 8,
+    "from_user": [
+      "swati"
+    ],
+    "is_read": false,
+    "created_at": "2026-03-07T16:53:49.412Z"
+  }
+},
+{
+  "model": "community.notification",
+  "pk": 13,
+  "fields": {
+    "user": [
+      "monikasatija"
+    ],
+    "notification_type": "reply",
+    "message": "sonam replied to your post",
+    "post": 1,
+    "reply": 9,
+    "from_user": [
+      "sonam"
+    ],
+    "is_read": false,
+    "created_at": "2026-03-08T15:31:29.690Z"
+  }
+},
+{
+  "model": "community.notification",
+  "pk": 14,
+  "fields": {
+    "user": [
+      "monikasatija"
+    ],
+    "notification_type": "reply",
+    "message": "sonam replied to your post",
+    "post": 1,
+    "reply": 10,
+    "from_user": [
+      "sonam"
+    ],
+    "is_read": false,
+    "created_at": "2026-03-08T15:31:47.323Z"
+  }
+},
+{
+  "model": "community.notification",
+  "pk": 15,
+  "fields": {
+    "user": [
+      "monikasatija"
+    ],
+    "notification_type": "reply",
+    "message": "sonam replied to your post",
+    "post": 1,
+    "reply": 11,
+    "from_user": [
+      "sonam"
+    ],
+    "is_read": false,
+    "created_at": "2026-03-08T15:32:07.299Z"
+  }
+},
+{
+  "model": "community.notification",
+  "pk": 16,
+  "fields": {
+    "user": [
+      "monikasatija"
+    ],
+    "notification_type": "reply",
+    "message": "sonam replied to your post",
+    "post": 1,
+    "reply": 12,
+    "from_user": [
+      "sonam"
+    ],
+    "is_read": false,
+    "created_at": "2026-03-08T16:08:46.949Z"
+  }
+},
+{
+  "model": "community.notification",
+  "pk": 17,
+  "fields": {
+    "user": [
+      "monikasatija"
+    ],
+    "notification_type": "reply",
+    "message": "sonam replied to your post",
+    "post": 1,
+    "reply": 13,
+    "from_user": [
+      "sonam"
+    ],
+    "is_read": false,
+    "created_at": "2026-03-08T16:09:26.319Z"
+  }
+},
+{
+  "model": "community.notification",
+  "pk": 18,
+  "fields": {
+    "user": [
+      "swati"
+    ],
+    "notification_type": "reply",
+    "message": "sonam replied to your post",
+    "post": 4,
+    "reply": 14,
+    "from_user": [
+      "sonam"
+    ],
+    "is_read": false,
+    "created_at": "2026-03-08T16:24:04.510Z"
+  }
+},
+{
+  "model": "community.notification",
+  "pk": 19,
+  "fields": {
+    "user": [
+      "swati"
+    ],
+    "notification_type": "reply",
+    "message": "sonam replied to your post",
+    "post": 4,
+    "reply": 15,
+    "from_user": [
+      "sonam"
+    ],
+    "is_read": false,
+    "created_at": "2026-03-08T16:24:42.119Z"
+  }
+},
+{
+  "model": "community.notification",
+  "pk": 20,
+  "fields": {
+    "user": [
+      "swati"
+    ],
+    "notification_type": "reply",
+    "message": "sonam replied to your post",
+    "post": 4,
+    "reply": 16,
+    "from_user": [
+      "sonam"
+    ],
+    "is_read": false,
+    "created_at": "2026-03-08T16:24:51.944Z"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2026-03-03T12:45:30.358Z",
+    "user": [
+      "monikasatija"
+    ],
+    "content_type": [
+      "community",
+      "category"
+    ],
+    "object_id": "1",
+    "object_repr": "Career & Financial Independence",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2026-03-03T12:46:07.678Z",
+    "user": [
+      "monikasatija"
+    ],
+    "content_type": [
+      "community",
+      "category"
+    ],
+    "object_id": "2",
+    "object_repr": "Conditioning & Marriage Pressure",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2026-03-03T12:46:53.977Z",
+    "user": [
+      "monikasatija"
+    ],
+    "content_type": [
+      "community",
+      "category"
+    ],
+    "object_id": "3",
+    "object_repr": "Courage Stories (Small Wins Matter)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2026-03-03T12:47:31.371Z",
+    "user": [
+      "monikasatija"
+    ],
+    "content_type": [
+      "community",
+      "category"
+    ],
+    "object_id": "4",
+    "object_repr": "Health & Self Care",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2026-03-03T12:48:24.103Z",
+    "user": [
+      "monikasatija"
+    ],
+    "content_type": [
+      "community",
+      "category"
+    ],
+    "object_id": "5",
+    "object_repr": "Identity & Self-Discovery",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2026-03-03T12:49:03.608Z",
+    "user": [
+      "monikasatija"
+    ],
+    "content_type": [
+      "community",
+      "category"
+    ],
+    "object_id": "6",
+    "object_repr": "Marriage, In-Laws & Boundaries",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2026-03-03T12:49:37.315Z",
+    "user": [
+      "monikasatija"
+    ],
+    "content_type": [
+      "community",
+      "category"
+    ],
+    "object_id": "7",
+    "object_repr": "Mental Health & Emotional Support",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2026-03-03T12:51:08.589Z",
+    "user": [
+      "monikasatija"
+    ],
+    "content_type": [
+      "community",
+      "category"
+    ],
+    "object_id": "8",
+    "object_repr": "Community Talk",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+}
+]
