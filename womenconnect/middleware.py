@@ -13,6 +13,7 @@ EXEMPT_URLS = [
     '/static/',
     '/media/',
     '/sugaradmin/',
+    '/admin/', 
 ]
 
 class LoginRequiredMiddleware:

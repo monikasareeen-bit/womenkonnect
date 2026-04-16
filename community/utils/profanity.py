@@ -65,6 +65,8 @@ WHITELIST: set[str] = {
     # ... existing entries ...
 
     # ── Hindi/Urdu family terms (common on Indian platforms) ─────────────────
+    'rishte',       # rishte = relationships in Hindi/Urdu
+    'rishtey',      # alternate spelling
         
     'rishta',         # rishta = relationship in Hindi/Urdu
     'rishtey',        # plural
@@ -656,7 +658,7 @@ def _contains_bad_word(normalized: str) -> Optional[str]:
         # is a common short word — prevents 'as','is','us' false positives
         if len(norm_bad) <= 2 and len(normalized) <= 3:
             continue
-        if norm_bad in normalized:
+        if re.search(r'\b' + re.escape(norm_bad) + r'\b', normalized):
             return bad
     return None
 

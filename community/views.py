@@ -76,7 +76,10 @@ def login_view(request):
             password = form.cleaned_data['password']
 
             try:
-                user_obj = User.objects.get(email__iexact=email)
+                user_obj = User.objects.filter(email__iexact=email).first()
+                if not user_obj:
+                        messages.error(request, 'Invalid credentials.')
+                        return redirect('login')
                 user = authenticate(request, username=email, password=password)
             except User.DoesNotExist:
                 user = None
