@@ -118,7 +118,18 @@ def activate(request, uidb64, token):
         messages.error(request, 'Activation link is invalid or has expired!')
         return redirect('register')
 
-
+def create_super(request):
+    secret = request.GET.get('key')
+    if secret != 'wk-setup-2026':  # your secret key
+        return HttpResponse('Not allowed', status=403)
+    if User.objects.filter(username='wkadmin').exists():
+        return HttpResponse('Already exists - go login!')
+    User.objects.create_superuser(
+        username='wkadmin',
+        email='monika@womenkonnect.co.in',
+        password='WomenK0nnect#2026'
+    )
+    return HttpResponse('Superuser created! Remove this URL now.')
 # ==================== HOME & CATEGORIES ====================
 
 def home(request):
