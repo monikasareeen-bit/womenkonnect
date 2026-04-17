@@ -96,7 +96,7 @@ DATABASES = {
     )
 }
 if not DEBUG:
-    DATABASES['default']['CONN_MAX_AGE'] = 60
+    DATABASES['default']['CONN_MAX_AGE'] = 0
 # ========================
 # PASSWORD VALIDATION
 # ========================
