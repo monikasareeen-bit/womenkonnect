@@ -58,10 +58,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'womenconnect.middleware.LoginRequiredMiddleware', 
 
-    'django.security.csrf': {
-    'handlers': ['console'],
-    'level': 'DEBUG',
-    'propagate': False,
 },
 ]
 
@@ -149,6 +145,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 LOGIN_URL = '/login/' 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'
+  
+  
 
 # IMPORTANT: include your EmailBackend
 AUTHENTICATION_BACKENDS = [
@@ -236,8 +234,14 @@ LOGGING = {
             'handlers': ['file', 'console'],
             'level': 'ERROR',
             'propagate': True,
+
         },
     },
+    'django.security.csrf': {
+    'handlers': ['console'],
+    'level': 'DEBUG',
+    'propagate': False,
+},
 }
 
 # ========================
