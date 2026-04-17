@@ -57,6 +57,12 @@ MIDDLEWARE = [
 
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'womenconnect.middleware.LoginRequiredMiddleware', 
+
+    'django.security.csrf': {
+    'handlers': ['console'],
+    'level': 'DEBUG',
+    'propagate': False,
+},
 ]
 
 # ========================
@@ -80,20 +86,21 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'community.context_processors.community_stats',
                 'community.context_processors.global_categories',
+                'django.template.context_processors.csrf',
             ],
         },
     },
 ]
+
 
 # ========================
 # DATABASE
 # ========================
 DATABASES = {
     'default': dj_database_url.parse(
-        config('DATABASE_URL')
+        config("DATABASE_URL")
     )
 }
-
 if not DEBUG:
     DATABASES['default']['CONN_MAX_AGE'] = 60
 # ========================

@@ -93,7 +93,7 @@ def robots_txt(request):
 # ── URL patterns ──────────────────────────────────────────────────────────────
 urlpatterns = [
     path("sugaradmin/", admin.site.urls),
-    path('admin/', admin.site.urls), 
+    #path('admin/', admin.site.urls), 
     path("", include("community.urls")),
 
     # Favicon

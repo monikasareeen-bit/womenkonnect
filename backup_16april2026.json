@@ -1,0 +1,1690 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2026-03-03T12:45:30.358Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "Career & Financial Independence",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2026-03-03T12:46:07.678Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "2",
+    "object_repr": "Conditioning & Marriage Pressure",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2026-03-03T12:46:53.977Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "Courage Stories (Small Wins Matter)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2026-03-03T12:47:31.371Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "4",
+    "object_repr": "Health & Self Care",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2026-03-03T12:48:24.103Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "5",
+    "object_repr": "Identity & Self-Discovery",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2026-03-03T12:49:03.608Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "6",
+    "object_repr": "Marriage, In-Laws & Boundaries",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2026-03-03T12:49:37.315Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "7",
+    "object_repr": "Mental Health & Emotional Support",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2026-03-03T12:51:08.589Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "8",
+    "object_repr": "Community Talk",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2026-04-15T12:18:17.081Z",
+    "user": 2,
+    "content_type": 8,
+    "object_id": "4",
+    "object_repr": "nothing",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2026-04-15T12:18:17.081Z",
+    "user": 2,
+    "content_type": 8,
+    "object_id": "3",
+    "object_repr": "jhjhj",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2026-04-15T12:19:50.953Z",
+    "user": 2,
+    "content_type": 9,
+    "object_id": "3",
+    "object_repr": "Reply by monika on first post",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2026-04-15T12:19:50.953Z",
+    "user": 2,
+    "content_type": 9,
+    "object_id": "5",
+    "object_repr": "Reply by monika on CTTalk",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2026-04-15T12:19:50.953Z",
+    "user": 2,
+    "content_type": 9,
+    "object_id": "6",
+    "object_repr": "Reply by swati on first post",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2026-04-15T12:19:50.953Z",
+    "user": 2,
+    "content_type": 9,
+    "object_id": "7",
+    "object_repr": "Reply by swati on CTTalk",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2026-04-15T12:19:50.953Z",
+    "user": 2,
+    "content_type": 9,
+    "object_id": "8",
+    "object_repr": "Reply by swati on CTTalk",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2026-04-15T12:19:50.953Z",
+    "user": 2,
+    "content_type": 9,
+    "object_id": "9",
+    "object_repr": "Reply by sonam on first post",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2026-04-15T12:19:50.953Z",
+    "user": 2,
+    "content_type": 9,
+    "object_id": "10",
+    "object_repr": "Reply by sonam on first post",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2026-04-15T12:19:50.953Z",
+    "user": 2,
+    "content_type": 9,
+    "object_id": "11",
+    "object_repr": "Reply by sonam on first post",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2026-04-15T12:19:50.953Z",
+    "user": 2,
+    "content_type": 9,
+    "object_id": "12",
+    "object_repr": "Reply by sonam on first post",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2026-04-15T12:19:50.953Z",
+    "user": 2,
+    "content_type": 9,
+    "object_id": "13",
+    "object_repr": "Reply by sonam on first post",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2026-04-15T12:19:50.953Z",
+    "user": 2,
+    "content_type": 9,
+    "object_id": "18",
+    "object_repr": "Reply by monikasatija on Marriage",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2026-04-15T12:25:17.432Z",
+    "user": 2,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "Career & Financial Independence",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Description\", \"Icon\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2026-04-15T12:27:20.214Z",
+    "user": 2,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "Career & Financial Independence",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Description\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2026-04-15T12:28:46.749Z",
+    "user": 2,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "first post",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2026-04-15T12:29:56.377Z",
+    "user": 2,
+    "content_type": 8,
+    "object_id": "5",
+    "object_repr": "Marriage",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2026-04-15T12:29:56.377Z",
+    "user": 2,
+    "content_type": 8,
+    "object_id": "2",
+    "object_repr": "CTTalk",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2026-04-15T12:32:22.087Z",
+    "user": 2,
+    "content_type": 7,
+    "object_id": "8",
+    "object_repr": "Community Talk",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Description\", \"Icon\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2026-04-15T12:38:37.211Z",
+    "user": 2,
+    "content_type": 7,
+    "object_id": "2",
+    "object_repr": "Conditioning & Marriage Pressure",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Description\", \"Icon\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2026-04-15T12:41:30.351Z",
+    "user": 2,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "Courage Stories (Small Wins Matter)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Description\", \"Icon\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2026-04-15T12:43:41.416Z",
+    "user": 2,
+    "content_type": 7,
+    "object_id": "4",
+    "object_repr": "Health & Self Care",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Description\", \"Icon\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2026-04-15T12:46:44.555Z",
+    "user": 2,
+    "content_type": 7,
+    "object_id": "5",
+    "object_repr": "Identity & Self-Discovery",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Description\", \"Icon\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2026-04-15T12:48:49.637Z",
+    "user": 2,
+    "content_type": 7,
+    "object_id": "6",
+    "object_repr": "Pregnancy and Motherhood",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Name\", \"Slug\", \"Description\", \"Icon\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2026-04-15T12:51:12.797Z",
+    "user": 2,
+    "content_type": 7,
+    "object_id": "7",
+    "object_repr": "Divorce & New Beginnings",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Name\", \"Slug\", \"Description\", \"Icon\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2026-04-15T12:52:09.174Z",
+    "user": 2,
+    "content_type": 7,
+    "object_id": "7",
+    "object_repr": "Divorce & New Beginnings",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2026-04-15T12:59:28.515Z",
+    "user": 2,
+    "content_type": 7,
+    "object_id": "7",
+    "object_repr": "Divorce & New Beginnings",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 4,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 4,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 4,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 4,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 5,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 5,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 5,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 5,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 6,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 6,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 6,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 6,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add category",
+    "content_type": 7,
+    "codename": "add_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change category",
+    "content_type": 7,
+    "codename": "change_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete category",
+    "content_type": 7,
+    "codename": "delete_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view category",
+    "content_type": 7,
+    "codename": "view_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add post",
+    "content_type": 8,
+    "codename": "add_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change post",
+    "content_type": 8,
+    "codename": "change_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete post",
+    "content_type": 8,
+    "codename": "delete_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view post",
+    "content_type": 8,
+    "codename": "view_post"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add reply",
+    "content_type": 9,
+    "codename": "add_reply"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change reply",
+    "content_type": 9,
+    "codename": "change_reply"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete reply",
+    "content_type": 9,
+    "codename": "delete_reply"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view reply",
+    "content_type": 9,
+    "codename": "view_reply"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add user profile",
+    "content_type": 10,
+    "codename": "add_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change user profile",
+    "content_type": 10,
+    "codename": "change_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete user profile",
+    "content_type": 10,
+    "codename": "delete_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view user profile",
+    "content_type": 10,
+    "codename": "view_userprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add notification",
+    "content_type": 11,
+    "codename": "add_notification"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change notification",
+    "content_type": 11,
+    "codename": "change_notification"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete notification",
+    "content_type": 11,
+    "codename": "delete_notification"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view notification",
+    "content_type": 11,
+    "codename": "view_notification"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add report",
+    "content_type": 12,
+    "codename": "add_report"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change report",
+    "content_type": 12,
+    "codename": "change_report"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete report",
+    "content_type": 12,
+    "codename": "delete_report"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view report",
+    "content_type": 12,
+    "codename": "view_report"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 49,
+  "fields": {
+    "name": "Can add access attempt",
+    "content_type": 13,
+    "codename": "add_accessattempt"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 50,
+  "fields": {
+    "name": "Can change access attempt",
+    "content_type": 13,
+    "codename": "change_accessattempt"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 51,
+  "fields": {
+    "name": "Can delete access attempt",
+    "content_type": 13,
+    "codename": "delete_accessattempt"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 52,
+  "fields": {
+    "name": "Can view access attempt",
+    "content_type": 13,
+    "codename": "view_accessattempt"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 53,
+  "fields": {
+    "name": "Can add access log",
+    "content_type": 14,
+    "codename": "add_accesslog"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 54,
+  "fields": {
+    "name": "Can change access log",
+    "content_type": 14,
+    "codename": "change_accesslog"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 55,
+  "fields": {
+    "name": "Can delete access log",
+    "content_type": 14,
+    "codename": "delete_accesslog"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 56,
+  "fields": {
+    "name": "Can view access log",
+    "content_type": 14,
+    "codename": "view_accesslog"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 57,
+  "fields": {
+    "name": "Can add access failure",
+    "content_type": 15,
+    "codename": "add_accessfailurelog"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 58,
+  "fields": {
+    "name": "Can change access failure",
+    "content_type": 15,
+    "codename": "change_accessfailurelog"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 59,
+  "fields": {
+    "name": "Can delete access failure",
+    "content_type": 15,
+    "codename": "delete_accessfailurelog"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 60,
+  "fields": {
+    "name": "Can view access failure",
+    "content_type": 15,
+    "codename": "view_accessfailurelog"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$jjmKlmmsZMnzeNnH8OiUuA$iw9Jn0U5mgWTil/VL2GVn5deXSwlcyHTmjTIP9vUxE8=",
+    "last_login": "2026-03-10T17:58:11.200Z",
+    "is_superuser": true,
+    "username": "monikasatija",
+    "first_name": "",
+    "last_name": "",
+    "email": "monikasareeen@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-03-03T08:54:11.932Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$k8H4FKwlPTiuyuXIKu8Ay7$mC0tqVRArGp8wUoPeT0+RakDm8AlAr6A6giIIJH8L9Q=",
+    "last_login": "2026-04-16T03:37:49.577Z",
+    "is_superuser": true,
+    "username": "monika",
+    "first_name": "",
+    "last_name": "",
+    "email": "monika.satija9883@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-03-03T15:12:26.705Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$aoRtDBa74ssqutPCOkl4fF$WQYVw/bSrCdcvszTX61V2KjIg2oH1kWF/VPgvBZwOKk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Monika",
+    "first_name": "",
+    "last_name": "",
+    "email": "monikas@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-07T14:46:06.021Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$jz9AL4BCRIlZ23oETuGbQJ$zfKbWHs8k0trr3ISxyztRzEVlkoA8fKvlQAkCMV9vtQ=",
+    "last_login": "2026-03-07T14:49:39.293Z",
+    "is_superuser": false,
+    "username": "sonam",
+    "first_name": "",
+    "last_name": "",
+    "email": "sonam@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-07T14:47:13.155Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$lJPfc4frwn4SUEmUl1upXB$PfnnnN8vpeEww4WmEhlvPC5Ivwdn3g03bM4XEKNhAu4=",
+    "last_login": "2026-03-07T16:47:17.947Z",
+    "is_superuser": false,
+    "username": "swati",
+    "first_name": "",
+    "last_name": "",
+    "email": "swatimittal7@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-07T16:46:23.086Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$9fnv1b0ZHdASBE3m0zXQzs$B3crhCoZEtNZ1leogeJx0aDINqNt+6gmbaBsYjxBQUo=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "ritika",
+    "first_name": "",
+    "last_name": "",
+    "email": "ritika28@gmail.com",
+    "is_staff": false,
+    "is_active": false,
+    "date_joined": "2026-03-10T12:53:47.263Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$ztb7u2ZyYM96ALbviFGkuO$L7qrhilPAmay8tpSk1meaSa4u9I6z6W2iZQdGLnyaaU=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "anika",
+    "first_name": "",
+    "last_name": "",
+    "email": "anika@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-10T13:13:43.354Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$eGCl7GSAAWFiGqwKShWj0c$edU6jp3bMb0qQrlDYm+BhG6YVbdxh6BbIXth5NrcJbE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "santabanta",
+    "first_name": "",
+    "last_name": "",
+    "email": "santa@123.com",
+    "is_staff": false,
+    "is_active": false,
+    "date_joined": "2026-03-10T16:33:25.723Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 9,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$2XYU0OrNCPHULNER8WUMNN$keQexVC/AD9kNLM5M/pfch3g3niDcoV3FF2Ou+Fa8aM=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "penguin",
+    "first_name": "",
+    "last_name": "",
+    "email": "prenting@gmail.com",
+    "is_staff": false,
+    "is_active": false,
+    "date_joined": "2026-03-10T16:36:49.768Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 10,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$ZpQrvt3gK9dWeMUOCSZGsz$e9c4sASnyknvEdHb9VQg2C3C9YaxHEAcLfomMGjGpBg=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Shimpy",
+    "first_name": "",
+    "last_name": "",
+    "email": "shimpymittal14@gmail.com",
+    "is_staff": false,
+    "is_active": false,
+    "date_joined": "2026-03-11T14:51:48.215Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 11,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$lJv1TUiMunvl6JqAuUwMLG$bFOs7jwNUI9GSQ7/L+h7rcnVfYxLUwkhqfDmdBGDVU8=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "oneuser",
+    "first_name": "",
+    "last_name": "",
+    "email": "gauravsatija7@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-11T18:27:48.995Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "community",
+    "model": "category"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "community",
+    "model": "post"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "community",
+    "model": "reply"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "community",
+    "model": "userprofile"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "community",
+    "model": "notification"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 12,
+  "fields": {
+    "app_label": "community",
+    "model": "report"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 13,
+  "fields": {
+    "app_label": "axes",
+    "model": "accessattempt"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 14,
+  "fields": {
+    "app_label": "axes",
+    "model": "accesslog"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 15,
+  "fields": {
+    "app_label": "axes",
+    "model": "accessfailurelog"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "xwc9lb0lti2qyulp8d33tg4enmczn383",
+  "fields": {
+    "session_data": ".eJxVi0sKwjAQQO-StZRJMp1Wl0LPESafIUFTwTQLEe-uQhe6fZ-ncty37HpLd1eiOimjDr_Mc7ik9SvCrda-lu0x7KwNS-VyPe_F35a55c8jhNYCzBHETGOwDGBRk2EQiSxy1AkpeCbSKMlOQl57CQlnNBHGqF5vhZo0hg:1wCyYw:EipjnRSx9S3C50GRWHk0fwtkL6IZc18v-Zz-QtxnbVU",
+    "expire_date": "2026-04-29T11:37:42.300Z"
+  }
+},
+{
+  "model": "community.category",
+  "pk": 1,
+  "fields": {
+    "name": "Career & Financial Independence",
+    "slug": "career-financial-independence",
+    "description": "Welcome to Career & Financial Independence — Let's Build Our Future Together\r\n\r\n\r\nWhether you're just starting out, switching careers, navigating the gender pay gap, or working towards financial freedom — this is your space.\r\nToo often, women are discouraged from talking openly about money, ambition, and career goals. Here, we do the opposite. This community exists so you can ask the questions you were told not to ask, share wins without apology, and get real advice from women who've been there.\r\nHere's what this space is for:\r\n\r\nNegotiating your salary and knowing your worth\r\nBuilding savings, investments, and financial security\r\nCareer pivots, promotions, and navigating workplace challenges\r\nSide hustles, freelancing, and entrepreneurship\r\nPractical budgeting and money management tips\r\n\r\nNo question is too basic. No goal is too big.\r\nDrop a comment and introduce yourself — where are you in your career journey right now?",
+    "icon": "💼",
+    "color": "#FF69B4",
+    "created_at": "2026-03-03T12:45:30.351Z"
+  }
+},
+{
+  "model": "community.category",
+  "pk": 2,
+  "fields": {
+    "name": "Conditioning & Marriage Pressure",
+    "slug": "conditioning-marriage-pressure",
+    "description": "\"You weren't born wanting to get married. You were taught to.\"\r\nFrom the time you could understand language, you were being prepared.\r\nFairy tales ended at the wedding. Relatives asked \"when will you settle down?\" before you'd even figured out who you were. Mothers planned futures for daughters that started and ended with a husband. Aunties measured your worth in terms of your \"marriageability.\"\r\nNobody asked you what you wanted. They assumed they already knew.\r\nThis is conditioning — the quiet, constant process of teaching a person to want what society needs them to want. And when it comes to marriage, women especially are conditioned deeply and early.\r\nYou're told marriage is the goal, not an option.\r\nYou're told being unmarried past a certain age means failure.\r\nYou're told your needs, your career, your ambitions are secondary — things to manage around a marriage, not build a life around.\r\nAnd the cruelest part? Most of us don't even notice it happening. By the time the pressure arrives — from family, from culture, from your own inner voice — it feels like your own desire.\r\nThat's how good the conditioning is.\r\nThis series is about noticing it. Naming it. And reclaiming the choice that was quietly taken from you.\r\nBecause you deserve to decide about marriage from a place of genuine wanting — not fear, not guilt, not a deadline someone else set for your life.\r\nFollow along. This conversation is long overdue.\r\n\r\nSave this if it resonates. Share it with someone who needs to hear it.",
+    "icon": "⚖️",
+    "color": "#FF69B4",
+    "created_at": "2026-03-03T12:46:07.673Z"
+  }
+},
+{
+  "model": "community.category",
+  "pk": 3,
+  "fields": {
+    "name": "Courage Stories (Small Wins Matter)",
+    "slug": "courage-stories-small-wins-matter",
+    "description": "Nobody talks about the small kind of courage.\r\nNot the kind that makes headlines.\r\nNot the kind that gets applause.\r\nThe kind that happens quietly — when no one is watching.\r\nLike texting back after weeks of silence because you finally found the words.\r\nLike saying \"I'm not okay\" to someone you usually pretend to be fine around.\r\nLike going to that class alone, even though every part of you wanted an excuse to skip.\r\nLike choosing yourself — just once — instead of shrinking to keep the peace.\r\nThat's courage too.\r\nWe've been sold this idea that bravery looks big. That it roars. That it arrives perfectly dressed, certain of itself, ready for the moment.\r\nBut most real courage? It whispers. It trembles. It shows up with shaking hands and does the thing anyway.\r\nThe conversation you finally had.\r\nThe boundary you held even when it felt selfish.\r\nThe dream you admitted out loud for the first time.\r\nThe day you decided your comfort mattered.\r\nThese are not small things.\r\nThese are the moments that quietly change the shape of your life.\r\nThis series is for those moments. The ones you almost didn't count. The wins you dismissed with \"it's not a big deal.\"\r\nIt is a big deal.\r\nYou are a big deal.\r\nWelcome to Courage Stories — where small wins get the recognition they always deserved.\r\nDrop a 🔥 if you've had a small-courage moment this week. I want to hear it.\r\n\r\nSave this for the days you forget that showing up counts.",
+    "icon": "🔥",
+    "color": "#FF69B4",
+    "created_at": "2026-03-03T12:46:53.973Z"
+  }
+},
+{
+  "model": "community.category",
+  "pk": 4,
+  "fields": {
+    "name": "Health & Self Care",
+    "slug": "health-self-care",
+    "description": "Self care isn't a spa day. It's the hard, unglamorous work of keeping yourself alive.\r\nNot the candles.\r\nNot the face mask.\r\nNot the aesthetically pleasing smoothie bowl.\r\nReal self care looks like this —\r\nDrinking water before you reach for your phone.\r\nSleeping even when your to-do list isn't done.\r\nSaying no to something that drains you, without explaining yourself.\r\nGoing to the doctor you've been avoiding for six months.\r\nEating a real meal instead of surviving on chai and anxiety.\r\nTaking your medicine. Consistently. Without guilt.\r\nThat's the self care nobody posts about.\r\nBecause it doesn't look pretty. It looks like discipline on bad days. It looks like choosing yourself when you're exhausted and every other option feels easier.\r\nWe live in bodies that carry us through everything — every heartbreak, every deadline, every sleepless night, every version of ourselves we've ever been.\r\nAnd most of us treat our bodies like an afterthought.\r\nHealth isn't just the absence of illness. It's the daily, quiet act of showing up for yourself — before you show up for anyone else.\r\nYou cannot pour from empty. You cannot show up fully when you're running on fumes and ignoring every signal your body sends you.\r\nThis series is about coming back to yourself.\r\nNot perfectly. Not all at once.\r\nJust one small, intentional act at a time.\r\nBecause you deserve the same care you so freely give to everyone else.\r\nWhat's one small thing you did for your health today? Tell me below. 👇\r\n\r\nSave this as your reminder. Your health is not a luxury — it's the foundation of everything.",
+    "icon": "🌿",
+    "color": "#FF69B4",
+    "created_at": "2026-03-03T12:47:31.368Z"
+  }
+},
+{
+  "model": "community.category",
+  "pk": 5,
+  "fields": {
+    "name": "Identity & Self-Discovery",
+    "slug": "identity-self-discovery",
+    "description": "At some point, you stopped asking yourself what you wanted. You just started becoming what everyone needed.\r\nThink about it.\r\nThe daughter who was always responsible.\r\nThe friend who was always available.\r\nThe girl who was always agreeable.\r\nThe woman who made herself smaller so others could feel bigger.\r\nRole after role after role.\r\nAnd somewhere in the middle of all that performing — you lost the thread back to yourself.\r\nYou don't even know when it happened. There was no single moment. Just a slow, quiet drift. Years of \"I'm fine.\" Years of adjusting. Years of becoming so good at reading what others needed that you forgot to ask what you need.\r\nAnd now sometimes you sit alone and wonder — who am I, actually? Outside of what I do for people? Outside of what they expect from me?\r\nThat question isn't a crisis.\r\nThat question is the beginning.\r\nIdentity isn't something you find once and keep forever. It's something you return to. Something you unlearn and rebuild. Something that asks you — again and again — to be honest about what fits and what never really did.\r\nWho are you when no one is watching?\r\nWhat do you love that has nothing to do with being useful?\r\nWhat have you been carrying that was never yours to begin with?\r\nThis series is about those questions.\r\nNot to overwhelm you — but to walk back to yourself, one honest conversation at a time.\r\nBecause the most important relationship you will ever have is the one you have with yourself.\r\nAnd it's never too late to start getting to know her.\r\nWhat's one thing you know to be deeply, truly yours — a value, a dream, a way of being? Share below. 👇\r\n\r\nSave this if you've ever felt like a stranger to yourself. You're not lost — you're just finding your way back.",
+    "icon": "🪞",
+    "color": "#FF69B4",
+    "created_at": "2026-03-03T12:48:24.098Z"
+  }
+},
+{
+  "model": "community.category",
+  "pk": 6,
+  "fields": {
+    "name": "Pregnancy and Motherhood",
+    "slug": "pregnancy-and-motherhood",
+    "description": "“Ek Nayi Zindagi… Aur Ek Nayi Main”\r\n\r\nPregnancy sirf ek phase nahi hota…\r\nye ek poori duniya badalne ka ehsaas hota hai।\r\n\r\nJab pehli baar pata chalta hai ki tumhare andar ek chhoti si jaan hai,\r\ntoh darr bhi hota hai… aur ek ajeeb si khushi bhi।\r\n\r\nKabhi bina wajah aansu aate hain,\r\nkabhi chhoti si baat pe hasi rukti nahi…\r\nhormones bolte hain log—\r\npar sach toh ye hai ki dil dheere dheere maa ban raha hota hai।\r\n\r\nRaat ko neend kam aati hai,\r\npar sapne zyada aate hain…\r\nus chhoti si muskaan ke,\r\njo abhi duniya mein aayi bhi nahi।\r\n\r\nAur phir ek din…\r\njab tum usse apni baahon mein pakadti ho,\r\ntab samajh aata hai—\r\ntum sirf ek baby ko janam nahi deti…\r\ntum ek nayi khud ko janam deti ho।\r\n\r\nMotherhood perfect nahi hota,\r\npar sach mein…\r\nye sabse khoobsurat journey hoti hai ❤️",
+    "icon": "🤰👶",
+    "color": "#FF69B4",
+    "created_at": "2026-03-03T12:49:03.603Z"
+  }
+},
+{
+  "model": "community.category",
+  "pk": 7,
+  "fields": {
+    "name": "Divorce & New Beginnings",
+    "slug": "divorce-new-beginnings",
+    "description": "“Starting Over Isn’t Starting From Zero”\r\n\r\nDivorce is not just the end of a relationship.\r\nIt’s the end of plans, habits, and a life you once thought was permanent.\r\n\r\nIt can feel like everything has fallen apart—\r\nlike you’re standing in the middle of a life you don’t recognize anymore.\r\n\r\nThere will be quiet moments that feel too loud,\r\nand memories that show up uninvited.\r\n\r\nBut starting over doesn’t mean you’ve lost everything.\r\nIt means you’re finally letting go of what wasn’t working.\r\n\r\nYou carry forward your strength, your lessons, and your courage.\r\nThat’s not nothing—that’s your foundation.\r\n\r\nSome days will be heavy.\r\nSome days will feel hopeful.\r\n\r\nBoth matter.\r\n\r\nBecause little by little, you begin again—\r\nnot as the person you were before,\r\nbut as someone stronger, wiser, and more aware of what you truly deserve.\r\n\r\nDivorce closed one chapter.\r\nBut it also gave you something powerful—\r\na chance to write the next one your way.",
+    "icon": "💔🌱",
+    "color": "#FF69B4",
+    "created_at": "2026-03-03T12:49:37.310Z"
+  }
+},
+{
+  "model": "community.category",
+  "pk": 8,
+  "fields": {
+    "name": "Community Talk",
+    "slug": "community-talk",
+    "description": "Welcome to Community Talk — This Is Your Space to Be Heard\r\n\r\nThis is the heart of WomenKonnect.\r\nCommunity Talk is where we come together — not just to talk about serious topics, but to simply connect as women. Share what's on your mind, celebrate small wins, vent about a tough day, or just say hello.\r\nThis space is for:\r\n\r\nEveryday conversations and real talk\r\nSharing experiences that don't fit anywhere else\r\nFinding your people and building friendships\r\nAsking for advice — big or small\r\nUplifting each other just because\r\n\r\nThere are no wrong topics here. If it matters to you, it matters here.\r\nTo get us started — introduce yourself! Tell us your name, where you're from, and one thing that made you smile this week. We'd love to meet you. 💬",
+    "icon": "🗣️",
+    "color": "#FF69B4",
+    "created_at": "2026-03-03T12:51:08.582Z"
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-03T14:18:34.662Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 2,
+  "fields": {
+    "user": 2,
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-07T10:32:11.732Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 3,
+  "fields": {
+    "user": 3,
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-07T14:46:07.305Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 4,
+  "fields": {
+    "user": 4,
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-07T14:47:14.557Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 5,
+  "fields": {
+    "user": 5,
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-07T16:46:24.043Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 6,
+  "fields": {
+    "user": 6,
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-10T12:53:48.311Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 7,
+  "fields": {
+    "user": 7,
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-10T13:13:44.352Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 8,
+  "fields": {
+    "user": 8,
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-10T16:33:26.647Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 9,
+  "fields": {
+    "user": 9,
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-10T16:36:50.359Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 10,
+  "fields": {
+    "user": 10,
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-11T14:51:48.734Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.userprofile",
+  "pk": 11,
+  "fields": {
+    "user": 11,
+    "bio": "",
+    "profile_picture": "",
+    "is_verified_woman": false,
+    "joined_date": "2026-03-11T18:27:49.547Z",
+    "location": "",
+    "website": ""
+  }
+},
+{
+  "model": "community.post",
+  "pk": 6,
+  "fields": {
+    "title": "Career mein aage jaana hai — par pehle ghar bhi toh sambhalna hai.",
+    "content": "Ek din ka scene imagine karo. Subah uthke tiffin banao, school drop karo, office pohoncho, back-to-back meetings survive karo, shaam ko ghar aao — aur tab shuru hoti hai doosri shift. Khana. Homework. Laundry. Dishes. Aur yeh sab karne ke baad, jab sab so jaate hain — tab kahin aap apne career ke baare mein sochti hain. Woh course jo complete nahi hua. Woh promotion jo maangni thi. Woh idea jo dimaag mein hai par kabhi bahar nahi aaya.\r\n\r\nYeh sirf aapki story nahi hai. Yeh karoron women ki story hai.\r\n\r\n\"Hamara rasta sirf lamba nahi hai — hamara rasta double shift wala hai. Aur phir bhi hum chal rahi hain.\"\r\nSociety ne yeh ek silent agreement bana li hai ki ghar ki zimmedaari by default woman ki hai. Aur career? Woh \"extra\" hai. Luxury hai. Jaise ambition koi selfishness ho. Jaise apne liye kuch chahna, ghar ke baaki logo se kuch \"chheenna\" ho.\r\n\r\nPar yeh sach nahi hai. Aur hume yeh bolna band karna hoga khud ko.\r\n\r\nThe real picture\r\nStudies kehti hain ki working women ghar pe average 4–5 ghante unpaid domestic work karti hain daily — apne male counterparts ke comparison mein jo karte hain roughly 1–2 ghante. Career mein same starting point se bhi, hum ek invisible weight ke saath daud rahi hain. Aur phir log poochte hain — \"aage kyun nahi badhi abhi tak?\"\r\n\r\nToh ab sawaal yeh nahi hai ki \"career kaise grow karein\" — sawaal yeh hai ki itne sab ke beech mein, apne liye jagah kaise nikaalein.\r\n\r\nKuch cheezein jo actually kaam karti hain —\r\n\r\n1.  Apna time publicly protect karo Agar aap 8–9 pm study ya work karna chahti hain, toh woh block calendar pe daalein — aur ghar mein bhi bolo. \"Yeh mera time hai.\" Yeh selfish nahi, yeh survival hai.\r\n\r\n2. Ghar ki zimmedaari redistribute karo — negotiate karo Partner hai toh conversation karo. Bacche bade hain toh unhe involve karo. Yeh unki bhi zimmedaari hai. Hum akele sab karne ki \"superhero\" image ko thoda retire karna hoga.\r\n\r\n3. Progress ko micro mein dekhna seekho Bade goals overwhelm karte hain jab time kam ho. Ek choti cheez — ek course module, ek email, ek connection — kafi hai. Compounding kaam karta hai careers mein bhi.\r\n\r\n4. Apni wins track karo — even the tiny ones Ek \"brag doc\" banao. Aaj aapne kya kiya jo worth noting hai? Jab aap exhausted hoti hain aur lagta hai \"kuch nahi hua\" — yeh doc aapko yaad dilaata hai ki kitna ho raha hai.\r\n\r\n5. Guilt ko data mat banne do. Guilt ek feeling hai — fact nahi. Yeh feeling aapko nahi batati ki aap buri maa hain, buri behen hain, buri bahu hain. Yeh sirf batati hai ki aapko bahut zyada expect kiya gaya hai.\r\n\r\nCareer growth sirf promotions aur salaries nahi hai. Kabhi kabhi growth yeh hai ki aap ek din apne liye 30 minutes nikaalpaayi — bina guilt ke. Woh bhi progress hai. Woh bhi count karta hai.\r\n\r\nAur agar aaj woh bhi nahi ho paya — kal hoga. Aap jaari hain. Yeh kaafi hai.\r\n\r\n\"Tumhara rasta lamba zaroor hai — par tum akeli nahi chal rahi.\"",
+    "author": 2,
+    "category": 1,
+    "created_at": "2026-04-16T03:53:15.075Z",
+    "updated_at": "2026-04-16T03:54:52.277Z",
+    "is_pinned": false,
+    "is_locked": false,
+    "view_count": 2,
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 7,
+  "fields": {
+    "title": "Community Talk Yahan koi performance nahi — bas aapke aur mere jaise sab...",
+    "content": "Ek jagah jahan \"I'm fine\" bolne ki zaroorat nahi.\r\n\r\nKabhi aisa hua hai ki kuch feel hua — khushi, frustration, confusion, ya sirf ek weird lonely feeling — aur samajh nahi aaya kise bolein? Family samjhegi nahi. Friends busy hain. Partner ke saath explain karna bahut energy maangta hai. Aur social media pe toh sirf highlights hi daalte hain na — woh wali real baat wahan jaati nahi.\r\n\r\nUsi ke liye yeh jagah hai.\r\n\r\n\"Koi bhi topic chota nahi hota — agar woh aapko feel ho raha hai, toh woh matter karta hai.\"\r\nYahan aap woh sab share kar sakti hain jo baaki jagah \"fit\" nahi hota. Aaj ka ek chota sa win jo aapko bahut bada laga — share karo. Ek din jo bohot bura gaya — vent karo. Koi sawaal jo poochne mein sharam aa rahi hai — poochho. Ya bas itna likhna hai ki \"hello, main yahan hoon\" — woh bhi welcome hai.\r\n\r\nYeh jagah hai\r\nReal baatein karne ke liye. Apne jaisi log dhundhne ke liye. Advice maangne ke liye — bina judge hue. Khud ko thoda halka feel karne ke liye. Aur kabhi kabhi, sirf yeh jaanne ke liye ki aap akeli nahi hain.\r\n\r\nHum sab bahut saari cheezein ek saath carry karti hain — ghar, kaam, rishte, sapne, thakaan. Aur hum mein se bahut saari log itni silently carry karti hain ki baaki sab ko lagta hai sab theek hai. Yahan woh silence tod sakte hain.\r\n\r\n✦\r\nKhushi share karo\r\nChoti ho ya badi — celebrate karo. Yahan log genuinely khush honge tumhare liye.\r\n\r\n✦\r\nVent karo, freely\r\nBura din tha? Koi baat nahi. Yahan sunne wale hain — fix karne ki zaroorat nahi.\r\n\r\n✦\r\nAdvice maango\r\nKoi bhi sawaal \"too small\" nahi. Life ke sawaalon ka koi right size nahi hota.\r\n\r\n✦\r\nBas hello bolo\r\nSirf connect karna hai? Woh bhi kaafi hai. Naye log milte hain yahan.\r\n\r\nEk rule hai yahan — koi judgment nahi. Hum sab apni apni life mein figure it out kar rahi hain. Koi expert nahi, koi perfect nahi. Bas ek doosre ke saath thodi der ke liye honest ho jaana — yeh bhi bahut hota hai.\r\n\r\nShuruwaat karte hain — introduce yourself\r\n01 Aap kahan se ho aur abhi life mein kya chal raha hai?\r\n02 Ek cheez jo aapko genuinely khush karti hai — badi ya choti, kuch bhi.\r\n03 Aap yahan kya dhundh rahi hain — dosti, advice, ya sirf ek jagah exist karne ke liye?\r\n\"Aap jaise hain — waise hi welcome hain yahan.\"",
+    "author": 2,
+    "category": 8,
+    "created_at": "2026-04-16T05:42:11.375Z",
+    "updated_at": "2026-04-16T05:43:11.551Z",
+    "is_pinned": false,
+    "is_locked": false,
+    "view_count": 2,
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 8,
+  "fields": {
+    "title": "Kisne bola tha tumhe chahiye? Ya bas... lagta tha chahiye?",
+    "content": "Ek baar seriously socho —\r\nPehli baar shaadi ka pressure kab feel hua? Aur kahan se aaya?\r\nKoi ek din nahi tha. Koi announcement nahi thi. Bas ek din realize hua ki yeh anxiety — yeh \"abhi nahi toh kab\" wali feeling — kabse tumhari apni ban gayi?\r\nWoh bani nahi thi. Dali gayi thi.\r\nKisi ne directly nahi kaha. Par kisi shaadi mein logo ki nazrein tumpe thodi zyada rukne lagi. Ghar mein ek \"tere liye rishta aaya tha\" wala casual sentence jo itna casual tha hi nahi. Ek birthday jo celebration se zyada deadline lagni lagi. Ek dost ki engagement jiske baad sabne tumhari taraf dekha — congratulations wali nazar se nahi, abhi tak nahi? wali nazar se.\r\nBoond boond. Saal dar saal.\r\nJab tak tumhe pata chala — woh darr tumhara apna lag raha tha. Woh urgency tumhari apni lag rahi thi. Akele reh jaane ka, peeche reh jaane ka, kuch miss kar jaane ka darr — sab tumhara apna.\r\nYahi toh conditioning ka kaam hai. Woh tumse permission nahi maangti. Woh seedha tumhare andar nahi aati. Woh itni dheere aati hai ki jab tak settle hoti hai — tumhe lagta hai tum khud yahi chahti thi.\r\nAur sabse mushkil hissa?\r\nYeh sab karne wale log tumse pyaar karte hain. Genuinely. Woh protect karna chahte hain tumhe. Unhe bhi yahi sikhaya gaya tha — unhe bhi yahi weight diya gaya tha. Woh bas wahi pass on kar rahe hain jo unhe mila tha.\r\nPar pyaar hone se cheez harmless nahi ho jaati.\r\nKyunki kahin na kahin, ek sawaal jo sirf tumhara hona chahiye tha —\r\nKya main yeh chahti hoon? Kya main is insaan ke saath yeh zindagi chahti hoon?\r\n— woh sawaal kabka replace ho chuka tha iss sawaal se:\r\n\"Kab karogi? Aur kya wait kar rahi ho?\"\r\nWanting ka step skip hi ho gaya.\r\nToh iss series mein shaadi, relationships, timelines — sab aayega. Par shuru hoga yahan se. Ek seedha sawaal:\r\nYeh tumhari genuine wanting hai — ya woh darr hai jo wanting jaisa feel hota hai?\r\nJawab dena zaroori nahi abhi. Par is sawaal ke saath baitho. Sach mein baitho.\r\nKyunki yahan se shuru hoti hai tum",
+    "author": 2,
+    "category": 2,
+    "created_at": "2026-04-16T05:46:18.750Z",
+    "updated_at": "2026-04-16T05:46:18.750Z",
+    "is_pinned": false,
+    "is_locked": false,
+    "view_count": 1,
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 9,
+  "fields": {
+    "title": "Ek Sawal - Khudse",
+    "content": "Agar aaj — sirf aaj — tumhe koi chai nahi banani hoti. Koi tiffin pack nahi karna hota. Koi \"mummy yeh kahan hai\" nahi bolta. Koi mood manage nahi karna hota kisi ka.\r\nTum kya karti?\r\nRuko. Sochne do.\r\n\r\n...\r\n\r\nYaad bhi hai na? Ki tum kya karti thi. Ki tumhe kya pasand tha. Ki tumhara ek alag hi world tha ek time pe.\r\nYa itna waqt ho gaya hai ki ab woh sawaal hi ajnabi lagta hai?\r\n\r\nYeh ghar ke kaam chote lagte hain bahar se.\r\nChai. Khana. Bacho ka homework. Sasural ki expectations. Relatives ki opinions. Pati ka mood. Sab ka sab simultaneously.\r\nAur jab thak jaao — jab ek ghante ki zaroorat ho sirf apne liye — tab sun'ne ko milta hai:\r\n\"Aur kya chahiye tujhe? Ghar hai, parivar hai, sab hai.\" Jaise \"sab hai\" matlab hai ki tum complete ho. Jaise tumhari existence ka purpose fulfill ho gaya. Jaise tum ek aurat nahi — ek system ho. Jo 24/7 run karta hai. Bina maintenance ke. Bina off-day ke.\r\n\r\nPar suno —\r\n\r\nJo aurat bacho ko sambhalte sambhalte ek industry run kar sakti hai.\r\nJo in-laws ki demands manage karte karte ek country manage kar sakti hai.\r\nJo sab ka emotional labor uthate uthate mountains hilane ki taakat rakhti hai —\r\nWoh sirf isliye nahi ruk gayi kyunki use \"nahi aata.\"\r\nWoh ruki hai kyunki usse kisi ne bataya hi nahi ki rukna zaroori nahi.\r\nUski energy — woh sab jo ghar ki chaar deewaaron mein kho jaati hai roz — woh kisi aur cheez pe lagti toh duniya alag hoti.\r\n\r\nToh yeh series usi ke liye hai.\r\nPehle — khud samajhna ki main kaun hoon in sab roles ke baad bhi.\r\nPhir — dheere dheere — duniya ko ehsaas dilana.\r\nYahi courage hai. Sabse bada wala.\r\nApni zindagi wapas maangna — uss ghar mein rehte hue bhi jahan sab samajhte hain ki tumhe aur kya chahiye.\r\n🔥 drop karo agar kabhi tumne bhi yeh sawaal khud se puchha ho — main kaun hoon? Sirf yeh sab ke alawa?",
+    "author": 2,
+    "category": 3,
+    "created_at": "2026-04-16T06:10:27.454Z",
+    "updated_at": "2026-04-16T06:10:27.454Z",
+    "is_pinned": false,
+    "is_locked": false,
+    "view_count": 1,
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 10,
+  "fields": {
+    "title": "Divorce-An End and Also A New Beginning...",
+    "content": "Divorce se khatam kya hua?\r\nEk chapter khatam hua. Aur haan — woh chapter sirf ek relationship nahi tha.\r\nWoh woh subah thi jo tum dono ki thi. Woh plans the jo kabhi bolе nahi gaye par the. Woh aadat thi kisi ki presence ki — chahe woh presence healthy nahi thi tab bhi. Woh future tha jo tumne socha tha — jo shayad kabhi tumhara tha hi nahi, par tumne uske liye khud ko diya tha poora.\r\nYeh sab khatam hua. Aur yeh dard real hai. Isse chota mat karo. Isse \"move on\" ke naam pe jaldi mein mat dabaao.\r\n\r\nPar ek baat aur bhi sach hai.\r\nJo tum aaj ho — yeh zero nahi hai.\r\nZero woh hoti jo kuch seekhi hi nahi. Zero woh hoti jisne khud ko kabhi jaana hi nahi. Zero woh hoti jisne yeh faisla karne ki himmat hi nahi dikhai.\r\nTum woh nahi ho.\r\nTum woh ho jisne ek zindagi banayi. Phir dekha ki woh zindagi kaam nahi kar rahi. Phir — aur yeh sabse mushkil hissa hai — usse jaane diya.\r\nYeh strength hai. Chahe abhi aisa feel na ho.\r\n\r\nKuch din bahut bhaari honge.\r\nAkеlapan aisa hoga jo pehle kabhi feel nahi kiya. Chhoti chhoti cheezein — ek gaana, ek jagah, ek waqt ka khana — achanak bahut kuch yaad dila dengi.\r\nLog opinions denge. Kuch sympathetic honge. Kuch judgmental. Kuch dono ek saath.\r\nAur tum andar se ek sawaal se lad rahi hogi —\r\nAb kya?\r\n\r\nAb yeh —\r\nPehli baar — shayad bahut time baad — tumhari zindagi sirf tumhari hai.\r\nKoi aise future ke liye plan nahi karna jisme tumhara mann nahi tha. Koi aise insaan ko khush karne ki koshish nahi jiske liye tum khud ko kho rahi thi. Koi compromise nahi jo sirf tum kar rahi thi — akele.\r\nYeh freedom overwhelming lagti hai pehle. Lagti hai — kyunki hoti hai.\r\nPar yeh freedom hai. Real wali.\r\n\r\nStarting over ka matlab yeh nahi ki tum wahi banogi jo thi divorce se pehle.\r\nWoh wapas nahi aayega. Aana bhi nahi chahiye.\r\nTum kuch aur banogi. Koi jo zyada jaanti hai khud ko. Koi jise pata hai ki woh kya nahi chahiye — aur isliye ab clearly dekh sakti hai ki chahiye kya.\r\nWoh foundation hai. Zero nahi.\r\n\r\nYeh series un auraton ke liye hai jinki zindagi mein yeh waqt aaya — ya aa raha hai — ya kisi apni ke liye dekh rahi hain.\r\nKoi judgment nahi yahan.\r\nSirf yeh — tumhara agla chapter abhi bhi likha jaana baaki hai. Aur is baar — woh tumhare haath mein hai.\r\n🤍 agar yeh tumse baat kar raha hai — ya kisi aisi aurat ke liye feel kiya tumne jo yeh sab jee rahi hai — toh yeh post untak pahuncha do.",
+    "author": 2,
+    "category": 7,
+    "created_at": "2026-04-16T06:16:44.974Z",
+    "updated_at": "2026-04-16T06:16:44.974Z",
+    "is_pinned": false,
+    "is_locked": false,
+    "view_count": 1,
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 11,
+  "fields": {
+    "title": "My Health and Self Care....😂",
+    "content": "Apni Health ka dhyan rakhna is not that simple. \r\n\r\nAgar koi kahe Exercise karo. Healthy khao. Itna simple hai. Itna easy hai. Baaki sab toh sambhal leti ho — yeh ek kaam kyon nahi hota? Unhe kya pata ki \"yeh ek kaam\" kab hota hai aur kab nahi hota.\r\n\r\nYeh woh jagah hai jahan hum aksar khud ko blame karne lagte hain.\r\nWillpower nahi hai. Discipline nahi hai. Seriously liya hi nahi.\r\nPar ek second ke liye ruko.\r\n\r\nEk aurat jo subah uthti hai — ghar sambhalti hai, bacho ko taiyaar karti hai, sabki alag alag demands poori karti hai, sabke liye khana banati hai — aur phir expect kiya jaata hai ki woh apne liye alag se low calorie meal bhi banaye, 45 minute exercise bhi kare, aur yeh sab bina kisi interruption ke kare — yeh \"simple\" kab se ho gaya?\r\nKab se ek insaan ke liye itni saari zindagiyan simultaneously jeena — aur upar se khud ke liye bhi waqt aur energy bachana — \"itna sa kaam\" kehlaane laga?\r\n\r\nSach yeh hai —\r\nYeh routine isliye nahi ban raha ki tum mein kuch kami hai.\r\nYeh isliye nahi ban raha kyunki tumhara time, tumhari energy, aur tumhara schedule — yeh sab pehle se hi kisi aur ke naam pe likha hua hai.\r\n\r\nWoh log jo \"itna sa kaam\" kehte hain —\r\nUnka khana koi aur banata hai.\r\nUnke bachon ko koi aur sambhalta hai.\r\nUnka Sunday sach mein sirf unka hota hai.\r\nIsliye unhe yeh sab itna simple lagta hai. Kyunki unki zindagi mein space hai — khud ke liye. Tumhari mein abhi nahi hai.\r\n\r\nApna dhyan rakhna tumhare liye mushkil nahi hai.\r\nMushkil yeh hai ki tumhari zindagi mein pehle khud ke liye jagah ho — aur yeh kaam koi aur tumhare liye nahi karega.\r\nYeh woh sach hai jo koi nahi bolta — jab woh apni \"exercise karo, healthy khao\" wali free salaah dete hain.🤍\r\n\r\nAap mei se jo bhi aisa feel karta hai ki apna dhyan rakhna mushkil hai aur jo bhi apne problems face ki hai isliye liye aap sab kuch yahan share kar sakte hain. We all can listen to each other atleast here.",
+    "author": 2,
+    "category": 4,
+    "created_at": "2026-04-16T06:41:24.751Z",
+    "updated_at": "2026-04-16T06:41:24.751Z",
+    "is_pinned": false,
+    "is_locked": false,
+    "view_count": 1,
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 12,
+  "fields": {
+    "title": "Khudko Pehchano..",
+    "content": "Kabhi na kabhi aisa moment aata hai jab tum khud se poochna band kar deti ho — mujhe kya chahiye?\r\nAur bas yeh sochne lagti ho — logon ko mujhse kya chahiye.\r\n\r\nSocho zara…\r\nWoh beti jo hamesha responsible thi.\r\nWoh dost jo hamesha available thi.\r\nWoh ladki jo hamesha “haan” bol deti thi.\r\nWoh aurat jo khud ko thoda chhota kar leti thi taaki dusre comfortable feel karein.\r\n\r\nRole pe role…\r\nAur dheere dheere, kahin beech mein… tum khud se door ho gayi.\r\n\r\nPata bhi nahi chala kab hua.\r\nKoi ek moment nahi tha.\r\nBas ek slow drift tha…\r\n“I’m fine” bolte bolte.\r\nAdjust karte karte.\r\nDusron ko samajhne mein itni expert ho gayi…\r\nki khud ko samajhna hi bhool gayi.\r\n\r\nAur ab kabhi kabhi akele baith ke yeh sawal aata hai —\r\n“Main actually hoon kaun?”\r\n\r\nLogon ke liye jo karti ho, uske bina…\r\nUnki expectations ke bina…\r\nTum kaun ho?\r\n\r\nYeh confusion koi problem nahi hai.\r\nYeh beginning hai.\r\n\r\nIdentity ek baar mil jaane wali cheez nahi hoti.\r\nYeh woh cheez hai jahan tum baar baar wapas aati ho.\r\nJahan tum unlearn karti ho… aur phir se khud ko build karti ho.\r\n\r\nToh thoda ruk ke socho:\r\n\r\n✨ Jab koi nahi dekh raha hota — tum kaun hoti ho?\r\n✨ Tumhe kya pasand hai jo sirf tumhare liye hai — kisi aur ke liye nahi?\r\n✨ Tum kya carry kar rahi ho jo kabhi tumhara tha hi nahi?\r\n\r\nYeh space unhi questions ke liye hai.\r\nOverwhelm hone ke liye nahi…\r\nBalki dheere dheere khud tak wapas aane ke liye.\r\n\r\nKyuki sabse important relationship…\r\nJo tumhari life mein hai —\r\nWoh tumhara khud ke saath hai.\r\n\r\nAur usse dobara jaanne ke liye… kabhi bhi late nahi hota.\r\n\r\n👇\r\nEk cheez share karo jo tumhe lagta hai truly tumhari hai\r\n— koi value, koi dream, ya tumhari personality ka ek hissa.\r\n\r\n💛 Share karo agar kabhi aisa feel kiya ho to",
+    "author": 2,
+    "category": 5,
+    "created_at": "2026-04-16T06:46:32.477Z",
+    "updated_at": "2026-04-16T06:46:32.477Z",
+    "is_pinned": false,
+    "is_locked": false,
+    "view_count": 1,
+    "likes": []
+  }
+},
+{
+  "model": "community.post",
+  "pk": 13,
+  "fields": {
+    "title": "“Ek Nayi Zindagi… Aur Ek Nayi Main”",
+    "content": "Pregnancy sirf ek phase nahi hota…\r\nyeh ek poori duniya badalne jaisa ehsaas hota hai.\r\n\r\nJab pehli baar pata chalta hai ki tumhare andar ek chhoti si jaan hai,\r\ntoh emotions mix ho jaate hain…\r\nthoda darr, thodi excitement, aur ek ajeeb si khushi jo words mein explain nahi hoti.\r\n\r\nKabhi bina wajah aansu aa jaate hain,\r\nkabhi chhoti si baat pe hasi rukti hi nahi…\r\nLog kehte hain hormones —\r\npar sach toh yeh hai ki dil dheere dheere maa ban raha hota hai.\r\n\r\nRaat ko neend kam ho jaati hai…\r\npar sapne badh jaate hain.\r\nUs chhoti si muskaan ke,\r\nuski chhoti si ungli pakadne ke,\r\nusse pehli baar “mumma” sunne ke…\r\n\r\nAur phir ek din…\r\njab tum usse apni baahon mein pakadti ho,\r\ntoh sab kuch ek second ke liye ruk sa jaata hai.\r\n\r\nTab samajh aata hai —\r\ntum sirf ek baby ko janam nahi deti…\r\ntum ek nayi khud ko janam deti ho.\r\n\r\nMotherhood perfect nahi hota.\r\nKabhi thakaan hoti hai, kabhi confusion, kabhi self-doubt bhi…\r\npar sach yeh hai —\r\nyeh journey jitni real hai, utni hi khoobsurat bhi hai ❤️\r\n\r\n👇\r\nAgar aap maa hain ya banne wali hain —\r\nek feeling share karo jo aapne is journey mein deeply feel ki ho.",
+    "author": 2,
+    "category": 6,
+    "created_at": "2026-04-16T06:49:42.357Z",
+    "updated_at": "2026-04-16T06:49:42.357Z",
+    "is_pinned": false,
+    "is_locked": false,
+    "view_count": 1,
+    "likes": []
+  }
+}
+]
