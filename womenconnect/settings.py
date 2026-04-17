@@ -57,8 +57,6 @@ MIDDLEWARE = [
 
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'womenconnect.middleware.LoginRequiredMiddleware', 
-
-},
 ]
 
 # ========================
@@ -229,18 +227,17 @@ LOGGING = {
             'class': 'logging.StreamHandler',
         },
     },
-    'loggers': {
-        'django': {
-            'handlers': ['file', 'console'],
-            'level': 'ERROR',
-            'propagate': True,
-
-        },
+  'loggers': {
+    'django': {
+        'handlers': ['file', 'console'],
+        'level': 'ERROR',
+        'propagate': True,
     },
     'django.security.csrf': {
-    'handlers': ['console'],
-    'level': 'DEBUG',
-    'propagate': False,
+        'handlers': ['console'],
+        'level': 'DEBUG',
+        'propagate': False,
+    },
 },
 }
 
