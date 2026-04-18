@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+﻿from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
@@ -50,7 +50,7 @@ def register(request):
                     "subject": "Activate your WomenKonnect account",
                     "text": f"Hi {user.username},\n\nClick the link to activate:\n{activation_link}",
                 })
-                messages.success(request, "✅ Account created! Check your email to activate.")
+                messages.success(request, "âœ… Account created! Check your email to activate.")
             except Exception as e:
                     
                 print(f"RESEND ERROR: {type(e).__name__}: {str(e)}")
@@ -496,7 +496,7 @@ def search(request):
          .prefetch_related('likes')\
          .annotate(reply_count=Count('replies', distinct=True))[:20]
     elif query:
-        query = ''  # too short — template will show hint
+        query = ''  # too short â€” template will show hint
 
     context = {
         'posts': posts,
@@ -600,7 +600,7 @@ def contact(request):
                 resend.Emails.send({
                     "from": settings.DEFAULT_FROM_EMAIL,
                     "to": [settings.ADMIN_EMAIL],
-                    "reply_to": form.cleaned_data['email'],   # ← add this
+                    "reply_to": form.cleaned_data['email'],   # â† add this
                     "subject": f"Contact: {form.cleaned_data['subject']}",
                     "text": f"From: {form.cleaned_data['name']} <{form.cleaned_data['email']}>\n\n{form.cleaned_data['message']}",
                 })
