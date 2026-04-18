@@ -135,8 +135,8 @@ def create_super(request):
 def home(request):
     categories = Category.objects.all()
     cutoff = timezone.now() - timezone.timedelta(hours=48)
-    recent_posts = Post.objects.select_related('author', 'category', 'author__userprofile').prefetch_related('likes').filter(created_at__gte=cutoff).annotate(reply_count=Count('replies', distinct=True)).order_by('-created_at')[:10]
-    older_posts = Post.objects.select_related('author', 'category', 'author__userprofile').prefetch_related('likes').filter(created_at__lt=cutoff).annotate(reply_count=Count('replies', distinct=True)).order_by('-created_at')[:10]
+    recent_posts = Post.objects.select_related('author', 'category', 'author__userprofile').filter(created_at__gte=cutoff).annotate(reply_count=Count('replies', distinct=True)).order_by('-created_at')[:10]
+    older_posts = Post.objects.select_related('author', 'category', 'author__userprofile').filter(created_at__lt=cutoff).annotate(reply_count=Count('replies', distinct=True)).order_by('-created_at')[:10]
     context = {
         'categories': categories,
         'recent_posts': recent_posts,
