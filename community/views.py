@@ -682,5 +682,4 @@ def reset_password_confirm(request, uidb64, token):
 
     return render(request, 'community/password_reset_confirm.html', {'uidb64': uidb64, 'token': token, 'validlink': True})# force rebuild
 
-#   r e b u i l t  
- 
+# rebuilt
