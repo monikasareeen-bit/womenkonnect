@@ -1,0 +1,9 @@
+Django==5.2.13
+gunicorn==25.3.0
+psycopg2-binary==2.9.10
+dj-database-url==3.1.2
+python-decouple==3.8
+whitenoise==6.12.0
+Pillow==11.2.1
+resend==2.7.0
+django-axes==8.0.0
