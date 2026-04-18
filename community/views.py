@@ -138,7 +138,7 @@ def home(request):
     # Optimized query with select_related and prefetch_related
     posts = Post.objects.select_related('author', 'category', 'author__userprofile')\
         .prefetch_related('likes')\
-        .annotate(reply_count=Count('replies'))\
+        .annotate(reply_count=Count('replies' , distinct=True))\
         .all()
 
     cutoff = timezone.now() - timezone.timedelta(hours=48)
@@ -163,7 +163,7 @@ def category_posts(request, slug):
     posts = Post.objects.filter(category=category)\
         .select_related('author', 'author__userprofile')\
         .prefetch_related('likes')\
-        .annotate(reply_count=Count('replies'))\
+        .annotate(reply_count=Count('replies', distinct=True))\
         .order_by('-is_pinned', '-created_at')
 
     context = {
@@ -457,7 +457,7 @@ def profile(request):
     profile, created = UserProfile.objects.get_or_create(user=request.user)
     user_posts = Post.objects.filter(author=request.user)\
         .select_related('category')\
-        .annotate(reply_count=Count('replies'))\
+        .annotate(reply_count=Count('replies', distinct=True))\
         .order_by('-created_at')
 
     context = {
