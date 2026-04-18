@@ -680,4 +680,5 @@ def reset_password_confirm(request, uidb64, token):
         messages.success(request, 'Password reset successfully! You can now login.')
         return redirect('login')
 
-    return render(request, 'community/password_reset_confirm.html', {'uidb64': uidb64, 'token': token, 'validlink': True})
+    return render(request, 'community/password_reset_confirm.html', {'uidb64': uidb64, 'token': token, 'validlink': True})#   f o r c e   r e b u i l d  
+ 
