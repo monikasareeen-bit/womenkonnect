@@ -494,7 +494,7 @@ def search(request):
             Q(title__icontains=query) | Q(content__icontains=query)
         ).select_related('author', 'category', 'author__userprofile')\
          .prefetch_related('likes')\
-         .annotate(reply_count=Count('replies'))[:20]
+         .annotate(reply_count=Count('replies', distinct=True))[:20]
     elif query:
         query = ''  # too short — template will show hint
 
