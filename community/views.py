@@ -159,7 +159,6 @@ def category_posts(request, slug):
         Post.objects.filter(category=category)
         .select_related('author', 'author__userprofile')
         .prefetch_related('likes', 'replies')
-        .annotate(reply_count=Count('replies', distinct=True))
         .order_by('-is_pinned', '-created_at')
     )
 
@@ -174,6 +173,7 @@ def category_posts(request, slug):
 
     for post in posts:
         post.user_has_liked = post.pk in liked_post_ids
+        post.reply_count = post.replies.count()  # uses prefetch cache, no extra query
 
     context = {
         'category': category,
