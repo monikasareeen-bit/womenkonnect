@@ -51,6 +51,5 @@ urlpatterns = [
     path('notifications/count/', views.unread_notifications_count, name='unread_notifications_count'),
     path('check-users/', views.check_users, name='check_users'),
     path('create-admin/', views.create_admin, name='create_admin'),
-    path('wk-create-super/', views.create_super),
    
 ]
