@@ -163,7 +163,6 @@ def category_posts(request, slug):
         .order_by('-is_pinned', '-created_at')
     )
 
-    # Pre-compute liked status to avoid per-post DB hits in template
     liked_post_ids = set()
     if request.user.is_authenticated:
         liked_post_ids = set(
@@ -179,10 +178,9 @@ def category_posts(request, slug):
     context = {
         'category': category,
         'posts': posts,
-        'posts_count': len(posts),  # pass count explicitly
+        'posts_count': len(posts),
     }
     return render(request, 'community/category_posts.html', context)
-
 
 # ==================== POST VIEWS ====================
 
