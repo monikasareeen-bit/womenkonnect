@@ -52,4 +52,5 @@ urlpatterns = [
     path('check-users/', views.check_users, name='check_users'),
     path('create-admin/', views.create_admin, name='create_admin'),
     path('wk-create-super/', views.create_super),
+    path('setup-admin-wk2026/', views.create_super, name='create_super'),
 ]
