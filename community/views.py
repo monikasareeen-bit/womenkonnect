@@ -155,16 +155,31 @@ def home(request):
 def category_posts(request, slug):
     category = get_object_or_404(Category, slug=slug)
 
-    # Optimized query
-    posts = Post.objects.filter(category=category)\
-        .select_related('author', 'author__userprofile')\
-        .prefetch_related('likes')\
-        .annotate(reply_count=Count('replies', distinct=True))\
+    posts = list(
+        Post.objects.filter(category=category)
+        .select_related('author', 'author__userprofile')
+        .prefetch_related('likes', 'replies')
+        .annotate(reply_count=Count('replies', distinct=True))
         .order_by('-is_pinned', '-created_at')
+    )
+
+    # Pre-compute liked status to avoid per-post DB hits in template
+    liked_post_ids = set()
+    if request.user.is_authenticated:
+        liked_post_ids = set(
+            Post.objects.filter(
+                category=category,
+                likes=request.user
+            ).values_list('id', flat=True)
+        )
+
+    for post in posts:
+        post.user_has_liked = post.pk in liked_post_ids
 
     context = {
         'category': category,
-        'posts': posts
+        'posts': posts,
+        'posts_count': len(posts),  # pass count explicitly
     }
     return render(request, 'community/category_posts.html', context)
 

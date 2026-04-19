@@ -3,7 +3,7 @@
 
 {% block title %}{{ category.name }} – Women's Community Discussion – WomenKonnect{% endblock %}
 
-{% block meta_description %}Browse {{ posts.count }} discussion{{ posts.count|pluralize }} in {{ category.name }} on WomenKonnect. {{ category.description }}{% endblock %}
+{% block meta_description %}Browse {{ posts_count }} discussion{{ posts_count|pluralize }} in {{ category.name }} on WomenKonnect. {{ category.description }}{% endblock %}
 
 {% block meta_keywords %}{{ category.name|lower }}, women {{ category.name|lower }} India, women community {{ category.name|lower }}, WomenKonnect {{ category.name|lower }}{% endblock %}
 
@@ -79,7 +79,7 @@
         <div class="post-stats">
             <div class="stat-item">
                 <i class="fas fa-comments"></i>
-                <span>{{ posts.count }} {% if posts.count == 1 %}Post{% else %}Posts{% endif %}</span>
+                <span>{{ posts_count }} {% if posts_count == 1 %}Post{% else %}Posts{% endif %}</span>
             </div>
         </div>
 
@@ -126,7 +126,7 @@
                 </div>
             </div>
 
-            <!-- Post Title — h2 because the category name is already h1 -->
+            <!-- Post Title -->
             <h2 class="post-title" itemprop="headline">
                 <a href="{% url 'post_detail' post.pk %}" itemprop="url">{{ post.title }}</a>
             </h2>
@@ -141,11 +141,11 @@
 
                 {% if user.is_authenticated %}
                 <button type="button"
-                        class="like-btn {% if user in post.likes.all %}liked{% endif %}"
+                        class="like-btn {% if post.user_has_liked %}liked{% endif %}"
                         data-post-id="{{ post.pk }}"
                         onclick="toggleLike(this)"
                         aria-label="Like this post">
-                    <i class="{% if user in post.likes.all %}fas{% else %}far{% endif %} fa-heart"></i>
+                    <i class="{% if post.user_has_liked %}fas{% else %}far{% endif %} fa-heart"></i>
                     <span class="like-count">{{ post.total_likes }}</span>
                 </button>
                 {% else %}
