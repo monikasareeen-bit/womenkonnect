@@ -118,18 +118,6 @@ def activate(request, uidb64, token):
         messages.error(request, 'Activation link is invalid or has expired!')
         return redirect('register')
 
-def create_super(request):
-    secret = request.GET.get('key')
-    if secret != 'wk-setup-2026':  # your secret key
-        return HttpResponse('Not allowed', status=403)
-    if User.objects.filter(username='wkadmin').exists():
-        return HttpResponse('Already exists - go login!')
-    User.objects.create_superuser(
-        username='wkadmin',
-        email='monika@womenkonnect.co.in',
-        password='WomenK0nnect#2026'
-    )
-    return HttpResponse('Superuser created! Remove this URL now.')
 # ==================== HOME & CATEGORIES ====================
 
 def home(request):
@@ -185,21 +173,33 @@ def category_posts(request, slug):
 # ==================== POST VIEWS ====================
 
 def post_detail(request, pk):
-    # Optimized query
     post = get_object_or_404(
         Post.objects.select_related('author', 'author__userprofile', 'category'),
         pk=pk
     )
 
-    # Increment view count
     post.increment_views()
+    post.user_has_liked = request.user.is_authenticated and post.likes.filter(pk=request.user.pk).exists()
 
-    # Get all replies with optimized query
-    replies_list = post.replies.select_related('author', 'author__userprofile', 'quoted_user')\
-        .prefetch_related('likes')\
+    # replies_list MUST come before post.replies_count
+    replies_list = list(
+        post.replies.select_related('author', 'author__userprofile', 'quoted_user')
+        .prefetch_related('likes')
         .order_by('created_at')
+    )
 
-    # Pagination - 10 replies per page
+    post.replies_count = len(replies_list)  # NOW it's defined
+
+    liked_reply_ids = set()
+    if request.user.is_authenticated:
+        liked_reply_ids = set(
+            post.replies.filter(likes=request.user).values_list('id', flat=True)
+        )
+
+    for reply in replies_list:
+        reply.user_has_liked = reply.pk in liked_reply_ids
+        reply.like_count = reply.likes.count()
+
     paginator = Paginator(replies_list, 10)
     page = request.GET.get('page', 1)
 
@@ -215,8 +215,6 @@ def post_detail(request, pk):
         'replies': replies,
     }
     return render(request, 'community/post_detail.html', context)
-
-
 @login_required
 def create_post(request, category_slug=None):
     preselected_category = None
@@ -464,10 +462,13 @@ def like_reply(request, pk):
 @login_required
 def profile(request):
     profile, created = UserProfile.objects.get_or_create(user=request.user)
-    user_posts = Post.objects.filter(author=request.user)\
-        .select_related('category')\
-        .annotate(reply_count=Count('replies', distinct=True))\
+    user_posts = list(
+        Post.objects.filter(author=request.user)
+        .select_related('category')
         .order_by('-created_at')
+    )
+    for post in user_posts:
+        post.reply_count = post.replies.count()
 
     context = {
         'profile': profile,
@@ -499,20 +500,23 @@ def search(request):
     posts = []
 
     if len(query) >= 2:
-        posts = Post.objects.filter(
-            Q(title__icontains=query) | Q(content__icontains=query)
-        ).select_related('author', 'category', 'author__userprofile')\
-         .prefetch_related('likes')\
-         .annotate(reply_count=Count('replies', distinct=True))[:20]
+        posts = list(
+            Post.objects.filter(
+                Q(title__icontains=query) | Q(content__icontains=query)
+            ).select_related('author', 'category', 'author__userprofile')
+            .prefetch_related('likes', 'replies')
+            .order_by('-created_at')[:20]
+        )
+        for post in posts:
+            post.reply_count = post.replies.count()
     elif query:
-        query = ''  # too short â€” template will show hint
+        query = ''
 
     context = {
         'posts': posts,
         'query': query,
     }
     return render(request, 'community/search_results.html', context)
-
 
 # ==================== NOTIFICATIONS ====================
 

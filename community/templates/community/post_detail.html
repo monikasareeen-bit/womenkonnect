@@ -19,7 +19,7 @@
             By <strong>{{ post.author.username }}</strong> &bull;
             {{ post.created_at|timesince }} ago &bull;
             <span id="post-likes-count">{{ post.total_likes }}</span> likes &bull;
-            {{ post.replies.count }} replies &bull;
+            {{ post.replies_count }} replies &bull;
             {{ post.view_count }} views
         </div>
     </div>
@@ -40,9 +40,9 @@
                 </span>
                 {% else %}
                 <button type="button"
-                        class="like-btn {% if user in post.likes.all %}liked{% endif %}"
+                        class="like-btn {% if post.user_has_liked %}liked{% endif %}"
                         onclick="togglePostLike({{ post.pk }}, this)">
-                    <i class="{% if user in post.likes.all %}fas{% else %}far{% endif %} fa-heart"></i>
+                    <i class="{% if post.user_has_liked %}fas{% else %}far{% endif %} fa-heart"></i>
                     <span class="like-count">{{ post.total_likes }}</span>
                 </button>
                 {% endif %}
@@ -104,7 +104,7 @@
 
     <!-- REPLIES -->
     <div id="replies" class="replies-section">
-        <h4>Replies ({{ post.replies.count }})</h4>
+        <h4>Replies ({{ post.replies_count }})</h4>
 
         {% if replies %}
         {% for reply in replies %}
@@ -147,10 +147,10 @@
                     </span>
                     {% else %}
                     <button type="button"
-                            class="like-btn {% if user in reply.likes.all %}liked{% endif %}"
+                            class="like-btn {% if reply.user_has_liked %}liked{% endif %}"
                             onclick="toggleReplyLike({{ reply.pk }}, this)">
-                        <i class="{% if user in reply.likes.all %}fas{% else %}far{% endif %} fa-heart"></i>
-                        <span class="like-count">{{ reply.total_likes }}</span>
+                        <i class="{% if reply.user_has_liked %}fas{% else %}far{% endif %} fa-heart"></i>
+                        <span class="like-count">{{ reply.like_count }}</span>
                     </button>
                     {% endif %}
                 {% else %}
