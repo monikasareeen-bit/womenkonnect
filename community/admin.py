@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, UserProfile, Post, Reply
+from .models import Category, UserProfile, Post, Reply, Notification, Report
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -13,15 +13,22 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'author', 'category', 'created_at', 'total_likes']
+    list_display = ['title', 'author', 'category', 'created_at', 'like_count']
     list_filter = ['category', 'created_at']
     search_fields = ['title', 'content']
 
+    def like_count(self, obj):
+        return obj.likes.count()
+    like_count.short_description = 'Likes'
+
 @admin.register(Reply)
 class ReplyAdmin(admin.ModelAdmin):
-    list_display = ['author', 'post', 'created_at', 'total_likes']
+    list_display = ['author', 'post', 'created_at', 'like_count']
     list_filter = ['created_at']
-from .models import Notification, Report
+
+    def like_count(self, obj):
+        return obj.likes.count()
+    like_count.short_description = 'Likes'
 
 @admin.register(Notification)
 class NotificationAdmin(admin.ModelAdmin):
