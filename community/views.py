@@ -50,7 +50,7 @@ def register(request):
                     "subject": "Activate your WomenKonnect account",
                     "text": f"Hi {user.username},\n\nClick the link to activate:\n{activation_link}",
                 })
-                messages.success(request, "âœ… Account created! Check your email to activate.")
+                messages.success(request, "Account created! Check your email to activate.")
             except Exception as e:
                     
                 print(f"RESEND ERROR: {type(e).__name__}: {str(e)}")
