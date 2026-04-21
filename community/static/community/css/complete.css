@@ -1760,18 +1760,20 @@ html, body {
 .nav-auth-btns { display: flex; align-items: center; gap: 10px; }
 .nav-btn-login {
     color: #ffffff !important;
-    border: 2px solid rgba(255,255,255,0.85) !important;
-    padding: 7px 18px !important;
+    border: 2px solid #ffffff !important;
+    padding: 8px 20px !important;
     border-radius: 20px !important;
     font-size: 13px !important;
     font-weight: 600 !important;
     text-decoration: none !important;
-    background: transparent !important;
+    background: rgba(255,255,255,0.2) !important;
     -webkit-text-fill-color: #ffffff !important;
     transition: all 0.25s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
 }
 .nav-btn-login:hover {
-    background: rgba(255,255,255,0.15) !important;
+    background: rgba(255,255,255,0.35) !important;
 }
 .nav-btn-signup {
     color: #e8558b !important;
@@ -2118,11 +2120,11 @@ html, body {
         text-align: center !important;
     }
 
-    .nav-links .nav-auth-btns .nav-btn-login {
+.nav-links .nav-auth-btns .nav-btn-login {
         color: #ffffff !important;
         -webkit-text-fill-color: #ffffff !important;
-        background: transparent !important;
-        border: 1.5px solid rgba(255,255,255,0.7) !important;
+        background: rgba(255,255,255,0.2) !important;
+        border: 2px solid #ffffff !important;
         border-radius: 20px !important;
         padding: 8px 16px !important;
         display: block !important;
