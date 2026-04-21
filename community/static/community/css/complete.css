@@ -1760,27 +1760,34 @@ html, body {
 .nav-auth-btns { display: flex; align-items: center; gap: 10px; }
 .nav-btn-login {
     color: #ffffff !important;
-    border: 1.5px solid rgba(255,255,255,0.65) !important;
-    padding: 6px 16px !important;
+    border: 2px solid rgba(255,255,255,0.85) !important;
+    padding: 7px 18px !important;
     border-radius: 20px !important;
     font-size: 13px !important;
-    font-weight: 500 !important;
+    font-weight: 600 !important;
     text-decoration: none !important;
     background: transparent !important;
     -webkit-text-fill-color: #ffffff !important;
+    transition: all 0.25s ease !important;
+}
+.nav-btn-login:hover {
+    background: rgba(255,255,255,0.15) !important;
 }
 .nav-btn-signup {
     color: #e8558b !important;
     background: #ffffff !important;
-    border: none !important;
-    padding: 6px 16px !important;
+    border: 2px solid #ffffff !important;
+    padding: 7px 18px !important;
     border-radius: 20px !important;
     font-size: 13px !important;
     font-weight: 700 !important;
     text-decoration: none !important;
     -webkit-text-fill-color: #e8558b !important;
+    transition: all 0.25s ease !important;
 }
-
+.nav-btn-signup:hover {
+    background: rgba(255,255,255,0.88) !important;
+}
 /* ── Hide chip bar everywhere — we don't use it ──────────── */
 .mobile-category-bar { display: none !important; }
 
