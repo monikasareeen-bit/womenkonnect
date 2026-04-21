@@ -1759,18 +1759,19 @@ html, body {
 /* ── Auth buttons ─────────────────────────────────────────── */
 .nav-auth-btns { display: flex; align-items: center; gap: 10px; }
 .nav-btn-login {
-    color: #ffffff !important;
+    color: #e8558b !important;
+    background: #ffffff !important;
     border: 2px solid #ffffff !important;
     padding: 8px 20px !important;
     border-radius: 20px !important;
     font-size: 13px !important;
     font-weight: 600 !important;
     text-decoration: none !important;
-    background: rgba(255,255,255,0.2) !important;
-    -webkit-text-fill-color: #ffffff !important;
+    -webkit-text-fill-color: #e8558b !important;
     transition: all 0.25s ease !important;
     display: inline-flex !important;
     align-items: center !important;
+
 }
 .nav-btn-login:hover {
     background: rgba(255,255,255,0.35) !important;
