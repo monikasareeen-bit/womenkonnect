@@ -51,14 +51,14 @@
                 <label for="{{ form.email.id_for_label }}">
                     <i class="fas fa-envelope"></i> Email Address
                 </label>
-                <input
-                    type="email"
-                    name="email"
-                    id="{{ form.email.id_for_label }}"
-                    placeholder="Enter your email"
-                    required
-                    {% if form.email.value %}value="{{ form.email.value }}"{% endif %}
-                >
+            <input
+                type="email"
+                name="email"
+                id="{{ form.email.id_for_label }}"
+                placeholder="Enter your email"
+                required
+                autocomplete="off"
+            >
                 {% if form.email.errors %}
                 <ul class="errorlist">
                     {% for error in form.email.errors %}
