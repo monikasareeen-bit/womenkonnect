@@ -57,7 +57,7 @@ class CategorySitemap(Sitemap):
     def location(self, obj):
         # Adjust if your category URL name / slug field is different
         try:
-            return reverse("category_detail", args=[obj.slug])
+            return reverse("category_posts", args=[obj.slug])
         except Exception:
             # Fallback: if no category_detail URL exists yet, skip by returning home
             return reverse("home")

@@ -1,8 +1,14 @@
 {% extends 'community/base.html' %}
 {% load static %}
 {% load time_filters %}
+{% block meta_description %}{{ post.content|truncatewords:25|striptags }}{% endblock %}
+{% block canonical %}https://www.womenkonnect.co.in/post/{{ post.pk }}/{% endblock %}
+{% block og_title %}{{ post.title }} | WomenKonnect{% endblock %}
+{% block og_description %}{{ post.content|truncatewords:20|striptags }}{% endblock %}
+{% block og_url %}https://www.womenkonnect.co.in/post/{{ post.pk }}/{% endblock %}
+{% block og_type %}article{% endblock %}
 
-{% block title %}{{ post.title }} - WomenConnect{% endblock %}
+{% block title %}{{ post.title }} | WomenKonnect{% endblock %}
 
 {% block content %}
 <div class="container my-5">
