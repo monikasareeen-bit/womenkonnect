@@ -157,7 +157,7 @@ LOGOUT_REDIRECT_URL = 'login'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'community.backends.EmailBackend',
-    'allauth.backends.AuthenticationBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 # ========================
