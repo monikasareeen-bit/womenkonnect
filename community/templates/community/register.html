@@ -207,6 +207,15 @@
                 <a href="{% url 'login' %}">Login</a>
             </p>
         </form>
+        <div style="text-align:center; margin: 16px 0; color:#999; font-size:13px; position:relative;">
+            <hr style="border:none; border-top:1px solid #ffe4f1;">
+            <span style="background:#fff; padding:0 10px; position:relative; top:-11px;">or</span>
+        </div>
+
+        <a href="{% url 'google_login' %}" style="display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:12px; border:2px solid #ffe4f1; border-radius:10px; background:#fff; color:#d63384; font-weight:600; text-decoration:none; margin-bottom:16px;">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" height="20">
+            Continue with Google
+        </a>
     </div>
 </div>
 
