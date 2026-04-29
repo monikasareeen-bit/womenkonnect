@@ -101,6 +101,15 @@
                 <i class="fas fa-sign-in-alt"></i> Login to WomenKonnect
             </button>
         </form>
+        <div style="text-align:center; margin: 16px 0; color:#999; font-size:13px; position:relative;">
+            <hr style="border:none; border-top:1px solid #eee;">
+            <span style="background:#fff; padding:0 10px; position:relative; top:-11px;">or</span>
+        </div>
+
+        <a href="{% url 'google_login' %}" style="display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; background:#fff; color:#333; font-weight:600; text-decoration:none; margin-bottom:16px;">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" height="20">
+            Continue with Google
+        </a>
         <div class="auth-footer">
             <p>New to WomenKonnect? <a href="{% url 'register' %}">Create an account</a></p>
         </div>
