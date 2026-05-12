@@ -739,6 +739,34 @@ button.like-btn.liked {
     background: #fef5f8 !important;
 }
 
+/* Locked like button — before user reads the full post */
+.like-btn.like-locked,
+button.like-btn.like-locked,
+.like-btn[disabled],
+button.like-btn[disabled] {
+    opacity: 0.4 !important;
+    cursor: not-allowed !important;
+    pointer-events: all !important;
+    filter: grayscale(60%) !important;
+    border-color: #ccc !important;
+    color: #aaa !important;
+    background: #f5f5f5 !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+.like-btn.like-locked:hover,
+button.like-btn.like-locked:hover,
+.like-btn[disabled]:hover,
+button.like-btn[disabled]:hover {
+    opacity: 0.4 !important;
+    border-color: #ccc !important;
+    color: #aaa !important;
+    background: #f5f5f5 !important;
+    transform: none !important;
+    box-shadow: none !important;
+    filter: grayscale(60%) !important;
+}
+
 .reply-link,
 a.reply-link,
 .post-actions a {

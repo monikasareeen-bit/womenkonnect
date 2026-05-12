@@ -1,3 +1,4 @@
+
 {% extends 'community/base.html' %}
 {% load static %}
 
@@ -146,8 +147,9 @@
                         onclick="toggleLike(this)"
                         aria-label="Like this post"
                         disabled
-                        title="Read the full post to like it">
-                    <i class="{% if post.user_has_liked %}fas{% else %}far{% endif %} fa-heart"></i>
+                        title="Read the full post first to like it">
+                    <i class="fas fa-lock" style="font-size:11px;"></i>
+                    <i class="far fa-heart"></i>
                     <span class="like-count">{{ post.total_likes }}</span>
                 </button>
                 {% else %}
@@ -203,6 +205,9 @@ document.addEventListener('DOMContentLoaded', function () {
             btn.disabled = false;
             btn.classList.remove('like-locked');
             btn.removeAttribute('title');
+            // Remove the lock icon, keep only the heart
+            const lockIcon = btn.querySelector('.fa-lock');
+            if (lockIcon) lockIcon.remove();
         }
     });
 });
