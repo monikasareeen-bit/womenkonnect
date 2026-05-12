@@ -388,5 +388,8 @@ if (textarea && charCount) {
         charCount.style.color = len > 4500 ? '#e53e3e' : '#999';
     });
 }
+
+// Mark this post as read so the like button unlocks on the category page
+localStorage.setItem('read_post_{{ post.pk }}', '1');
 </script>
 {% endblock %}

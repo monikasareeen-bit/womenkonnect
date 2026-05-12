@@ -141,10 +141,12 @@
 
                 {% if user.is_authenticated %}
                 <button type="button"
-                        class="like-btn {% if post.user_has_liked %}liked{% endif %}"
+                        class="like-btn {% if post.user_has_liked %}liked{% endif %} like-locked"
                         data-post-id="{{ post.pk }}"
                         onclick="toggleLike(this)"
-                        aria-label="Like this post">
+                        aria-label="Like this post"
+                        disabled
+                        title="Read the full post to like it">
                     <i class="{% if post.user_has_liked %}fas{% else %}far{% endif %} fa-heart"></i>
                     <span class="like-count">{{ post.total_likes }}</span>
                 </button>
@@ -193,6 +195,18 @@
 
 {% block extra_js %}
 <script>
+// Unlock like buttons for posts the user has already read
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.like-btn.like-locked').forEach(function (btn) {
+        const postId = btn.getAttribute('data-post-id');
+        if (localStorage.getItem('read_post_' + postId)) {
+            btn.disabled = false;
+            btn.classList.remove('like-locked');
+            btn.removeAttribute('title');
+        }
+    });
+});
+
 function toggleLike(button) {
     const postId = button.getAttribute('data-post-id');
     const csrfToken = '{{ csrf_token }}';
