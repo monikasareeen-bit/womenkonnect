@@ -375,6 +375,111 @@ a:hover {
     width: 100%;
 }
 
+/* =========================================
+   HOMEPAGE HERO
+========================================= */
+
+.home-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 40px;
+    margin-bottom: 30px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, #fef5f8 0%, #f8f5fc 50%, #f5f8fc 100%);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-soft);
+    position: relative;
+    overflow: hidden;
+}
+
+.home-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(232, 85, 139, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(60px, -80px);
+    pointer-events: none;
+}
+
+.home-hero-text {
+    position: relative;
+    z-index: 1;
+    max-width: 620px;
+}
+
+.home-hero-text h1 {
+    font-size: 32px;
+    line-height: 1.25;
+    margin-bottom: 12px;
+}
+
+.home-hero-text p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 22px;
+    line-height: 1.6;
+}
+
+.home-hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.home-hero-stat {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    text-align: center;
+    padding: 22px 30px;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+    border-top: 4px solid;
+    border-image: linear-gradient(90deg, #e8558b, #9b7fa8) 1;
+}
+
+.home-hero-stat-number {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-weight: 700;
+    font-size: 34px;
+    background: linear-gradient(90deg, #e8558b 0%, #9b7fa8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.home-hero-stat-label {
+    display: block;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .home-hero {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 28px 22px;
+    }
+
+    .home-hero-text h1 {
+        font-size: 24px;
+    }
+
+    .home-hero-stat {
+        width: 100%;
+    }
+}
+
 .home-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -697,6 +802,11 @@ a:hover {
 .btn-lg {
     padding: 14px 32px;
     font-size: 16px;
+}
+
+.w-100 {
+    width: 100%;
+    justify-content: center;
 }
 
 /* =========================================

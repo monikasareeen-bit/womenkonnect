@@ -16,11 +16,11 @@
 <div class="sidebar-card">
     <h5>Start Discussion</h5>
     {% if user.is_authenticated %}
-        <a href="{% url 'create_post' %}" class="btn btn-pink w-100">
+        <a href="{% url 'create_post' %}" class="btn btn-primary w-100">
             + New Post
         </a>
     {% else %}
-        <a href="{% url 'login' %}" class="btn btn-outline-dark w-100">
+        <a href="{% url 'login' %}" class="btn btn-secondary w-100">
             Login to Post
         </a>
     {% endif %}
