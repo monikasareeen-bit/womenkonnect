@@ -1,0 +1,95 @@
+{% extends 'community/base.html' %}
+{% load humanize %}
+
+{% block title %}Home - WomenKonnect{% endblock %}
+
+{% block sidebar %}
+{% include 'community/partials/sidebar.html' %}
+{% endblock %}
+
+{% block right_panel %}
+<div class="sidebar-card">
+    <h4>📊 Community Stats</h4>
+    <p><strong>Total Members:</strong> {{ total_members }}</p>
+    <p><strong>Total Posts:</strong> {{ total_posts }}</p>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="home-wrapper">
+
+    <!-- HERO SECTION -->
+    <div class="home-hero">
+        <div class="home-hero-text">
+            <h1>Women ki apni jagah — share karo, judo, aage badho</h1>
+            <p>WomenKonnect ek safe, supportive online community hai jahan women India bhar se apne experiences share kar sakti hain, advice le sakti hain, aur saath mein aage badh sakti hain.</p>
+            <div class="home-hero-actions">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'create_post' %}" class="btn btn-primary btn-lg">+ Start a Discussion</a>
+                {% else %}
+                    <a href="{% url 'register' %}" class="btn btn-primary btn-lg">Join Free</a>
+                    <a href="{% url 'login' %}" class="btn btn-secondary btn-lg">Login</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="home-hero-stat">
+            <span class="home-hero-stat-number">{{ total_members }}+</span>
+            <span class="home-hero-stat-label">women already here</span>
+        </div>
+    </div>
+
+    <!-- MOBILE ONLY: horizontal category chips -->
+    <div class="mobile-category-bar">
+        <a href="?category=career">Career & Finance</a>
+        <a href="?category=marriage">Marriage Pressure</a>
+        <a href="?category=courage">Courage Stories</a>
+        <a href="?category=health">Health & Self-Care</a>
+        <a href="?category=identity">Identity</a>
+        <a href="?category=inlaws">In-Laws</a>
+        <a href="?category=mental">Mental Health</a>
+    </div>
+
+    <div class="home-grid">
+        <!-- RIGHT COLUMN: Recent Posts -->
+        <div class="discussion-column">
+            <h3 class="section-title">Recent Discussions</h3>
+
+            {% for post in recent_posts %}
+            <div class="post-row">
+                <h5 class="post-title">
+                    <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
+                </h5>
+                <div class="post-meta">
+                    {{ post.author.username }} ·
+                    {{ post.created_at|naturaltime }} ·
+                    {{ post.reply_count }} replies ·
+                    {{ post.total_likes }} likes
+                </div>
+            </div>
+            {% empty %}
+            <p class="empty-text">No recent posts yet.</p>
+            {% endfor %}
+        </div>
+        <!-- LEFT COLUMN: Older Posts -->
+        <div class="discussion-column">
+            <h3 class="section-title">Older Discussions</h3>
+
+            {% for post in older_posts %}
+            <div class="post-row">
+                <h5 class="post-title">
+                    <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
+                </h5>
+                <div class="post-meta">
+                    {{ post.author.username }} ·
+                    {{ post.created_at|naturaltime }} ·
+                    {{ post.reply_count }} replies ·
+                    {{ post.total_likes }} likes
+                </div>
+            </div>
+            {% empty %}
+            <p class="empty-text">No older posts available.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
