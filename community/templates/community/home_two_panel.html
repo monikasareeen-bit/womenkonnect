@@ -54,47 +54,27 @@
         <a href="?category=mental">Mental Health</a>
     </div>
 
-    <div class="home-grid">
-        <!-- RIGHT COLUMN: Recent Posts -->
-        <div class="discussion-column">
-            <h3 class="section-title">Recent Discussions</h3>
+    <div class="home-feed">
+        <h3 class="section-title">Discussions</h3>
 
-            {% for post in recent_posts %}
-            <div class="post-row">
-                <h5 class="post-title">
-                    <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
-                </h5>
-                <div class="post-meta">
-                    {{ post.author.username }} ·
-                    {{ post.created_at|naturaltime }} ·
-                    {{ post.reply_count }} replies ·
-                    {{ post.total_likes }} likes
-                </div>
+        {% for post in posts %}
+        <div class="post-row">
+            <h5 class="post-title">
+                <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
+                {% if post.created_at > cutoff %}
+                <span class="badge-new">New</span>
+                {% endif %}
+            </h5>
+            <div class="post-meta">
+                {{ post.author.username }} ·
+                {{ post.created_at|naturaltime }} ·
+                {{ post.reply_count }} replies ·
+                {{ post.total_likes }} likes
             </div>
-            {% empty %}
-            <p class="empty-text">No recent posts yet.</p>
-            {% endfor %}
         </div>
-        <!-- LEFT COLUMN: Older Posts -->
-        <div class="discussion-column">
-            <h3 class="section-title">Older Discussions</h3>
-
-            {% for post in older_posts %}
-            <div class="post-row">
-                <h5 class="post-title">
-                    <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
-                </h5>
-                <div class="post-meta">
-                    {{ post.author.username }} ·
-                    {{ post.created_at|naturaltime }} ·
-                    {{ post.reply_count }} replies ·
-                    {{ post.total_likes }} likes
-                </div>
-            </div>
-            {% empty %}
-            <p class="empty-text">No older posts available.</p>
-            {% endfor %}
-        </div>
+        {% empty %}
+        <p class="empty-text">No posts yet — be the first to start a discussion.</p>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
