@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
-from django.db.models import Q, Count, Prefetch
+from django.db.models import Q, Count, Prefetch, OuterRef, Subquery
 from .models import Category, Post, Reply, UserProfile, Notification
 from django.utils import timezone
 from .forms import CustomUserCreationForm, ProfileForm, EmailAuthenticationForm, PostForm, ContactForm, ReportForm
@@ -23,11 +23,37 @@ from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.contrib.auth.tokens import default_token_generator
+from django.db.models.functions import Coalesce
+from django.db.models import IntegerField
 
 
 
 # ==================== AUTHENTICATION ====================
 import resend
+
+
+def _reply_count_subquery():
+    """
+    Postgres-safe reply count.
+
+    Using .annotate(reply_count=Count('replies')) together with
+    select_related() across a joined table (e.g. author__userprofile)
+    makes Django build a GROUP BY that can omit columns pulled in via
+    the join, which Postgres rejects (SQLite silently allows it, which
+    is why this only ever broke in production). A correlated subquery
+    sidesteps the join/GROUP BY entirely.
+    """
+    return Coalesce(
+        Subquery(
+            Reply.objects.filter(post=OuterRef('pk'))
+            .order_by()
+            .values('post')
+            .annotate(c=Count('id'))
+            .values('c'),
+        ),
+        0,
+        output_field=IntegerField(),
+    )
 
 def register(request):
     if request.method == "POST":
@@ -123,7 +149,7 @@ def home(request):
     # Optimized query with select_related and prefetch_related
     posts = Post.objects.select_related('author', 'category', 'author__userprofile')\
         .prefetch_related('likes')\
-        .annotate(reply_count=Count('replies'))\
+        .annotate(reply_count=_reply_count_subquery())\
         .all()
 
     cutoff = timezone.now() - timezone.timedelta(hours=48)
@@ -148,7 +174,7 @@ def category_posts(request, slug):
     posts = Post.objects.filter(category=category)\
         .select_related('author', 'author__userprofile')\
         .prefetch_related('likes')\
-        .annotate(reply_count=Count('replies'))\
+        .annotate(reply_count=_reply_count_subquery())\
         .order_by('-is_pinned', '-created_at')
 
     context = {
@@ -442,7 +468,7 @@ def profile(request):
     profile, created = UserProfile.objects.get_or_create(user=request.user)
     user_posts = Post.objects.filter(author=request.user)\
         .select_related('category')\
-        .annotate(reply_count=Count('replies'))\
+        .annotate(reply_count=_reply_count_subquery())\
         .order_by('-created_at')
 
     context = {
@@ -479,7 +505,7 @@ def search(request):
             Q(title__icontains=query) | Q(content__icontains=query)
         ).select_related('author', 'category', 'author__userprofile')\
          .prefetch_related('likes')\
-         .annotate(reply_count=Count('replies'))[:20]
+         .annotate(reply_count=_reply_count_subquery())[:20]
     elif query:
         query = ''  # too short — template will show hint
 
