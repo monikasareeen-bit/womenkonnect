@@ -356,6 +356,20 @@ a:hover {
     z-index: 1;
 }
 
+/* Category pages: no right panel needed, so give the content column
+   the extra room instead of leaving it as dead whitespace either side.
+   Scoped to desktop only so it doesn't fight the mobile single-column
+   breakpoints further down this file. */
+body.category-page .right-panel {
+    display: none;
+}
+
+@media (min-width: 1101px) {
+    body.category-page .layout-container {
+        grid-template-columns: 260px 1fr;
+    }
+}
+
 .container {
     max-width: 1400px;
     margin: 0 auto;
@@ -376,107 +390,91 @@ a:hover {
 }
 
 /* =========================================
-   HOMEPAGE HERO
+   HOME HERO
 ========================================= */
 
 .home-hero {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 30px;
-    padding: 40px;
+    text-align: center;
+    padding: 50px 30px 40px;
     margin-bottom: 30px;
     border-radius: var(--radius-lg);
-    background: linear-gradient(135deg, #fef5f8 0%, #f8f5fc 50%, #f5f8fc 100%);
-    border: 1px solid var(--border-light);
-    box-shadow: var(--shadow-soft);
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(135deg, #e8558b 0%, #9b7fa8 55%, #7fa8c8 100%);
+    box-shadow: 0 10px 30px rgba(155, 127, 168, 0.25);
+    color: #fff;
 }
 
-.home-hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 260px;
-    height: 260px;
-    background: radial-gradient(circle, rgba(232, 85, 139, 0.08) 0%, transparent 70%);
-    border-radius: 50%;
-    transform: translate(60px, -80px);
-    pointer-events: none;
+.home-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    font-weight: 700;
+    margin: 0 0 14px;
+    line-height: 1.3;
 }
 
-.home-hero-text {
-    position: relative;
-    z-index: 1;
-    max-width: 620px;
+.home-hero-tagline {
+    font-size: 17px;
+    max-width: 640px;
+    margin: 0 auto 26px;
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.7;
 }
 
-.home-hero-text h1 {
-    font-size: 32px;
-    line-height: 1.25;
-    margin-bottom: 12px;
-}
-
-.home-hero-text p {
-    font-size: 15px;
-    color: var(--text-muted);
-    margin-bottom: 22px;
-    line-height: 1.6;
-}
-
-.home-hero-actions {
+.home-hero-cta {
     display: flex;
+    justify-content: center;
     gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+}
+
+.home-hero-cta .btn-primary {
+    background: #ffffff;
+    color: var(--primary-pink);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.home-hero-cta .btn-primary:hover {
+    background: #fff5f8;
+    transform: translateY(-2px);
+}
+
+.home-hero-cta .btn-outline {
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
+    color: #fff;
+}
+
+.home-hero-cta .btn-outline:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.home-hero-stats {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
-.home-hero-stat {
-    position: relative;
-    z-index: 1;
-    flex-shrink: 0;
-    text-align: center;
-    padding: 22px 30px;
-    background: var(--white);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-soft);
-    border-top: 4px solid;
-    border-image: linear-gradient(90deg, #e8558b, #9b7fa8) 1;
+.home-hero-stats strong {
+    color: #fff;
 }
 
-.home-hero-stat-number {
-    display: block;
-    font-family: 'Georgia', serif;
-    font-weight: 700;
-    font-size: 34px;
-    background: linear-gradient(90deg, #e8558b 0%, #9b7fa8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.home-hero-stats .dot {
+    opacity: 0.6;
 }
 
-.home-hero-stat-label {
-    display: block;
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-top: 4px;
-    white-space: nowrap;
-}
-
-@media (max-width: 768px) {
+@media (max-width: 576px) {
     .home-hero {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 28px 22px;
+        padding: 36px 20px 30px;
     }
 
-    .home-hero-text h1 {
+    .home-hero-title {
         font-size: 24px;
     }
 
-    .home-hero-stat {
-        width: 100%;
+    .home-hero-tagline {
+        font-size: 15px;
     }
 }
 
@@ -804,11 +802,6 @@ a:hover {
     font-size: 16px;
 }
 
-.w-100 {
-    width: 100%;
-    justify-content: center;
-}
-
 /* =========================================
    LIKE & REPLY BUTTONS
 ========================================= */
@@ -847,34 +840,6 @@ button.like-btn.liked {
     border-color: #e8558b !important;
     color: #e8558b !important;
     background: #fef5f8 !important;
-}
-
-/* Locked like button — before user reads the full post */
-.like-btn.like-locked,
-button.like-btn.like-locked,
-.like-btn[disabled],
-button.like-btn[disabled] {
-    opacity: 0.4 !important;
-    cursor: not-allowed !important;
-    pointer-events: all !important;
-    filter: grayscale(60%) !important;
-    border-color: #ccc !important;
-    color: #aaa !important;
-    background: #f5f5f5 !important;
-    transform: none !important;
-    box-shadow: none !important;
-}
-.like-btn.like-locked:hover,
-button.like-btn.like-locked:hover,
-.like-btn[disabled]:hover,
-button.like-btn[disabled]:hover {
-    opacity: 0.4 !important;
-    border-color: #ccc !important;
-    color: #aaa !important;
-    background: #f5f5f5 !important;
-    transform: none !important;
-    box-shadow: none !important;
-    filter: grayscale(60%) !important;
 }
 
 .reply-link,
@@ -1897,40 +1862,28 @@ html, body {
 /* ── Auth buttons ─────────────────────────────────────────── */
 .nav-auth-btns { display: flex; align-items: center; gap: 10px; }
 .nav-btn-login {
-    color: #e8558b !important;
-    background: #ffffff !important;
-    border: 2px solid #ffffff !important;
-    padding: 8px 20px !important;
+    color: #ffffff !important;
+    border: 1.5px solid rgba(255,255,255,0.65) !important;
+    padding: 6px 16px !important;
     border-radius: 20px !important;
     font-size: 13px !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
     text-decoration: none !important;
-    -webkit-text-fill-color: #e8558b !important;
-    transition: all 0.25s ease !important;
-    display: inline-flex !important;
-    align-items: center !important;
-
-}
-.nav-btn-login:hover {
-    background: rgba(255,255,255,0.35) !important;
+    background: transparent !important;
+    -webkit-text-fill-color: #ffffff !important;
 }
 .nav-btn-signup {
     color: #e8558b !important;
     background: #ffffff !important;
-    border: 2px solid #ffffff !important;
-    padding: 8px 20px !important;
+    border: none !important;
+    padding: 6px 16px !important;
     border-radius: 20px !important;
     font-size: 13px !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
     text-decoration: none !important;
     -webkit-text-fill-color: #e8558b !important;
-    transition: all 0.25s ease !important;
-    display: inline-flex !important;
-    align-items: center !important;
 }
-.nav-btn-signup:hover {
-    background: rgba(255,255,255,0.88) !important;
-}
+
 /* ── Hide chip bar everywhere — we don't use it ──────────── */
 .mobile-category-bar { display: none !important; }
 
@@ -2261,11 +2214,11 @@ html, body {
         text-align: center !important;
     }
 
-.nav-links .nav-auth-btns .nav-btn-login {
+    .nav-links .nav-auth-btns .nav-btn-login {
         color: #ffffff !important;
         -webkit-text-fill-color: #ffffff !important;
-        background: rgba(255,255,255,0.2) !important;
-        border: 2px solid #ffffff !important;
+        background: transparent !important;
+        border: 1.5px solid rgba(255,255,255,0.7) !important;
         border-radius: 20px !important;
         padding: 8px 16px !important;
         display: block !important;

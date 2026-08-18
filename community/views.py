@@ -1,9 +1,8 @@
-﻿from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.db.models import Q, Count, Prefetch
-from urllib3 import request
 from .models import Category, Post, Reply, UserProfile, Notification
 from django.utils import timezone
 from .forms import CustomUserCreationForm, ProfileForm, EmailAuthenticationForm, PostForm, ContactForm, ReportForm
@@ -35,7 +34,7 @@ def register(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = False
+            user.is_active = True
             user.save()
 
             uid = urlsafe_base64_encode(force_bytes(user.pk))
@@ -50,7 +49,7 @@ def register(request):
                     "subject": "Activate your WomenKonnect account",
                     "text": f"Hi {user.username},\n\nClick the link to activate:\n{activation_link}",
                 })
-                messages.success(request, "Account created! Check your email to activate.")
+                messages.success(request, "✅ Account created! Check your email to activate.")
             except Exception as e:
                     
                 print(f"RESEND ERROR: {type(e).__name__}: {str(e)}")
@@ -76,10 +75,7 @@ def login_view(request):
             password = form.cleaned_data['password']
 
             try:
-                user_obj = User.objects.filter(email__iexact=email).first()
-                if not user_obj:
-                        messages.error(request, 'Invalid credentials.')
-                        return redirect('login')
+                user_obj = User.objects.get(email__iexact=email)
                 user = authenticate(request, username=email, password=password)
             except User.DoesNotExist:
                 user = None
@@ -118,17 +114,22 @@ def activate(request, uidb64, token):
         messages.error(request, 'Activation link is invalid or has expired!')
         return redirect('register')
 
+
 # ==================== HOME & CATEGORIES ====================
 
 def home(request):
     categories = Category.objects.all()
+
+    # Optimized query with select_related and prefetch_related
+    posts = Post.objects.select_related('author', 'category', 'author__userprofile')\
+        .prefetch_related('likes')\
+        .annotate(reply_count=Count('replies'))\
+        .all()
+
     cutoff = timezone.now() - timezone.timedelta(hours=48)
-    recent_posts = list(Post.objects.filter(created_at__gte=cutoff).select_related('author', 'category', 'author__userprofile').order_by('-created_at')[:10])
-    for post in recent_posts:
-        post.reply_count = post.replies.count()
-    older_posts = list(Post.objects.filter(created_at__lt=cutoff).select_related('author', 'category', 'author__userprofile').order_by('-created_at')[:10])
-    for post in older_posts:
-        post.reply_count = post.replies.count()
+    recent_posts = posts.filter(created_at__gte=cutoff).order_by('-created_at')[:10]
+    older_posts = posts.filter(created_at__lt=cutoff).order_by('-created_at')[:10]
+
     context = {
         'categories': categories,
         'recent_posts': recent_posts,
@@ -143,63 +144,38 @@ def home(request):
 def category_posts(request, slug):
     category = get_object_or_404(Category, slug=slug)
 
-    posts = list(
-        Post.objects.filter(category=category)
-        .select_related('author', 'author__userprofile')
-        .prefetch_related('likes', 'replies')
+    # Optimized query
+    posts = Post.objects.filter(category=category)\
+        .select_related('author', 'author__userprofile')\
+        .prefetch_related('likes')\
+        .annotate(reply_count=Count('replies'))\
         .order_by('-is_pinned', '-created_at')
-    )
-
-    liked_post_ids = set()
-    if request.user.is_authenticated:
-        liked_post_ids = set(
-            Post.objects.filter(
-                category=category,
-                likes=request.user
-            ).values_list('id', flat=True)
-        )
-
-    for post in posts:
-        post.user_has_liked = post.pk in liked_post_ids
-        post.reply_count = post.replies.count()  # uses prefetch cache, no extra query
 
     context = {
         'category': category,
-        'posts': posts,
-        'posts_count': len(posts),
+        'posts': posts
     }
     return render(request, 'community/category_posts.html', context)
+
 
 # ==================== POST VIEWS ====================
 
 def post_detail(request, pk):
+    # Optimized query
     post = get_object_or_404(
         Post.objects.select_related('author', 'author__userprofile', 'category'),
         pk=pk
     )
 
+    # Increment view count
     post.increment_views()
-    post.user_has_liked = request.user.is_authenticated and post.likes.filter(pk=request.user.pk).exists()
 
-    # replies_list MUST come before post.replies_count
-    replies_list = list(
-        post.replies.select_related('author', 'author__userprofile', 'quoted_user')
-        .prefetch_related('likes')
+    # Get all replies with optimized query
+    replies_list = post.replies.select_related('author', 'author__userprofile', 'quoted_user')\
+        .prefetch_related('likes')\
         .order_by('created_at')
-    )
 
-    post.replies_count = len(replies_list)  # NOW it's defined
-
-    liked_reply_ids = set()
-    if request.user.is_authenticated:
-        liked_reply_ids = set(
-            post.replies.filter(likes=request.user).values_list('id', flat=True)
-        )
-
-    for reply in replies_list:
-        reply.user_has_liked = reply.pk in liked_reply_ids
-        reply.like_count = reply.likes.count()
-
+    # Pagination - 10 replies per page
     paginator = Paginator(replies_list, 10)
     page = request.GET.get('page', 1)
 
@@ -215,6 +191,8 @@ def post_detail(request, pk):
         'replies': replies,
     }
     return render(request, 'community/post_detail.html', context)
+
+
 @login_required
 def create_post(request, category_slug=None):
     preselected_category = None
@@ -462,13 +440,10 @@ def like_reply(request, pk):
 @login_required
 def profile(request):
     profile, created = UserProfile.objects.get_or_create(user=request.user)
-    user_posts = list(
-        Post.objects.filter(author=request.user)
-        .select_related('category')
+    user_posts = Post.objects.filter(author=request.user)\
+        .select_related('category')\
+        .annotate(reply_count=Count('replies'))\
         .order_by('-created_at')
-    )
-    for post in user_posts:
-        post.reply_count = post.replies.count()
 
     context = {
         'profile': profile,
@@ -500,23 +475,20 @@ def search(request):
     posts = []
 
     if len(query) >= 2:
-        posts = list(
-            Post.objects.filter(
-                Q(title__icontains=query) | Q(content__icontains=query)
-            ).select_related('author', 'category', 'author__userprofile')
-            .prefetch_related('likes', 'replies')
-            .order_by('-created_at')[:20]
-        )
-        for post in posts:
-            post.reply_count = post.replies.count()
+        posts = Post.objects.filter(
+            Q(title__icontains=query) | Q(content__icontains=query)
+        ).select_related('author', 'category', 'author__userprofile')\
+         .prefetch_related('likes')\
+         .annotate(reply_count=Count('replies'))[:20]
     elif query:
-        query = ''
+        query = ''  # too short — template will show hint
 
     context = {
         'posts': posts,
         'query': query,
     }
     return render(request, 'community/search_results.html', context)
+
 
 # ==================== NOTIFICATIONS ====================
 
@@ -613,7 +585,7 @@ def contact(request):
                 resend.Emails.send({
                     "from": settings.DEFAULT_FROM_EMAIL,
                     "to": [settings.ADMIN_EMAIL],
-                    "reply_to": form.cleaned_data['email'],   # â† add this
+                    "reply_to": form.cleaned_data['email'],   # ← add this
                     "subject": f"Contact: {form.cleaned_data['subject']}",
                     "text": f"From: {form.cleaned_data['name']} <{form.cleaned_data['email']}>\n\n{form.cleaned_data['message']}",
                 })
@@ -634,12 +606,6 @@ def handler500(request):
 
 def handler403(request, exception):
     return render(request, '403.html', status=403)
-
-def check_users(request):
-    return HttpResponse("This endpoint is disabled.", status=403)
-
-def create_admin(request):
-    return HttpResponse("This endpoint is disabled.", status=403)
 
 def forgot_password(request):
     if request.method == "POST":
@@ -693,6 +659,4 @@ def reset_password_confirm(request, uidb64, token):
         messages.success(request, 'Password reset successfully! You can now login.')
         return redirect('login')
 
-    return render(request, 'community/password_reset_confirm.html', {'uidb64': uidb64, 'token': token, 'validlink': True})# force rebuild
-
-# rebuilt
+    return render(request, 'community/password_reset_confirm.html', {'uidb64': uidb64, 'token': token, 'validlink': True})
