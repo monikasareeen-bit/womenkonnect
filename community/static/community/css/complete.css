@@ -8,7 +8,7 @@
 ========================================= */
 
 html {
-    background: linear-gradient(160deg, #c96f95 0%, #e9a4bf 45%, #f6d3e0 100%);
+    background: linear-gradient(160deg, #e0a0bc 0%, #f0c2d8 45%, #fbe9f1 100%);
     min-height: 100vh !important;
     background-attachment: fixed;
 }
@@ -23,12 +23,11 @@ body {
     font-family: 'Segoe UI', 'Trebuchet MS', sans-serif;
     color: #3d3d4d;
     background:
-        linear-gradient(160deg, #c96f95 0%, #e9a4bf 45%, #f6d3e0 100%) !important;
+        linear-gradient(160deg, #e0a0bc 0%, #f0c2d8 45%, #fbe9f1 100%) !important;
     min-height: 100vh !important;
     background-attachment: fixed;
-    background-color: #e9a4bf;
+    background-color: #f0c2d8;
 }
-
 /* Site-wide floral pattern — same on every page since this lives in body,
    which every template inherits via base.html. */
 body::before {
@@ -38,11 +37,10 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image:
-        url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22260%22%20height%3D%22260%22%20viewBox%3D%220%200%20260%20260%22%3E%0A%3Cg%20fill%3D%22%23ffffff%22%20opacity%3D%220.55%22%3E%0A%3Cellipse%20cx%3D%2290%22%20cy%3D%2240%22%20rx%3D%2220%22%20ry%3D%2210%22%20transform%3D%22rotate%2820%2090%2040%29%22/%3E%0A%3Cellipse%20cx%3D%2260%22%20cy%3D%2255%22%20rx%3D%2218%22%20ry%3D%229%22%20transform%3D%22rotate%28-15%2060%2055%29%22/%3E%0A%3Cellipse%20cx%3D%22115%22%20cy%3D%2265%22%20rx%3D%2216%22%20ry%3D%228%22%20transform%3D%22rotate%2845%20115%2065%29%22/%3E%0A%3Cellipse%20cx%3D%2240%22%20cy%3D%22160%22%20rx%3D%2220%22%20ry%3D%2210%22%20transform%3D%22rotate%28-30%2040%20160%29%22/%3E%0A%3Cellipse%20cx%3D%2265%22%20cy%3D%22140%22%20rx%3D%2220%22%20ry%3D%2210%22%20transform%3D%22rotate%28-10%2065%20140%29%22/%3E%0A%3Cellipse%20cx%3D%2290%22%20cy%3D%22120%22%20rx%3D%2218%22%20ry%3D%229%22%20transform%3D%22rotate%2815%2090%20120%29%22/%3E%0A%3C/g%3E%0A%3Cg%20fill%3D%22%23a9436b%22%20opacity%3D%220.28%22%3E%0A%3Cellipse%20cx%3D%22180%22%20cy%3D%2270%22%20rx%3D%2216%22%20ry%3D%228%22%20transform%3D%22rotate%2825%20180%2070%29%22/%3E%0A%3Cellipse%20cx%3D%22155%22%20cy%3D%2285%22%20rx%3D%2214%22%20ry%3D%227%22%20transform%3D%22rotate%28-10%20155%2085%29%22/%3E%0A%3Cellipse%20cx%3D%22195%22%20cy%3D%2295%22%20rx%3D%2212%22%20ry%3D%226%22%20transform%3D%22rotate%2850%20195%2095%29%22/%3E%0A%3Cellipse%20cx%3D%2260%22%20cy%3D%22220%22%20rx%3D%2214%22%20ry%3D%227%22%20transform%3D%22rotate%2830%2060%20220%29%22/%3E%0A%3Cellipse%20cx%3D%2240%22%20cy%3D%22235%22%20rx%3D%2212%22%20ry%3D%226%22%20transform%3D%22rotate%28-20%2040%20235%29%22/%3E%0A%3C/g%3E%0A%3Cpath%20d%3D%22M30%2C10%20C60%2C40%2080%2C50%20130%2C90%22%20stroke%3D%22%23f0c2d4%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.6%22/%3E%0A%3Cpath%20d%3D%22M20%2C180%20C50%2C150%2070%2C130%20130%2C80%22%20stroke%3D%22%23f0c2d4%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.6%22/%3E%0A%3Cpath%20d%3D%22M140%2C30%20C160%2C50%20175%2C55%20200%2C80%22%20stroke%3D%22%23a9436b%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.4%22/%3E%0A%3Ccircle%20cx%3D%22200%22%20cy%3D%2230%22%20r%3D%223%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.8%22/%3E%0A%3Ccircle%20cx%3D%2230%22%20cy%3D%22100%22%20r%3D%222.5%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.7%22/%3E%0A%3Ccircle%20cx%3D%22220%22%20cy%3D%22180%22%20r%3D%224%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.6%22/%3E%0A%3Ccircle%20cx%3D%22110%22%20cy%3D%22220%22%20r%3D%223%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.7%22/%3E%0A%3C/svg%3E"),
-        radial-gradient(ellipse 800px 600px at 5% 20%, rgba(255, 255, 255, 0.10) 0%, transparent 40%),
-        radial-gradient(ellipse 900px 700px at 95% 80%, rgba(169, 67, 107, 0.10) 0%, transparent 45%);
-    background-repeat: repeat, no-repeat, no-repeat;
+        background-image:
+        url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22260%22%20height%3D%22260%22%20viewBox%3D%220%200%20260%20260%22%3E%0A%3Cg%20fill%3D%22%23ffffff%22%20opacity%3D%220.6%22%3E%0A%3Cellipse%20cx%3D%2290%22%20cy%3D%2240%22%20rx%3D%2220%22%20ry%3D%2210%22%20transform%3D%22rotate%2820%2090%2040%29%22/%3E%0A%3Cellipse%20cx%3D%2260%22%20cy%3D%2255%22%20rx%3D%2218%22%20ry%3D%229%22%20transform%3D%22rotate%28-15%2060%2055%29%22/%3E%0A%3Cellipse%20cx%3D%22115%22%20cy%3D%2265%22%20rx%3D%2216%22%20ry%3D%228%22%20transform%3D%22rotate%2845%20115%2065%29%22/%3E%0A%3Cellipse%20cx%3D%2240%22%20cy%3D%22160%22%20rx%3D%2220%22%20ry%3D%2210%22%20transform%3D%22rotate%28-30%2040%20160%29%22/%3E%0A%3Cellipse%20cx%3D%2265%22%20cy%3D%22140%22%20rx%3D%2220%22%20ry%3D%2210%22%20transform%3D%22rotate%28-10%2065%20140%29%22/%3E%0A%3Cellipse%20cx%3D%2290%22%20cy%3D%22120%22%20rx%3D%2218%22%20ry%3D%229%22%20transform%3D%22rotate%2815%2090%20120%29%22/%3E%0A%3C/g%3E%0A%3Cg%20fill%3D%22%23e0a0bc%22%20opacity%3D%220.22%22%3E%0A%3Cellipse%20cx%3D%22180%22%20cy%3D%2270%22%20rx%3D%2216%22%20ry%3D%228%22%20transform%3D%22rotate%2825%20180%2070%29%22/%3E%0A%3Cellipse%20cx%3D%22155%22%20cy%3D%2285%22%20rx%3D%2214%22%20ry%3D%227%22%20transform%3D%22rotate%28-10%20155%2085%29%22/%3E%0A%3Cellipse%20cx%3D%22195%22%20cy%3D%2295%22%20rx%3D%2212%22%20ry%3D%226%22%20transform%3D%22rotate%2850%20195%2095%29%22/%3E%0A%3Cellipse%20cx%3D%2260%22%20cy%3D%22220%22%20rx%3D%2214%22%20ry%3D%227%22%20transform%3D%22rotate%2830%2060%20220%29%22/%3E%0A%3Cellipse%20cx%3D%2240%22%20cy%3D%22235%22%20rx%3D%2212%22%20ry%3D%226%22%20transform%3D%22rotate%28-20%2040%20235%29%22/%3E%0A%3C/g%3E%0A%3Cpath%20d%3D%22M30%2C10%20C60%2C40%2080%2C50%20130%2C90%22%20stroke%3D%22%23f5d9e6%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.6%22/%3E%0A%3Cpath%20d%3D%22M20%2C180%20C50%2C150%2070%2C130%20130%2C80%22%20stroke%3D%22%23f5d9e6%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.6%22/%3E%0A%3Cpath%20d%3D%22M140%2C30%20C160%2C50%20175%2C55%20200%2C80%22%20stroke%3D%22%23e0a0bc%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.35%22/%3E%0A%3Ccircle%20cx%3D%22200%22%20cy%3D%2230%22%20r%3D%223%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.8%22/%3E%0A%3Ccircle%20cx%3D%2230%22%20cy%3D%22100%22%20r%3D%222.5%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.7%22/%3E%0A%3Ccircle%20cx%3D%22220%22%20cy%3D%22180%22%20r%3D%224%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.6%22/%3E%0A%3Ccircle%20cx%3D%22110%22%20cy%3D%22220%22%20r%3D%223%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.7%22/%3E%0A%3C/svg%3E"),
+        radial-gradient(ellipse 800px 600px at 5% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
+        radial-gradient(ellipse 900px 700px at 95% 80%, rgba(224, 160, 188, 0.10) 0%, transparent 45%);
     background-size: 420px 420px, auto, auto;
     pointer-events: none;
     z-index: 0;
@@ -215,7 +213,7 @@ a:hover {
     color: #ffffff;
     text-decoration: none;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 16px;
     transition: opacity 0.3s ease;
     letter-spacing: 0.3px;
     white-space: nowrap;
@@ -343,7 +341,7 @@ a:hover {
 
 .sidebar,
 .right-panel {
-    background: rgba(255, 255, 255, 0.72);
+    background: rgba(255, 255, 255, 0.8);
     padding: 25px;
     border-radius: var(--radius-lg);
     border: 1px solid var(--border-light);
@@ -400,9 +398,9 @@ body.category-page .right-panel {
     padding: 46px 30px 36px;
     margin-bottom: 30px;
     border-radius: var(--radius-lg);
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(3px);
-    box-shadow: 0 10px 30px rgba(155, 90, 120, 0.15);
+    box-shadow: 0 10px 30px rgba(155, 90, 120, 0.12);
     color: #5c2440;
 }
 
@@ -510,7 +508,7 @@ body.category-page .right-panel {
 
 .post-row {
     padding: 20px;
-    background: rgba(255, 255, 255, 0.72);
+    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(6px);
     border-radius: 12px;
     border-left: 5px solid #e8558b;
@@ -586,7 +584,7 @@ body.category-page .right-panel {
 ========================================= */
 
 .sidebar-card {
-    background: rgba(255, 255, 255, 0.72);
+    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(6px);
     padding: 20px;
     border-radius: 12px;
@@ -668,7 +666,7 @@ body.category-page .right-panel {
 ========================================= */
 
 .post-card {
-    background: rgba(255, 255, 255, 0.72);
+    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(6px);
     padding: 20px;
     border-radius: 12px;
@@ -1780,41 +1778,38 @@ select.form-control {
 /* Logo container */
 .logo {
     display: flex;
-    align-items: center;   /* centers image + text vertically */
-    gap: 10px;             /* adds space between them */
+    align-items: center;
+    gap: 12px;
 }
-/* Apply flexbox directly to the anchor that wraps image + text */
+
 .logo a {
     display: flex;
-    align-items: center;   /* vertical centering */
-    gap: 12px;             /* spacing between image and text */
-    text-decoration: none; /* optional: remove underline */
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    white-space: nowrap;
 }
 
-
-/* Logo image */
 .logo img {
-    height: 60px;     /* slightly bigger = more premium */
+    height: 72px;
     width: auto;
     display: block;
 }
 
-/* Logo text */
 .logo span {
     font-family: 'Georgia', serif;
-    font-size: 22px;
+    font-size: 28px;
     color: #ffffff;
     font-weight: 700;
-    white-space: nowrap;   /* keeps text on one line */
+    white-space: nowrap;
 }
 
-/* Optional: adjust for mobile */
 @media (max-width: 576px) {
     .logo img {
-        height: 40px;      /* smaller logo on mobile */
+        height: 44px;
     }
     .logo span {
-        font-size: 1rem;   /* smaller text on mobile */
+        font-size: 18px;
     }
 }
 /* Fix transparent text in input fields */
