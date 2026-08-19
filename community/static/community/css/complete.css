@@ -212,18 +212,13 @@ a:hover {
 .nav-links a {
     color: #ffffff;
     text-decoration: none;
-    font-weight: 500;
-    font-size: 16px;
+    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 20px;
     transition: opacity 0.3s ease;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.8px;
     white-space: nowrap;
 }
-
-.nav-links a:hover {
-    opacity: 0.9;
-    text-decoration: underline;
-}
-
 .logout-btn {
     background-color: rgba(255, 255, 255, 0.18);
     border: 1.5px solid rgba(255, 255, 255, 0.35);
@@ -254,8 +249,10 @@ a:hover {
     background-color: transparent;
     color: #ffffff;
     border: none;
-    font-size: 14px;
-    font-weight: 500;
+    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
     cursor: pointer;
     transition: opacity 0.3s ease;
 }
