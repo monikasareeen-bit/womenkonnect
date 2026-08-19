@@ -28,8 +28,9 @@ body {
     background-attachment: fixed;
     background-color: #f0c2d8;
 }
-/* Site-wide floral pattern — same on every page since this lives in body,
-   which every template inherits via base.html. */
+
+/* Site-wide floral pattern — same on every page (login, category, profile, etc)
+   since this lives in body, which every template inherits via base.html. */
 body::before {
     content: '';
     position: fixed;
@@ -37,14 +38,16 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-        background-image:
+    background-image:
         url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22260%22%20height%3D%22260%22%20viewBox%3D%220%200%20260%20260%22%3E%0A%3Cg%20fill%3D%22%23ffffff%22%20opacity%3D%220.6%22%3E%0A%3Cellipse%20cx%3D%2290%22%20cy%3D%2240%22%20rx%3D%2220%22%20ry%3D%2210%22%20transform%3D%22rotate%2820%2090%2040%29%22/%3E%0A%3Cellipse%20cx%3D%2260%22%20cy%3D%2255%22%20rx%3D%2218%22%20ry%3D%229%22%20transform%3D%22rotate%28-15%2060%2055%29%22/%3E%0A%3Cellipse%20cx%3D%22115%22%20cy%3D%2265%22%20rx%3D%2216%22%20ry%3D%228%22%20transform%3D%22rotate%2845%20115%2065%29%22/%3E%0A%3Cellipse%20cx%3D%2240%22%20cy%3D%22160%22%20rx%3D%2220%22%20ry%3D%2210%22%20transform%3D%22rotate%28-30%2040%20160%29%22/%3E%0A%3Cellipse%20cx%3D%2265%22%20cy%3D%22140%22%20rx%3D%2220%22%20ry%3D%2210%22%20transform%3D%22rotate%28-10%2065%20140%29%22/%3E%0A%3Cellipse%20cx%3D%2290%22%20cy%3D%22120%22%20rx%3D%2218%22%20ry%3D%229%22%20transform%3D%22rotate%2815%2090%20120%29%22/%3E%0A%3C/g%3E%0A%3Cg%20fill%3D%22%23e0a0bc%22%20opacity%3D%220.22%22%3E%0A%3Cellipse%20cx%3D%22180%22%20cy%3D%2270%22%20rx%3D%2216%22%20ry%3D%228%22%20transform%3D%22rotate%2825%20180%2070%29%22/%3E%0A%3Cellipse%20cx%3D%22155%22%20cy%3D%2285%22%20rx%3D%2214%22%20ry%3D%227%22%20transform%3D%22rotate%28-10%20155%2085%29%22/%3E%0A%3Cellipse%20cx%3D%22195%22%20cy%3D%2295%22%20rx%3D%2212%22%20ry%3D%226%22%20transform%3D%22rotate%2850%20195%2095%29%22/%3E%0A%3Cellipse%20cx%3D%2260%22%20cy%3D%22220%22%20rx%3D%2214%22%20ry%3D%227%22%20transform%3D%22rotate%2830%2060%20220%29%22/%3E%0A%3Cellipse%20cx%3D%2240%22%20cy%3D%22235%22%20rx%3D%2212%22%20ry%3D%226%22%20transform%3D%22rotate%28-20%2040%20235%29%22/%3E%0A%3C/g%3E%0A%3Cpath%20d%3D%22M30%2C10%20C60%2C40%2080%2C50%20130%2C90%22%20stroke%3D%22%23f5d9e6%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.6%22/%3E%0A%3Cpath%20d%3D%22M20%2C180%20C50%2C150%2070%2C130%20130%2C80%22%20stroke%3D%22%23f5d9e6%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.6%22/%3E%0A%3Cpath%20d%3D%22M140%2C30%20C160%2C50%20175%2C55%20200%2C80%22%20stroke%3D%22%23e0a0bc%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20opacity%3D%220.35%22/%3E%0A%3Ccircle%20cx%3D%22200%22%20cy%3D%2230%22%20r%3D%223%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.8%22/%3E%0A%3Ccircle%20cx%3D%2230%22%20cy%3D%22100%22%20r%3D%222.5%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.7%22/%3E%0A%3Ccircle%20cx%3D%22220%22%20cy%3D%22180%22%20r%3D%224%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.6%22/%3E%0A%3Ccircle%20cx%3D%22110%22%20cy%3D%22220%22%20r%3D%223%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.7%22/%3E%0A%3C/svg%3E"),
         radial-gradient(ellipse 800px 600px at 5% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
         radial-gradient(ellipse 900px 700px at 95% 80%, rgba(224, 160, 188, 0.10) 0%, transparent 45%);
+    background-repeat: repeat, no-repeat, no-repeat;
     background-size: 420px 420px, auto, auto;
     pointer-events: none;
     z-index: 0;
 }
+
 /* =========================================
    COLOR VARIABLES (ELEGANT & REFINED)
 ========================================= */
@@ -219,6 +222,12 @@ a:hover {
     letter-spacing: 0.8px;
     white-space: nowrap;
 }
+
+.nav-links a:hover {
+    opacity: 0.9;
+    text-decoration: underline;
+}
+
 .logout-btn {
     background-color: rgba(255, 255, 255, 0.18);
     border: 1.5px solid rgba(255, 255, 255, 0.35);
@@ -409,6 +418,9 @@ body.category-page .right-panel {
     letter-spacing: 0.3px;
     margin: 0 0 14px;
     line-height: 1.25;
+    /* Override the global h1 gradient-text-clip effect (see the
+       "h1, h2, h3..." rule above) — that gradient text made the
+       title hard to read on this background. */
     background: none;
     -webkit-background-clip: unset;
     background-clip: unset;
@@ -526,6 +538,7 @@ body.category-page .right-panel {
     grid-template-columns: 1fr 1fr;
     gap: 50px;
     margin-top: 30px;
+}
 
 .section-title {
     font-size: 24px;
@@ -540,6 +553,26 @@ body.category-page .right-panel {
     display: flex;
     flex-direction: column;
     gap: 15px;
+}
+
+.home-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.badge-new {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #e8558b 0%, #9b7fa8 100%);
+    padding: 2px 9px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 8px;
 }
 
 .post-row {
@@ -1786,26 +1819,6 @@ select.form-control {
     }
 }
 
-
-.logo span {
-    font-family: 'Georgia', serif;
-    font-size: 22px;
-    color: #ffffff;
-    font-weight: 700;
-    margin-left: 10px;
-}
-
-.top-navbar .logo a {
-    display: flex;
-    align-items: center;
-    /* centers image + text vertically */
-    gap: 10px;
-    /* adds space between them */
-    text-decoration: none;
-    /* optional: remove underline */
-}
-
-
 /* Logo container */
 .logo {
     display: flex;
@@ -2026,7 +2039,7 @@ html, body {
     .nav-links.nav-open { display: flex !important; }
     .nav-links a {
         padding: 12px 18px !important;
-        font-size: 18px !important;
+        font-size: 14px !important;
         color: #fff !important;
         -webkit-text-fill-color: #fff !important;
         border-left: 3px solid transparent !important;

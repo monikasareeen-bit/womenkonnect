@@ -148,8 +148,9 @@ def home(request):
 
     cutoff = timezone.now() - timezone.timedelta(hours=48)
 
-    # Single chronological feed (newest first), with a "New" badge for
-    # anything within the last 48 hours — no more Recent/Older split.
+    # Single chronological feed (newest first). Posts within the last 48
+    # hours are flagged so the template can show a "New" badge — no more
+    # splitting into separate Recent/Older columns.
     posts = Post.objects.select_related('author', 'category', 'author__userprofile')\
         .prefetch_related('likes')\
         .annotate(reply_count=_reply_count_subquery())\
@@ -164,6 +165,7 @@ def home(request):
     }
 
     return render(request, 'community/home_two_panel.html', context)
+
 
 def category_posts(request, slug):
     category = get_object_or_404(Category, slug=slug)
