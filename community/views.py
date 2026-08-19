@@ -146,26 +146,24 @@ def activate(request, uidb64, token):
 def home(request):
     categories = Category.objects.all()
 
-    # Optimized query with select_related and prefetch_related
+    cutoff = timezone.now() - timezone.timedelta(hours=48)
+
+    # Single chronological feed (newest first), with a "New" badge for
+    # anything within the last 48 hours — no more Recent/Older split.
     posts = Post.objects.select_related('author', 'category', 'author__userprofile')\
         .prefetch_related('likes')\
         .annotate(reply_count=_reply_count_subquery())\
-        .all()
-
-    cutoff = timezone.now() - timezone.timedelta(hours=48)
-    recent_posts = posts.filter(created_at__gte=cutoff).order_by('-created_at')[:10]
-    older_posts = posts.filter(created_at__lt=cutoff).order_by('-created_at')[:10]
+        .order_by('-created_at')[:30]
 
     context = {
         'categories': categories,
-        'recent_posts': recent_posts,
-        'older_posts': older_posts,
+        'posts': posts,
+        'cutoff': cutoff,
         'total_members': User.objects.count(),
         'total_posts': Post.objects.count(),
     }
 
     return render(request, 'community/home_two_panel.html', context)
-
 
 def category_posts(request, slug):
     category = get_object_or_404(Category, slug=slug)
