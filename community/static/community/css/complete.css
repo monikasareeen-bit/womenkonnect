@@ -405,11 +405,13 @@ body.category-page .right-panel {
 }
 
 .home-hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 34px;
+    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+    font-size: 44px;
     font-weight: 700;
+    font-style: italic;
+    letter-spacing: 0.3px;
     margin: 0 0 14px;
-    line-height: 1.3;
+    line-height: 1.25;
     background: none;
     -webkit-background-clip: unset;
     background-clip: unset;
@@ -1793,11 +1795,11 @@ select.form-control {
 }
 
 .logo span {
-    font-family: 'Playfair Display', 'Georgia', serif;
-    font-size: 32px;
-    font-weight: 700;
-    font-style: italic;
-    letter-spacing: 0.5px;
+    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: 1.5px;
     color: #ffffff;
     white-space: nowrap;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
