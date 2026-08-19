@@ -1791,7 +1791,7 @@ select.form-control {
 }
 
 .logo img {
-    height: 130px;
+    height: 160px;
     width: auto;
     display: block;
     filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.22));
@@ -1799,7 +1799,7 @@ select.form-control {
 
 .logo span {
     font-family: 'Playfair Display', 'Georgia', serif;
-    font-size: 38px;
+    font-size: 32px;
     font-weight: 700;
     font-style: italic;
     letter-spacing: 0.5px;
@@ -1810,10 +1810,10 @@ select.form-control {
 
 @media (max-width: 576px) {
     .logo img {
-        height: 62px;
+        height: 74px;
     }
     .logo span {
-        font-size: 22px;
+        font-size: 20px;
     }
 }
 /* Fix transparent text in input fields */
