@@ -1791,27 +1791,29 @@ select.form-control {
 }
 
 .logo img {
-    height: 112px;
+    height: 130px;
     width: auto;
     display: block;
-    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.22));
 }
 
 .logo span {
-    font-family: 'Georgia', serif;
-    font-size: 34px;
-    color: #ffffff;
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-size: 38px;
     font-weight: 700;
+    font-style: italic;
+    letter-spacing: 0.5px;
+    color: #ffffff;
     white-space: nowrap;
-    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 @media (max-width: 576px) {
     .logo img {
-        height: 56px;
+        height: 62px;
     }
     .logo span {
-        font-size: 20px;
+        font-size: 22px;
     }
 }
 /* Fix transparent text in input fields */
