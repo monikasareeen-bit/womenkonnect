@@ -1750,11 +1750,6 @@ select.form-control {
     }
 }
 
-.logo img {
-    display: block;
-    max-height: 50px;
-    width: auto;
-}
 
 .logo span {
     font-family: 'Georgia', serif;
