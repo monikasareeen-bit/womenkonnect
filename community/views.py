@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.db.models import Q, Count, Prefetch, OuterRef, Subquery
-from .models import Category, Post, Reply, UserProfile, Notification
+from .models import Category, Post, Reply, UserProfile, Notification, PostView
 from django.utils import timezone
 from .forms import CustomUserCreationForm, ProfileForm, EmailAuthenticationForm, PostForm, ContactForm, ReportForm
 from django.core.mail import send_mail
@@ -193,8 +193,19 @@ def post_detail(request, pk):
         pk=pk
     )
 
-    # Increment view count
-    post.increment_views()
+    # Count each visitor (logged in or not) at most once per browser
+    # session, so refreshing the page doesn't inflate view_count.
+    session_key = f'viewed_post_{post.pk}'
+    if not request.session.get(session_key, False):
+        post.increment_views()
+        request.session[session_key] = True
+
+    # For logged-in readers, record that they've seen this post so the
+    # author can later see who's engaged with it. Anonymous readers still
+    # count toward view_count above but aren't identifiable, so nothing
+    # to record here for them.
+    if request.user.is_authenticated:
+        PostView.objects.get_or_create(post=post, user=request.user)
 
     # Get all replies with optimized query
     replies_list = post.replies.select_related('author', 'author__userprofile', 'quoted_user')\
@@ -216,6 +227,13 @@ def post_detail(request, pk):
         'post': post,
         'replies': replies,
     }
+
+    # "Seen by" list — only ever shown to the post's own author, to
+    # respect readers' privacy on a site whose whole promise is being a
+    # safe, anonymous space.
+    if request.user.is_authenticated and request.user == post.author:
+        context['viewers'] = post.post_views.select_related('user', 'user__userprofile')[:50]
+
     return render(request, 'community/post_detail.html', context)
 
 

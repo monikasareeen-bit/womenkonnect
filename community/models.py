@@ -87,6 +87,27 @@ class Post(models.Model):
         #self.view_count += 1
         #self.save(update_fields=['view_count'])
 
+
+class PostView(models.Model):
+    """
+    Records that a logged-in user has read a post, so the author can see
+    who has engaged with it. Anonymous readers still count toward
+    Post.view_count (see post_detail view) but aren't tracked here since
+    there's no identity to attach — this keeps the site's "100% Anonymous
+    & Safe" promise intact for anyone not logged in, and even for logged-in
+    readers this list is only ever shown to the post's own author.
+    """
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_views')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='viewed_posts')
+    viewed_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('post', 'user')
+        ordering = ['-viewed_at']
+
+    def __str__(self):
+        return f"{self.user.username} viewed {self.post.title}"
+
 class Reply(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='replies')
     author = models.ForeignKey(User, on_delete=models.CASCADE)

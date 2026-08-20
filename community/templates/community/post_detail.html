@@ -1,14 +1,8 @@
 {% extends 'community/base.html' %}
 {% load static %}
 {% load time_filters %}
-{% block meta_description %}{{ post.content|truncatewords:25|striptags }}{% endblock %}
-{% block canonical %}https://www.womenkonnect.co.in/post/{{ post.pk }}/{% endblock %}
-{% block og_title %}{{ post.title }} | WomenKonnect{% endblock %}
-{% block og_description %}{{ post.content|truncatewords:20|striptags }}{% endblock %}
-{% block og_url %}https://www.womenkonnect.co.in/post/{{ post.pk }}/{% endblock %}
-{% block og_type %}article{% endblock %}
 
-{% block title %}{{ post.title }} | WomenKonnect{% endblock %}
+{% block title %}{{ post.title }} - WomenConnect{% endblock %}
 
 {% block content %}
 <div class="container my-5">
@@ -25,7 +19,7 @@
             By <strong>{{ post.author.username }}</strong> &bull;
             {{ post.created_at|timesince }} ago &bull;
             <span id="post-likes-count">{{ post.total_likes }}</span> likes &bull;
-            {{ post.replies_count }} replies &bull;
+            {{ post.replies.count }} replies &bull;
             {{ post.view_count }} views
         </div>
     </div>
@@ -46,9 +40,9 @@
                 </span>
                 {% else %}
                 <button type="button"
-                        class="like-btn {% if post.user_has_liked %}liked{% endif %}"
+                        class="like-btn {% if user in post.likes.all %}liked{% endif %}"
                         onclick="togglePostLike({{ post.pk }}, this)">
-                    <i class="{% if post.user_has_liked %}fas{% else %}far{% endif %} fa-heart"></i>
+                    <i class="{% if user in post.likes.all %}fas{% else %}far{% endif %} fa-heart"></i>
                     <span class="like-count">{{ post.total_likes }}</span>
                 </button>
                 {% endif %}
@@ -106,11 +100,30 @@
 
         </div>
     </div>
+
+    <!-- SEEN BY — only ever rendered for the post's own author (see
+         view: `viewers` is only added to context when request.user is
+         the author), keeping readers anonymous to everyone else. -->
+    {% if viewers %}
+    <div class="sidebar-card" style="margin-top:15px;">
+        <h4>👀 Seen By ({{ viewers.count }})</h4>
+        <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">
+            Only visible to you as the post's author.
+        </p>
+        <div style="display:flex; flex-wrap:wrap; gap:10px;">
+            {% for pv in viewers %}
+            <span class="stat-item" title="{{ pv.viewed_at|date:'M d, Y H:i' }}">
+                {{ pv.user.username }}
+            </span>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
     {% endif %}
 
     <!-- REPLIES -->
     <div id="replies" class="replies-section">
-        <h4>Replies ({{ post.replies_count }})</h4>
+        <h4>Replies ({{ post.replies.count }})</h4>
 
         {% if replies %}
         {% for reply in replies %}
@@ -153,10 +166,10 @@
                     </span>
                     {% else %}
                     <button type="button"
-                            class="like-btn {% if reply.user_has_liked %}liked{% endif %}"
+                            class="like-btn {% if user in reply.likes.all %}liked{% endif %}"
                             onclick="toggleReplyLike({{ reply.pk }}, this)">
-                        <i class="{% if reply.user_has_liked %}fas{% else %}far{% endif %} fa-heart"></i>
-                        <span class="like-count">{{ reply.like_count }}</span>
+                        <i class="{% if user in reply.likes.all %}fas{% else %}far{% endif %} fa-heart"></i>
+                        <span class="like-count">{{ reply.total_likes }}</span>
                     </button>
                     {% endif %}
                 {% else %}
@@ -388,8 +401,5 @@ if (textarea && charCount) {
         charCount.style.color = len > 4500 ? '#e53e3e' : '#999';
     });
 }
-
-// Mark this post as read so the like button unlocks on the category page
-localStorage.setItem('read_post_{{ post.pk }}', '1');
 </script>
 {% endblock %}
