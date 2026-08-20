@@ -47,12 +47,18 @@
                 </button>
                 {% endif %}
             {% else %}
-            <span class="stat-item"><i class="far fa-heart"></i> {{ post.total_likes }}</span>
+            <span class="stat-item login-required-btn" onclick="showLoginToast('like')" style="cursor:pointer;">
+                <i class="far fa-heart"></i> {{ post.total_likes }}
+            </span>
             {% endif %}
 
             <!-- Scroll to Reply -->
             {% if user.is_authenticated and not post.is_locked %}
             <button class="reply-link" onclick="scrollToReplyBox()">
+                <i class="far fa-comment"></i> Reply
+            </button>
+            {% elif not post.is_locked %}
+            <button class="reply-link" onclick="showLoginToast('reply')">
                 <i class="far fa-comment"></i> Reply
             </button>
             {% endif %}
@@ -173,12 +179,18 @@
                     </button>
                     {% endif %}
                 {% else %}
-                <span class="stat-item"><i class="far fa-heart"></i> {{ reply.total_likes }}</span>
+                <span class="stat-item login-required-btn" onclick="showLoginToast('like')" style="cursor:pointer;">
+                    <i class="far fa-heart"></i> {{ reply.total_likes }}
+                </span>
                 {% endif %}
 
                 <!-- Quote Reply -->
                 {% if user.is_authenticated and not post.is_locked %}
                 <button class="reply-link" onclick="quoteReply('{{ reply.author.username }}', {{ reply.author.id }})">
+                    <i class="fas fa-reply"></i> Quote
+                </button>
+                {% elif not post.is_locked %}
+                <button class="reply-link" onclick="showLoginToast('reply')">
                     <i class="fas fa-reply"></i> Quote
                 </button>
                 {% endif %}
@@ -302,6 +314,29 @@
 </div>
 
 <script>
+function showLoginToast(action) {
+    const messages = {
+        like: 'Login to like this',
+        reply: 'Login to reply'
+    };
+    const text = messages[action] || 'Login required';
+
+    let toast = document.getElementById('loginToast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'loginToast';
+        toast.className = 'login-toast';
+        document.body.appendChild(toast);
+    }
+    toast.innerHTML = `${text} — <a href="/login/?next=${encodeURIComponent(window.location.pathname)}">Login</a>`;
+    toast.classList.add('show');
+
+    clearTimeout(window._loginToastTimer);
+    window._loginToastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+}
+
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
