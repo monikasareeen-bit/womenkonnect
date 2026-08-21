@@ -212,7 +212,8 @@ a:hover {
     justify-content: flex-end;
 }
 
-.nav-links a {
+.nav-links > a {
+    position: relative;
     color: #ffffff;
     text-decoration: none;
     font-family: 'Cormorant Garamond', 'Playfair Display', serif;
@@ -221,11 +222,26 @@ a:hover {
     transition: opacity 0.3s ease;
     letter-spacing: 0.8px;
     white-space: nowrap;
+    padding-bottom: 4px;
 }
 
-.nav-links a:hover {
-    opacity: 0.9;
-    text-decoration: underline;
+.nav-links > a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: #ffffff;
+    transition: width 0.25s ease;
+}
+
+.nav-links > a:hover {
+    opacity: 1;
+}
+
+.nav-links > a:hover::after {
+    width: 100%;
 }
 
 .logout-btn {
@@ -1955,28 +1971,57 @@ html, body {
 .hamburger-btn.is-active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ── Auth buttons ─────────────────────────────────────────── */
-.nav-auth-btns { display: flex; align-items: center; gap: 10px; }
+.nav-auth-btns {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
 .nav-btn-login {
     color: #ffffff !important;
-    border: 1.5px solid rgba(255,255,255,0.65) !important;
-    padding: 6px 16px !important;
-    border-radius: 20px !important;
-    font-size: 13px !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.7) !important;
+    padding: 9px 24px !important;
+    border-radius: 30px !important;
+    font-family: 'Inter', 'Segoe UI', sans-serif !important;
+    font-size: 15px !important;
     font-weight: 500 !important;
+    letter-spacing: 0.2px !important;
     text-decoration: none !important;
     background: transparent !important;
     -webkit-text-fill-color: #ffffff !important;
+    transition: all 0.25s ease !important;
+    white-space: nowrap;
 }
+
+.nav-btn-login:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: #ffffff !important;
+    opacity: 1 !important;
+    text-decoration: none !important;
+}
+
 .nav-btn-signup {
-    color: #e8558b !important;
+    color: #a9436b !important;
     background: #ffffff !important;
     border: none !important;
-    padding: 6px 16px !important;
-    border-radius: 20px !important;
-    font-size: 13px !important;
+    padding: 9px 24px !important;
+    border-radius: 30px !important;
+    font-family: 'Inter', 'Segoe UI', sans-serif !important;
+    font-size: 15px !important;
     font-weight: 700 !important;
+    letter-spacing: 0.2px !important;
     text-decoration: none !important;
-    -webkit-text-fill-color: #e8558b !important;
+    -webkit-text-fill-color: #a9436b !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    transition: all 0.25s ease !important;
+    white-space: nowrap;
+}
+
+.nav-btn-signup:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    opacity: 1 !important;
+    text-decoration: none !important;
 }
 
 /* ── Hide chip bar everywhere — we don't use it ──────────── */
