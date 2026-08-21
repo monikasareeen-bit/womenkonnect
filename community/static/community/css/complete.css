@@ -1977,29 +1977,7 @@ html, body {
     gap: 14px;
 }
 
-.nav-btn-login {
-    color: #ffffff !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.7) !important;
-    padding: 9px 24px !important;
-    border-radius: 30px !important;
-    font-family: 'Inter', 'Segoe UI', sans-serif !important;
-    font-size: 15px !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.2px !important;
-    text-decoration: none !important;
-    background: transparent !important;
-    -webkit-text-fill-color: #ffffff !important;
-    transition: all 0.25s ease !important;
-    white-space: nowrap;
-}
-
-.nav-btn-login:hover {
-    background: rgba(255, 255, 255, 0.15) !important;
-    border-color: #ffffff !important;
-    opacity: 1 !important;
-    text-decoration: none !important;
-}
-
+.nav-btn-login,
 .nav-btn-signup {
     color: #a9436b !important;
     background: #ffffff !important;
@@ -2017,6 +1995,7 @@ html, body {
     white-space: nowrap;
 }
 
+.nav-btn-login:hover,
 .nav-btn-signup:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
