@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
+import json
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
@@ -54,6 +56,104 @@ def _reply_count_subquery():
         0,
         output_field=IntegerField(),
     )
+
+SITE_URL = 'https://www.womenkonnect.co.in'
+
+
+def _iso(dt):
+    """ISO-8601 datetime, or None if the value is missing/invalid."""
+    if not dt:
+        return None
+    try:
+        return dt.isoformat()
+    except Exception:
+        return None
+
+
+def _post_forum_posting(post):
+    """
+    Build one DiscussionForumPosting dict for a post. Returns None if the
+    post doesn't have a valid created_at — better to omit that single item
+    than to emit a broken/null datePublished for it.
+
+    Building this as a plain Python dict and letting json.dumps() serialize
+    it (rather than hand-writing JSON inside the template with the
+    `escapejs` filter) is what actually makes this safe for post titles
+    containing emoji or other special Unicode — escapejs has known gaps
+    with characters outside the BMP (many emoji), which was corrupting the
+    JSON for any post title containing them, and knocking out neighboring
+    items in the same list along with it.
+    """
+    date_published = _iso(post.created_at)
+    if not date_published:
+        return None
+    return {
+        "@type": "DiscussionForumPosting",
+        "headline": post.title,
+        "url": f"{SITE_URL}{reverse('post_detail', args=[post.pk])}",
+        "datePublished": date_published,
+        "dateModified": _iso(post.updated_at) or date_published,
+        "author": {
+            "@type": "Person",
+            "name": post.author.username,
+            "url": f"{SITE_URL}/",
+        },
+        "interactionStatistic": [
+            {
+                "@type": "InteractionCounter",
+                "interactionType": "https://schema.org/LikeAction",
+                "userInteractionCount": post.total_likes(),
+            },
+            {
+                "@type": "InteractionCounter",
+                "interactionType": "https://schema.org/CommentAction",
+                "userInteractionCount": getattr(post, 'reply_count', 0),
+            },
+        ],
+    }
+
+
+def _category_structured_data(category, posts):
+    return {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": f"{category.name} – WomenKonnect",
+        "description": category.description,
+        "url": f"{SITE_URL}/category/{category.slug}/",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "WomenKonnect",
+            "url": SITE_URL,
+        },
+        "hasPart": [item for item in (_post_forum_posting(p) for p in posts) if item],
+    }
+
+
+def _post_structured_data(post, comment_count):
+    data = _post_forum_posting(post)
+    if data is None:
+        # Shouldn't normally happen (post already exists and was just
+        # fetched), but fall back to a minimal valid block rather than
+        # emitting nothing.
+        data = {
+            "@type": "DiscussionForumPosting",
+            "headline": post.title,
+            "url": f"{SITE_URL}{reverse('post_detail', args=[post.pk])}",
+        }
+    data["@context"] = "https://schema.org"
+    data["text"] = post.content[:400]
+    # Use the actual comment count passed in (paginator.count reflects the
+    # real total across all pages, not just the current page).
+    for stat in data.get("interactionStatistic", []):
+        if stat.get("interactionType") == "https://schema.org/CommentAction":
+            stat["userInteractionCount"] = comment_count
+    data["isPartOf"] = {
+        "@type": "WebSite",
+        "name": "WomenKonnect",
+        "url": SITE_URL,
+    }
+    return data
+
 
 def register(request):
     if request.method == "POST":
@@ -179,7 +279,8 @@ def category_posts(request, slug):
 
     context = {
         'category': category,
-        'posts': posts
+        'posts': posts,
+        'structured_data': json.dumps(_category_structured_data(category, posts), ensure_ascii=False),
     }
     return render(request, 'community/category_posts.html', context)
 
@@ -226,6 +327,7 @@ def post_detail(request, pk):
     context = {
         'post': post,
         'replies': replies,
+        'structured_data': json.dumps(_post_structured_data(post, replies.paginator.count), ensure_ascii=False),
     }
 
     # "Seen by" list — only ever shown to the post's own author, to

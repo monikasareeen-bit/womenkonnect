@@ -19,45 +19,7 @@
 
 {% block extra_structured_data %}
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "name": "{{ category.name }} – WomenKonnect",
-  "description": "{{ category.description }}",
-  "url": "https://www.womenkonnect.co.in/category/{{ category.slug }}/",
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": "WomenKonnect",
-    "url": "https://www.womenkonnect.co.in"
-  },
-  "hasPart": [
-    {% for post in posts %}
-    {
-      "@type": "DiscussionForumPosting",
-      "headline": "{{ post.title|escapejs }}",
-      "url": "https://www.womenkonnect.co.in{% url 'post_detail' post.pk %}",
-      "datePublished": "{{ post.created_at|date:'c' }}",
-      "author": {
-        "@type": "Person",
-        "name": "{{ post.author.username|escapejs }}",
-        "url": "https://www.womenkonnect.co.in/"
-      },
-      "interactionStatistic": [
-        {
-          "@type": "InteractionCounter",
-          "interactionType": "https://schema.org/LikeAction",
-          "userInteractionCount": {{ post.total_likes }}
-        },
-        {
-          "@type": "InteractionCounter",
-          "interactionType": "https://schema.org/ReplyAction",
-          "userInteractionCount": {{ post.reply_count }}
-        }
-      ]
-    }{% if not forloop.last %},{% endif %}
-    {% endfor %}
-  ]
-}
+{{ structured_data|safe }}
 </script>
 {% endblock %}
 
