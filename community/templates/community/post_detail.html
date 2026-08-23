@@ -4,6 +4,42 @@
 
 {% block title %}{{ post.title }} - WomenConnect{% endblock %}
 
+{% block extra_structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DiscussionForumPosting",
+  "headline": "{{ post.title|escapejs }}",
+  "url": "https://www.womenkonnect.co.in{% url 'post_detail' post.pk %}",
+  "datePublished": "{{ post.created_at|date:'c' }}",
+  "dateModified": "{{ post.updated_at|date:'c' }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ post.author.username|escapejs }}",
+    "url": "https://www.womenkonnect.co.in/"
+  },
+  "text": "{{ post.content|escapejs|truncatewords:60 }}",
+  "interactionStatistic": [
+    {
+      "@type": "InteractionCounter",
+      "interactionType": "https://schema.org/LikeAction",
+      "userInteractionCount": {{ post.total_likes }}
+    },
+    {
+      "@type": "InteractionCounter",
+      "interactionType": "https://schema.org/CommentAction",
+      "userInteractionCount": {{ replies.paginator.count }}
+    }
+  ],
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "WomenKonnect",
+    "url": "https://www.womenkonnect.co.in"
+  }
+}
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="container my-5">
 

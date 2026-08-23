@@ -46,6 +46,7 @@
                 <p class="text-muted small">
                     <span itemprop="author" itemscope itemtype="https://schema.org/Person">
                         By <span itemprop="name">{{ post.author.username }}</span>
+                        <link itemprop="url" href="https://www.womenkonnect.co.in/">
                     </span>
                     in {{ post.category.name }} &bull;
                     <time itemprop="datePublished" datetime="{{ post.created_at|date:'c' }}">{{ post.created_at|timesince }} ago</time>
