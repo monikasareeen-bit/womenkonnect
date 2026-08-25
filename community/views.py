@@ -129,7 +129,32 @@ def _category_structured_data(category, posts):
     }
 
 
-def _post_structured_data(post, comment_count):
+def _reply_comment(reply):
+    """One schema.org Comment object for a single reply."""
+    date_published = _iso(reply.created_at)
+    comment = {
+        "@type": "Comment",
+        "text": reply.content[:400],
+        "author": {
+            "@type": "Person",
+            "name": reply.author.username,
+            "url": f"{SITE_URL}/",
+        },
+        "url": f"{SITE_URL}{reverse('post_detail', args=[reply.post_id])}#reply-{reply.pk}",
+    }
+    if date_published:
+        comment["datePublished"] = date_published
+    return comment
+
+
+def _post_structured_data(post, replies_qs):
+    """
+    replies_qs: the full (unpaginated) queryset of replies for this post,
+    already select_related for author/author__userprofile.
+    """
+    replies_list = list(replies_qs)
+    comment_count = len(replies_list)
+
     data = _post_forum_posting(post)
     if data is None:
         # Shouldn't normally happen (post already exists and was just
@@ -142,8 +167,8 @@ def _post_structured_data(post, comment_count):
         }
     data["@context"] = "https://schema.org"
     data["text"] = post.content[:400]
-    # Use the actual comment count passed in (paginator.count reflects the
-    # real total across all pages, not just the current page).
+    # Use the actual comment count (all replies, not just the current
+    # pagination page).
     for stat in data.get("interactionStatistic", []):
         if stat.get("interactionType") == "https://schema.org/CommentAction":
             stat["userInteractionCount"] = comment_count
@@ -152,6 +177,10 @@ def _post_structured_data(post, comment_count):
         "name": "WomenKonnect",
         "url": SITE_URL,
     }
+    # Google's Discussion Forum feature wants actual comment content, not
+    # just a count — cap at 50 to keep the payload reasonable on posts
+    # with very long reply threads.
+    data["comment"] = [_reply_comment(r) for r in replies_list[:50]]
     return data
 
 
@@ -327,7 +356,10 @@ def post_detail(request, pk):
     context = {
         'post': post,
         'replies': replies,
-        'structured_data': json.dumps(_post_structured_data(post, replies.paginator.count), ensure_ascii=False),
+        'structured_data': json.dumps(
+            _post_structured_data(post, replies_list),
+            ensure_ascii=False,
+        ),
     }
 
     # "Seen by" list — only ever shown to the post's own author, to
