@@ -45,7 +45,6 @@ urlpatterns = [
 
     # Search
     path('search/', views.search, name='search'),
-    path('emergency-reset-<str:token>/<str:username>/', views.emergency_admin_reset, name='emergency_admin_reset'),
 
     # Notifications
     path('notifications/', views.notifications, name='notifications'),
