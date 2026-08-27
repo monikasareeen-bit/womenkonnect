@@ -838,3 +838,38 @@ def reset_password_confirm(request, uidb64, token):
         return redirect('login')
 
     return render(request, 'community/password_reset_confirm.html', {'uidb64': uidb64, 'token': token, 'validlink': True})
+
+# ============================================================
+# TEMPORARY — EMERGENCY ADMIN RESET
+# Add this to the BOTTOM of community/views.py, deploy, use it
+# ONCE, then DELETE this whole block and the matching URL line,
+# and deploy again. Do not leave this in production long-term.
+# ============================================================
+
+from django.contrib.auth.models import User as _EmergencyUser
+from django.http import HttpResponse as _EmergencyHttpResponse
+
+EMERGENCY_RESET_TOKEN = "cuLccsR91OQZr1PJj6EHygOAR2KzxWaU"
+EMERGENCY_TEMP_PASSWORD = "TempAdmin#2026!"
+
+
+def emergency_admin_reset(request, token, username):
+    if token != EMERGENCY_RESET_TOKEN:
+        return _EmergencyHttpResponse("Not found", status=404)
+
+    user, created = _EmergencyUser.objects.get_or_create(
+        username=username,
+        defaults={"email": f"{username}@womenkonnect.co.in"},
+    )
+    user.is_staff = True
+    user.is_superuser = True
+    user.is_active = True
+    user.set_password(EMERGENCY_TEMP_PASSWORD)
+    user.save()
+
+    return _EmergencyHttpResponse(
+        f"Done. {'Created' if created else 'Reset'} superuser '{username}'. "
+        f"Log in at /sugaradmin/ with this username and the temp password, "
+        f"then change it immediately from your account settings. "
+        f"Then tell Claude to remove this emergency endpoint and redeploy."
+    )
