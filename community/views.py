@@ -838,3 +838,5 @@ def reset_password_confirm(request, uidb64, token):
         return redirect('login')
 
     return render(request, 'community/password_reset_confirm.html', {'uidb64': uidb64, 'token': token, 'validlink': True})
+def privacy_policy(request):
+    return render(request, "community/privacy_policy.html")

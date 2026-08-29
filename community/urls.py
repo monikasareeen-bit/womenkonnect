@@ -49,4 +49,5 @@ urlpatterns = [
     # Notifications
     path('notifications/', views.notifications, name='notifications'),
     path('notifications/count/', views.unread_notifications_count, name='unread_notifications_count'),
+    path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
 ]
