@@ -69,7 +69,7 @@
             </div>
 
             <div class="d-flex gap-2">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary" id="publishPostBtn">
                     <i class="fas fa-paper-plane"></i> Publish Post
                 </button>
                 {% if preselected_category %}
@@ -86,4 +86,23 @@
         </form>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var form = document.querySelector('.post-form form');
+    var btn = document.getElementById('publishPostBtn');
+    if (form && btn) {
+        form.addEventListener('submit', function () {
+            // Let the form submit normally on the first click, but block
+            // any further clicks/submits (double-click, slow network, etc.)
+            if (form.dataset.submitted === 'true') {
+                return false;
+            }
+            form.dataset.submitted = 'true';
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publishing...';
+        });
+    }
+});
+</script>
 {% endblock %}
