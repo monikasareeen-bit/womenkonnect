@@ -90,6 +90,13 @@ def robots_txt(request):
     return HttpResponse("\n".join(lines), content_type="text/plain")
 
 
+# ── ads.txt (Google AdSense verification) ─────────────────────────────────────
+def ads_txt(request):
+    return HttpResponse(
+        "google.com, pub-2304196457726651, DIRECT, f08c47fec0942fa0",
+        content_type="text/plain",
+    )
+
 # ── URL patterns ──────────────────────────────────────────────────────────────
 urlpatterns = [
     path("sugaradmin/", admin.site.urls),
@@ -139,6 +146,10 @@ urlpatterns = [
         ),
         name="password_reset_complete",
     ),
+    # SEO
+    path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="sitemap"),
+    path("robots.txt", robots_txt),
+    path("ads.txt", ads_txt),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
