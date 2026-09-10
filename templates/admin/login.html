@@ -1,0 +1,52 @@
+{% extends "admin/login.html" %}
+{% load static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    .password-toggle-wrapper {
+        position: relative;
+    }
+    .password-toggle {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        font-size: 18px;
+        user-select: none;
+    }
+</style>
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const passwordField = document.getElementById('id_password');
+    if (passwordField) {
+        passwordField.style.paddingRight = '36px';
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'password-toggle-wrapper';
+        passwordField.parentNode.insertBefore(wrapper, passwordField);
+        wrapper.appendChild(passwordField);
+
+        const toggle = document.createElement('span');
+        toggle.className = 'password-toggle';
+        toggle.innerHTML = '👁️';
+        wrapper.appendChild(toggle);
+
+        toggle.addEventListener('click', function() {
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggle.innerHTML = '🙈';
+            } else {
+                passwordField.type = 'password';
+                toggle.innerHTML = '👁️';
+            }
+        });
+    }
+});
+</script>
+{% endblock %}
