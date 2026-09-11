@@ -273,7 +273,7 @@ def activate(request, uidb64, token):
 # ==================== HOME & CATEGORIES ====================
 
 def home(request):
-    categories = Category.objects.all()
+    categories = Category.objects.annotate(post_count=Count('posts', distinct=True))
 
     cutoff = timezone.now() - timezone.timedelta(hours=48)
 

@@ -497,6 +497,27 @@ body.category-page .right-panel {
     opacity: 0.6;
 }
 
+.home-hero-intro {
+    max-width: 680px;
+    margin: 18px auto 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #6b3550;
+}
+
+.category-count {
+    font-size: 12px;
+    color: #a15a7a;
+    opacity: 0.8;
+}
+
+.post-preview {
+    margin-top: 6px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #5a4550;
+}
+
 @media (max-width: 576px) {
     .home-hero {
         padding: 36px 20px 30px;

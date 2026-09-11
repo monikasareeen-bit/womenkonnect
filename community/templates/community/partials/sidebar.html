@@ -4,7 +4,7 @@
         {% for category in categories %}
         <li>
             <a href="{% url 'category_posts' category.slug %}">
-                {{ category.name }}
+                {{ category.name }}{% if category.post_count %} <span class="category-count">({{ category.post_count }})</span>{% endif %}
             </a>
         </li>
         {% empty %}
