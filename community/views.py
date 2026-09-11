@@ -840,3 +840,8 @@ def reset_password_confirm(request, uidb64, token):
     return render(request, 'community/password_reset_confirm.html', {'uidb64': uidb64, 'token': token, 'validlink': True})
 def privacy_policy(request):
     return render(request, "community/privacy_policy.html")
+from django.http import HttpResponse
+
+def ads_txt(request):
+    content = "google.com, pub-2304196457726651, DIRECT, f08c47fec0942fa0"
+    return HttpResponse(content, content_type="text/plain")

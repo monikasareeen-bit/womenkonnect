@@ -11,6 +11,12 @@ from django.http import HttpResponse
 from django.utils import timezone
 
 from community.models import Post, Category
+from community.views import ads_txt
+
+urlpatterns = [
+    # ... tumhare existing urls
+    path('ads.txt', ads_txt, name='ads_txt'),
+]
 
 
 # ── Sitemaps ──────────────────────────────────────────────────────────────────
