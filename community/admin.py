@@ -15,7 +15,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     list_display = ['title', 'author', 'category', 'created_at', 'like_count']
     list_filter = ['category', 'created_at']
-    search_fields = ['title', 'content']
+    search_fields = ['pk', 'title', 'content']
 
     def like_count(self, obj):
         return obj.likes.count()
