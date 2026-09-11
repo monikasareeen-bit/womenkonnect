@@ -11,12 +11,6 @@ from django.http import HttpResponse
 from django.utils import timezone
 
 from community.models import Post, Category
-from community.views import ads_txt
-
-urlpatterns = [
-    # ... tumhare existing urls
-    path('ads.txt', ads_txt, name='ads_txt'),
-]
 
 
 # ── Sitemaps ──────────────────────────────────────────────────────────────────
@@ -32,7 +26,7 @@ class StaticSitemap(Sitemap):
     changefreq = "weekly"
 
     def items(self):
-        return ["home", "about", "contact"]
+        return ["home", "about", "contact", "privacy_policy"]
 
     def location(self, item):
         return reverse(item)
@@ -152,9 +146,6 @@ urlpatterns = [
         ),
         name="password_reset_complete",
     ),
-    # SEO
-    path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="sitemap"),
-    path("robots.txt", robots_txt),
     path("ads.txt", ads_txt),
 ]
 

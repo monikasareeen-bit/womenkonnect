@@ -3,6 +3,14 @@
 {% load time_filters %}
 
 {% block title %}{{ post.title }} - WomenConnect{% endblock %}
+{% block meta_description %}{{ post.content|truncatewords:30 }}{% endblock %}
+{% block canonical %}https://www.womenkonnect.co.in/post/{{ post.pk }}/{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_title %}{{ post.title }} - WomenKonnect{% endblock %}
+{% block og_description %}{{ post.content|truncatewords:30 }}{% endblock %}
+{% block og_url %}https://www.womenkonnect.co.in/post/{{ post.pk }}/{% endblock %}
+{% block twitter_title %}{{ post.title }} - WomenKonnect{% endblock %}
+{% block twitter_description %}{{ post.content|truncatewords:30 }}{% endblock %}
 
 {% block extra_structured_data %}
 <script type="application/ld+json">

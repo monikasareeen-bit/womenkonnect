@@ -26,6 +26,7 @@ EXEMPT_PREFIXES = [
     '/category/',
     '/post/',
     '/search/',
+    '/privacy-policy/',
     #'/admin/',
 ]
 
