@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.db.models import Q, Count, Prefetch, OuterRef, Subquery
 from .models import Category, Post, Reply, UserProfile, Notification, PostView
 from django.utils import timezone
+from datetime import timedelta
 from .forms import CustomUserCreationForm, ProfileForm, EmailAuthenticationForm, PostForm, ContactForm, ReportForm
 from django.core.mail import send_mail
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -273,7 +274,7 @@ def activate(request, uidb64, token):
 # ==================== HOME & CATEGORIES ====================
 
 def home(request):
-    categories = Category.objects.annotate(post_count=Count('posts', distinct=True))
+    categories = Category.objects.all()
 
     cutoff = timezone.now() - timezone.timedelta(hours=48)
 
@@ -380,6 +381,29 @@ def create_post(request, category_slug=None):
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
+            title = form.cleaned_data['title']
+            content = form.cleaned_data['content']
+            category = form.cleaned_data['category']
+
+            # DUPLICATE POST GUARD: a double-click on "Publish", a page
+            # refresh after submitting, or a slow-network retry can all
+            # resend the exact same POST request. Instead of creating a
+            # second identical post, detect an already-published match by
+            # this same author (same title + content + category) within the
+            # last 30 seconds and just send them to that existing post.
+            duplicate_window = timezone.now() - timedelta(seconds=30)
+            existing_post = Post.objects.filter(
+                author=request.user,
+                title=title,
+                content=content,
+                category=category,
+                created_at__gte=duplicate_window,
+            ).order_by('-created_at').first()
+
+            if existing_post:
+                messages.info(request, 'This post was already published.')
+                return redirect('post_detail', pk=existing_post.pk)
+
             post = form.save(commit=False)
             post.author = request.user
             post.save()
@@ -469,6 +493,22 @@ def add_reply(request, pk):
 
         if check_profanity(content):
             messages.error(request, 'Your reply contains inappropriate language. Please revise it.')
+            return redirect('post_detail', pk=pk)
+
+        # DUPLICATE REPLY GUARD: same idea as create_post — a double-click
+        # or a page refresh can resend the identical reply. If this exact
+        # reply from this author already exists on this post in the last
+        # 30 seconds, don't create another one.
+        duplicate_window = timezone.now() - timedelta(seconds=30)
+        existing_reply = Reply.objects.filter(
+            post=post,
+            author=request.user,
+            content=content.strip(),
+            created_at__gte=duplicate_window,
+        ).exists()
+
+        if existing_reply:
+            messages.info(request, 'This reply was already posted.')
             return redirect('post_detail', pk=pk)
 
         reply = Reply.objects.create(
